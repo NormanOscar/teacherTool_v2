@@ -1,0 +1,66 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #ededed !important;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: black;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: black;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: black;
+}
+
+.required-symbol {
+    color: red;
+}
+
+#form-block {
+    width: 30%;
+}
+
+.form-control, .form-select {
+    padding: 5px !important;
+}
+
+.active {
+    color: #0C5ED7 !important;
+    text-decoration: underline !important;
+}
+
+.student-name {
+    font-size: x-large;
+    width: fit-content;
+    margin: 0;
+    padding: 0 0 0 4rem;
+}
+
+.change-student {
+    font-size: large;
+    width: fit-content;
+    color: #5898f9;
+}
+
+@media screen and (max-width: 1100px) {
+    #form-block {
+      width: 50%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #form-block {
+      width: 80%;
+    }
+}

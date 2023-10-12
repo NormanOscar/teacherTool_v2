@@ -1,0 +1,115 @@
+{
+  "gradingTools" : [
+    {
+      "name" : "Skolverket",
+      "id" : 1
+    },
+    {
+      "name" : "Legilexi",
+      "id" : 2
+    },
+    {
+      "name" : "Bygga svenska",
+      "id" : 3
+    },
+    {
+      "name" : "H4",
+      "id" : 4
+    },
+    {
+      "name" : "Gömma nyckel",
+      "id" : 5
+    }
+  ],
+
+  "areas" : [
+    {
+      "name" : "Läsa",
+      "id" : 1,
+      "gradingTool" : [1, 2, 3, 4, 5]
+    },
+    {
+      "name" : "Skriva åk 1",
+      "id" : 2,
+      "gradingTool" : [1]
+    },
+    {
+      "name" : "Återberätta",
+      "id" : 3,
+      "gradingTool" : [1]
+    }
+  ],
+
+  "criteria" : [
+    {
+      "name" : "Avkodning",
+      "id" : 1,
+      "tickBox" : false,
+      "levels" : [
+        "1 (Logografisk ljudning)", "2 (Enkel ljudning)", "3 (Avancerad ljudning)", "4 (Ortografisk helordsläsning)"
+      ],
+      "gradingTool" : [1, 2],
+      "area" : [1]
+    },
+    {
+      "name" : "Läsförståelse",
+      "id" : 2,
+      "tickBox" : false,
+      "levels" : [
+        "1 (På raden)", "2 (Mellan raderna)", "3 (Bortom Raderna)", "4 (Högläsning - Språkförståelse)"
+      ],
+      "gradingTool" : [1, 2, 5],
+      "area" : [1]
+    },
+    {
+      "name" : "Läshastighet",
+      "id" : 3,
+      "tickBox" : false,
+      "levels" : [
+        "1 (Statine 1)", "2 (Statine 2)", "3 (Statine 3)", "4 (Statine 4)", "5 (Statine 5)", "6 (Statine 6)"
+      ],
+      "gradingTool" : [4],
+      "area" : [1]
+    },
+    {
+      "name" : "Skrivriktning",
+      "id" : 4,
+      "tickBox" : true,
+      "levels" : [],
+      "gradingTool" : [1],
+      "area" : [2]
+    },
+    {
+      "name" : "Gemener/Versaler",
+      "id" : 5,
+      "tickBox" : true,
+      "levels" : [],
+      "gradingTool" : [1],
+      "area" : [2]
+    },
+    {
+      "name" : "Mellanrum",
+      "id" : 6,
+      "tickBox" : true,
+      "levels" : [],
+      "gradingTool" : [1],
+      "area" : [2]
+    },
+    {
+      "name" : "Fonem/Grafem",
+      "id" : 7,
+      "tickBox" : true,
+      "levels" : [],
+      "gradingTool" : [1],
+      "area" : [2]
+    },
+    {
+      "name" : "???",
+      "id" : 8,
+      "tickBox" : false,
+      "levels" : ["???"],
+      "gradingTool" : [1],
+      "area" : [3]
+    }
+  ]
+}
