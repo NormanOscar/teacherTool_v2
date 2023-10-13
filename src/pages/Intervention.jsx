@@ -3,8 +3,11 @@ import { useState } from "react";
 import Levels from "../components/Levels";
 import studentData from "../json/studentData.json";
 import data from "../json/data.json";
+import { useNavigate } from 'react-router-dom';
 
 export default function Intervention() {
+  const navigate = useNavigate();
+
   const [selectedTool, setSelectedTool] = useState("0");
   const [selectedArea, setSelectedArea] = useState("0");
   const [selectedCriteria, setSelectedCriteria] = useState("0");
@@ -53,6 +56,7 @@ export default function Intervention() {
         comment: commentVal,
     };
     saveLocalStorage(studentData);
+    navigate('/');
 }
 
 function saveLocalStorage(data) {
