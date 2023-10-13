@@ -8,11 +8,19 @@ export default function Intervention() {
   const [selectedTool, setSelectedTool] = useState("0");
   const [selectedArea, setSelectedArea] = useState("0");
   const [selectedCriteria, setSelectedCriteria] = useState("0");
+  let name = '';
 
-  let student = studentData.students.filter(
-    (student) => student.id === JSON.parse(localStorage.getItem("studentId"))
-  );
-  const name = student[0].name;
+  console.log(localStorage.getItem("studentId"));
+  if (localStorage.getItem("studentId") !== null) {
+    let student = studentData.students.filter(
+      (student) => student.id === JSON.parse(localStorage.getItem("studentId"))
+    );
+    name = student[0].name;
+  } else {
+    name = "Du måste välja en elev";
+  }
+
+  console.log(data.areas.filter((area) => area.gradingTool));
 
   function handleForm() {
     const nameVal = student[0].name;
@@ -132,12 +140,12 @@ function saveLocalStorage(data) {
               required
             >
               <option value="0">Välj kriteria</option>
-              {selectedArea != "0"
+              {selectedArea != "0" && selectedTool != "0"
                 ? data.criteria
                     .filter(
                       (criteria) =>
                         criteria.area.includes(parseInt(selectedArea)) &&
-                        criteria.area.includes(parseInt(selectedTool))
+                        criteria.gradingTool.includes(parseInt(selectedTool))
                     )
                     .map((criteria) => (
                       <option key={criteria.name} value={criteria.id}>
