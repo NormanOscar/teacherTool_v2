@@ -10,7 +10,6 @@ export default function Intervention() {
   const [selectedCriteria, setSelectedCriteria] = useState("0");
   let name = '';
 
-  console.log(localStorage.getItem("studentId"));
   if (localStorage.getItem("studentId") !== null) {
     let student = studentData.students.filter(
       (student) => student.id === JSON.parse(localStorage.getItem("studentId"))
@@ -20,7 +19,6 @@ export default function Intervention() {
     name = "Du måste välja en elev";
   }
 
-  console.log(data.areas.filter((area) => area.gradingTool));
 
   function handleForm() {
     const nameVal = student[0].name;

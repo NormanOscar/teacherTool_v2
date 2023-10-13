@@ -3,8 +3,16 @@ import { useState } from 'react';
 import studentData from '../json/studentData.json';
 
 export default function Assessment() {
-  let student = studentData.students.filter((student) => student.id === JSON.parse(localStorage.getItem("studentId")));
-  const name = student[0].name;
+  let name = '';
+
+  if (localStorage.getItem("studentId") !== null) {
+    let student = studentData.students.filter(
+      (student) => student.id === JSON.parse(localStorage.getItem("studentId"))
+    );
+    name = student[0].name;
+  } else {
+    name = "Du måste välja en elev";
+  }
 
   return (
     <>
