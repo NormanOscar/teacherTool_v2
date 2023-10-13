@@ -56,7 +56,7 @@ export default function Intervention() {
         comment: commentVal,
     };
     saveLocalStorage(studentData);
-    navigate('/');
+    navigate('/intervention');
 }
 
 function saveLocalStorage(data) {
