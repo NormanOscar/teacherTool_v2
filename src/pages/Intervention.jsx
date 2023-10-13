@@ -9,9 +9,10 @@ export default function Intervention() {
   const [selectedArea, setSelectedArea] = useState("0");
   const [selectedCriteria, setSelectedCriteria] = useState("0");
   let name = '';
+  let student = '';
 
   if (localStorage.getItem("studentId") !== null) {
-    let student = studentData.students.filter(
+    student = studentData.students.filter(
       (student) => student.id === JSON.parse(localStorage.getItem("studentId"))
     );
     name = student[0].name;
@@ -19,8 +20,11 @@ export default function Intervention() {
     name = "Du måste välja en elev";
   }
 
-
-  function handleForm() {
+  function handleForm(e) {
+    e.preventDefault();
+    if (parseInt(selectedTool) == 0 || parseInt(selectedArea) == 0 || parseInt(selectedCriteria) == 0 || student === '') {
+      return;
+    }
     const nameVal = student[0].name;
     const gradeVal = student[0].grade;
     const gradingToolVal = data.gradingTools.find((tool) => tool.id == selectedTool).name;
@@ -31,9 +35,12 @@ export default function Intervention() {
 
     var levelVal;
     if (levelCheck == null) {
-        levelVal = levelSelect.value;
+      if (levelSelect.value == 0) {
+        return;
+      } 
+      levelVal = levelSelect.value;
     } else {
-        levelVal = levelCheck.checked ? 'Uppnår' : 'Uppnår inte';
+      levelVal = levelCheck.checked ? 'Uppnår' : 'Uppnår inte';
     }
     const commentVal = document.querySelector('#comment').value;
 
