@@ -179,7 +179,7 @@ function saveLocalStorage(data) {
             ></textarea>
           </div>
 
-          <button className="btn btn-primary btn-block w-100 mb-2 submitBtn">
+          <button type="submit" className="btn btn-primary btn-block w-100 mb-2 submitBtn">
             Spara
           </button>
         </form>
