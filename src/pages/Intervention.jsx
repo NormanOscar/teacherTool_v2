@@ -74,7 +74,7 @@ function saveLocalStorage(data) {
         <p className="student-name">{name}</p>
       </div>
       <div className="d-flex justify-content-center mt-5 main-div">
-        <form className="mb-4" id="form-block">
+        <form method="POST" className="mb-4" id="form-block">
           <h1 className="mb-4" style={{ textAlign: "center" }}>
             Intervention
           </h1>
