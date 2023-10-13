@@ -20,8 +20,7 @@ export default function Intervention() {
     name = "Du måste välja en elev";
   }
 
-  function handleForm(e) {
-    e.preventDefault();
+  function handleForm() {
     if (parseInt(selectedTool) == 0 || parseInt(selectedArea) == 0 || parseInt(selectedCriteria) == 0 || student === '') {
       return;
     }
