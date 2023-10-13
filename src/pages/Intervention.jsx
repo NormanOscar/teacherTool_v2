@@ -74,7 +74,7 @@ function saveLocalStorage(data) {
         <p className="student-name">{name}</p>
       </div>
       <div className="d-flex justify-content-center mt-5 main-div">
-        <form method="POST" className="mb-4" id="form-block">
+        <form className="mb-4" id="form-block" onSubmit={handleForm}>
           <h1 className="mb-4" style={{ textAlign: "center" }}>
             Intervention
           </h1>
@@ -179,7 +179,7 @@ function saveLocalStorage(data) {
             ></textarea>
           </div>
 
-          <button className="btn btn-primary btn-block w-100 mb-2 submitBtn" onClick={handleForm}>
+          <button className="btn btn-primary btn-block w-100 mb-2 submitBtn">
             Spara
           </button>
         </form>
