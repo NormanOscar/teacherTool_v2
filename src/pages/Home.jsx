@@ -17,7 +17,7 @@ export default function Home() {
     if (name !== '') {
       let student = studentData.students.filter((student) => student.name === name);
       localStorage.setItem("studentId", JSON.stringify(student[0].id));
-      navigate('/intervention');
+      navigate('/assessment');
     }
   };
   return (
