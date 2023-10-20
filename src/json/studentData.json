@@ -3,27 +3,32 @@
         {
             "name": "Oscar Norman",
             "id": 1,
-            "grade" : 1
+            "grade" : 1,
+            "interventions": ["Wendick"]
         },
         {
             "name": "Oscar Norman",
             "id": 2,
-            "grade" : 2
+            "grade" : 2,
+            "interventions": []
         },
         {
             "name": "Mari Udderyd",
             "id": 3,
-            "grade" : 1
+            "grade" : 1,
+            "interventions": ["Wendick"]
         },
         {
             "name": "Niklas Andersson",
             "id": 4,
-            "grade" : 2
+            "grade" : 2,
+            "interventions": []
         },
         {
             "name": "Mattias Davidsson",
             "id": 5,
-            "grade" : 3
+            "grade" : 3,
+            "interventions": []
         }
     ]
 }

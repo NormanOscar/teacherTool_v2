@@ -11,9 +11,8 @@ export default function NavBar () {
     const modal = document.querySelector('#navbModal');
     const modalBackdrop = document.querySelector('.modal-backdrop');
     modal.style.display = 'none';
-    modalBackdrop.style.display = 'none';
     modal.classList.remove('show');
-    modalBackdrop.classList.remove('show');
+    modalBackdrop.remove();
   }
 
   return (
