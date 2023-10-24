@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import studentData from '../json/studentData.json';
 import AutoComplete from '../components/AutoComplete';
+import CurrentInterventions from '../components/CurrentInterventions';
 
 export default function Home() {
   const [name, setName] = useState('');
@@ -36,6 +37,7 @@ export default function Home() {
             </button> 
           </form>
         </div>
+        <CurrentInterventions />
       </div>
     </>
   );

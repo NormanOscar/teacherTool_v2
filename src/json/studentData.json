@@ -4,7 +4,14 @@
             "name": "Oscar Norman",
             "id": 1,
             "grade" : 1,
-            "interventions": ["Wendick"]
+            "interventions": [
+                {
+                    "id": 1,
+                    "name":"Wendick",
+                    "date":"2023-10-24",
+                    "updates": []
+                }
+            ]
         },
         {
             "name": "Oscar Norman",
@@ -16,7 +23,14 @@
             "name": "Mari Udderyd",
             "id": 3,
             "grade" : 1,
-            "interventions": ["Wendick"]
+            "interventions": [
+                {
+                    "id": 1,
+                    "name":"Wendick",
+                    "date":"2023-10-18",
+                    "updates": []
+                }
+            ]
         },
         {
             "name": "Niklas Andersson",

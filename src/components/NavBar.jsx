@@ -35,22 +35,22 @@ export default function NavBar () {
       </button>
 
       <div className="modal fade" id="navbModal" tabIndex="-1" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
+        <div className="modal-dialog" id='modal-dialog'>
+          <div className="modal-content" id='modal-content'>
+            <div className="modal-header" id='modal-header'>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
             </div>
 
-            <div className="modal-body">    
-              <div className="modal-line">
+            <div className="modal-body" id='modal-body'>    
+              <div className="modal-line lines">
                 <NavLink className="nav-link" onClick={handleClick} to="/">Hämta elev</NavLink>
               </div>
 
-              <div className="modal-line">
+              <div className="modal-line lines">
                 <NavLink className="nav-link" onClick={handleClick} to="/assessment">Bedömning</NavLink>
               </div>
 
-              <div className="modal-line">
+              <div className="modal-line lines">
                 <NavLink className="nav-link" onClick={handleClick} to="/analyse">Analys</NavLink>
               </div>
             </div>
