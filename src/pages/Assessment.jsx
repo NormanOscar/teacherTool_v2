@@ -5,13 +5,13 @@ import studentData from "../json/studentData.json";
 import data from "../json/data.json";
 
 export default function Assessment() {
-  const [selectedTool, setSelectedTool] = useState("0");
-  const [selectedArea, setSelectedArea] = useState("0");
-  const [selectedCriteria, setSelectedCriteria] = useState("0");
+  const [selectedTool, setSelectedTool] = useState(0);
+  const [selectedArea, setSelectedArea] = useState(0);
+  const [selectedCriteria, setSelectedCriteria] = useState(0);
   const [inputError, setInputError] = useState(false);
 
-  let name = '';
-  let student = '';
+  let name = "";
+  let student = "";
 
   if (localStorage.getItem("studentId") !== null) {
     student = studentData.students.filter(
@@ -24,56 +24,73 @@ export default function Assessment() {
 
   function handleForm(e) {
     e.preventDefault();
-    
-    if (parseInt(selectedTool) == 0 || parseInt(selectedArea) == 0 || parseInt(selectedCriteria) == 0 || student === '') {
+
+    if (
+      selectedTool === 0 ||
+      selectedArea === 0 ||
+      selectedCriteria === 0 ||
+      student === ""
+    ) {
       setInputError(true);
       return;
     }
-    const levelCheck = document.querySelector('#flexCheckDefault');
-    const levelSelect = document.querySelector('#level');
+    const levelCheck = document.querySelector("#flexCheckDefault");
+    const levelSelect = document.querySelector("#level");
 
     var levelVal;
     if (levelSelect != null) {
-      if (levelSelect.value == 0) {
+      if (levelSelect.value === 0) {
         setInputError(true);
         return;
-      } 
+      }
       levelVal = levelSelect.value;
     } else {
-      levelVal = levelCheck.checked ? 'Uppnår' : 'Uppnår inte';
+      levelVal = levelCheck.checked ? "Uppnår" : "Uppnår inte";
     }
     const nameVal = student[0].name;
     const gradeVal = student[0].grade;
-    const gradingToolVal = data.gradingTools.find((tool) => tool.id == selectedTool).name;
-    const areaVal = data.areas.find((area) => area.id == selectedArea).name;
-    const criteriaVal = data.criteria.find((criteria) => criteria.id == selectedCriteria).name;
-    const commentVal = document.querySelector('#comment').value;
+    let gradingToolVal = data.gradingTools.find(
+      (tool) => tool.id === selectedTool
+    ).name;
+
+    if (selectedTool === 1) {
+      document.querySelectorAll(".gradingToolRadio").forEach(radioBtn => {
+        if (radioBtn.checked) {
+          let mergedStr = gradingToolVal.concat(" ", radioBtn.value);
+          gradingToolVal = mergedStr;
+        }
+      });
+    }
+    const areaVal = data.areas.find((area) => area.id === selectedArea).name;
+    const criteriaVal = data.criteria.find(
+      (criteria) => criteria.id === selectedCriteria
+    ).name;
+    const commentVal = document.querySelector("#comment").value;
 
     const studentData = {
-        name: nameVal,
-        grade: gradeVal,
-        gradingTools: gradingToolVal,
-        areas: areaVal,
-        criteria: criteriaVal,
-        level: levelVal,
-        comment: commentVal
+      name: nameVal,
+      grade: gradeVal,
+      gradingTools: gradingToolVal,
+      areas: areaVal,
+      criteria: criteriaVal,
+      level: levelVal,
+      comment: commentVal
     };
     saveLocalStorage(studentData);
-}
+  }
 
-function saveLocalStorage(data) {
-    let savedData = localStorage.getItem('studentData');
+  function saveLocalStorage(data) {
+    let savedData = localStorage.getItem("studentData");
     if (savedData === null) {
-        let studentDataList = [data];
-        localStorage.setItem('studentData', JSON.stringify(studentDataList));
-    }
-    else {
-        let studentDataList = JSON.parse(savedData);
-        studentDataList.push(data);
-        localStorage.setItem('studentData', JSON.stringify(studentDataList));
+      let studentDataList = [data];
+      localStorage.setItem("studentData", JSON.stringify(studentDataList));
+    } else {
+      let studentDataList = JSON.parse(savedData);
+      studentDataList.push(data);
+      localStorage.setItem("studentData", JSON.stringify(studentDataList));
     }
     window.location.reload();
-}
+  }
 
   return (
     <>
@@ -86,9 +103,11 @@ function saveLocalStorage(data) {
             Bedömning
           </h1>
 
-          {inputError && 
-            <div className="alert alert-danger" role="alert">Du måste fylla i alla fält</div>
-          }
+          {inputError && (
+            <div className="alert alert-danger" role="alert">
+              Du måste fylla i alla fält
+            </div>
+          )}
 
           <div className="form-outline mb-2" id="gradingTool-div">
             <label htmlFor="grading-tool">
@@ -99,7 +118,7 @@ function saveLocalStorage(data) {
               id="gradingTool"
               name="gradingTool"
               value={selectedTool}
-              onChange={(e) => setSelectedTool(e.target.value)}
+              onChange={(e) => setSelectedTool(parseInt(e.target.value))}
               required
             >
               <option value="0">Välj bedömningsverktyg</option>
@@ -111,6 +130,23 @@ function saveLocalStorage(data) {
             </select>
           </div>
 
+          {selectedTool === 1 ? (
+            <div className="d-flex">
+              <div className="mx-1">
+                <input type="radio" className="btn-check gradingToolRadio" name="options" id="option1" value="A" defaultChecked/>
+                <label className="btn btn-light border border-secondary px-4" htmlFor="option1">A</label>
+              </div>
+              <div className="mx-1">
+                <input type="radio" className="btn-check gradingToolRadio" name="options" id="option2" value="B"/>
+                <label className="btn btn-light border border-secondary px-4" htmlFor="option2">B</label>
+              </div>
+              <div className="mx-1">
+                <input type="radio" className="btn-check gradingToolRadio" name="options" id="option3" value="C"/>
+                <label className="btn btn-light border border-secondary px-4" htmlFor="option3">C</label>
+              </div>
+            </div>
+          ) : null}
+
           <div className="form-outline mb-2" id="area-div">
             <label htmlFor="area">
               Område: <span className="required-symbol">*</span>
@@ -120,14 +156,14 @@ function saveLocalStorage(data) {
               id="area"
               name="area"
               value={selectedArea}
-              onChange={(e) => setSelectedArea(e.target.value)}
+              onChange={(e) => setSelectedArea(parseInt(e.target.value))}
               required
             >
               <option value="0">Välj område</option>
-              {selectedTool != "0"
+              {selectedTool != 0
                 ? data.areas
                     .filter((area) =>
-                      area.gradingTool.includes(parseInt(selectedTool))
+                      area.gradingTool.includes(selectedTool)
                     )
                     .map((area) => (
                       <option key={area.name} value={area.id}>
@@ -151,16 +187,16 @@ function saveLocalStorage(data) {
               id="criteria"
               name="criteria"
               value={selectedCriteria}
-              onChange={(e) => setSelectedCriteria(e.target.value)}
+              onChange={(e) => setSelectedCriteria(parseInt(e.target.value))}
               required
             >
               <option value="0">Välj kriteria</option>
-              {selectedArea != "0" && selectedTool != "0"
+              {selectedArea != 0 && selectedTool != 0
                 ? data.criteria
                     .filter(
                       (criteria) =>
-                        criteria.area.includes(parseInt(selectedArea)) &&
-                        criteria.gradingTool.includes(parseInt(selectedTool))
+                        criteria.area.includes(selectedArea) &&
+                        criteria.gradingTool.includes(selectedTool)
                     )
                     .map((criteria) => (
                       <option key={criteria.name} value={criteria.id}>
@@ -174,13 +210,9 @@ function saveLocalStorage(data) {
                   ))}
             </select>
           </div>
-                  
-          {
-            selectedCriteria != "0" ? (
-              <Levels id={selectedCriteria}/>
-            ) : null
-          }
-          
+
+          {selectedCriteria != 0 ? <Levels id={selectedCriteria} /> : null}
+
           <div className="form-outline mb-2">
             <label htmlFor="comment">Kommentar:</label>
             <textarea
@@ -190,7 +222,10 @@ function saveLocalStorage(data) {
             ></textarea>
           </div>
 
-          <button type="submit" className="btn btn-primary btn-block w-100 mb-2 submitBtn">
+          <button
+            type="submit"
+            className="btn btn-primary btn-block w-100 mb-2 submitBtn"
+          >
             Spara
           </button>
         </form>

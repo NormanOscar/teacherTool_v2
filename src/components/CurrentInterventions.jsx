@@ -5,22 +5,23 @@ import Modal from 'react-bootstrap/Modal';
 
 export default function CurrentInterventions() {
   const [studentToShow, setStudentToShow] = useState(null);
-  const showModal = (student) => setStudentToShow(student);
-  const hideModal = () => setStudentToShow(false);
-  //const [selectedStudent, setSelectedStudent] = useState(0);
+  const [show, setShow] = useState(false);
+  const showModal = () => setShow(true);
+  const hideModal = () => setShow(false);
 
   const currentStudents = studentData.students.filter(
     (student) => student.interventions.length > 0
   )
 
   function handleClick(e) {
-    showModal(currentStudents.find((student) => student.id == e.currentTarget.value));
+    setStudentToShow(currentStudents.find((student) => student.id == e.currentTarget.value));
+    showModal();
   }
   
   return (
     <>
       {studentToShow && (
-        <StudentModal show={studentToShow} student={studentToShow} onClose={hideModal} />
+        <StudentModal show={show} student={studentToShow} onClose={hideModal} />
       )}
       <h4 className="mb-4 mt-5" style={{ textAlign: "center" }}>
         Pågående interventioner
@@ -73,10 +74,10 @@ function StudentModal({ show, student, onClose}) {
           }
           <div className="d-flex w-100 mt-3 justify-content-center">
             <div>
-              <button type="button" className="btn btn-success btn-sm mx-2">Utförd</button>
+              <button type="button" className="btn btn-success btn-sm mx-2" onClick={onClose}>Utförd</button>
             </div>
             <div>
-              <button type="button" className="btn btn-danger btn-sm mx-2">Frånvarande</button>
+              <button type="button" className="btn btn-danger btn-sm mx-2" onClick={onClose}>Frånvarande</button>
             </div>
           </div>
         </div>
