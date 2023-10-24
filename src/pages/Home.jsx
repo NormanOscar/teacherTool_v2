@@ -24,8 +24,8 @@ export default function Home() {
   return (
     <>
       <div className="h-100">
-        <div className="d-flex justify-content-center mt-5 main-div">
-          <form className="mb-4" id="form-block">
+        <div className="d-flex justify-content-center my-5 main-div">
+          <form className="my-5" id="form-block">
             <h1 className="mb-4" style={{textAlign: 'center'}}>Hämta elev</h1>
             <div className="form-outline mb-4">
               <label htmlFor="name">Elevens namn: <span className="required-symbol">*</span></label>

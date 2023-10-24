@@ -53,8 +53,6 @@ function StudentModal({ show, student, onClose}) {
     <Modal
       show={show}
       onHide={onClose}
-      backdrop="static"
-      keyboard={false}
       centered
     >
       <Modal.Header closeButton>
@@ -64,7 +62,7 @@ function StudentModal({ show, student, onClose}) {
         <div className="list-group-item list-group-item-action flex-column align-items-center" key={student.id}>
           {
             student.interventions.map((intervention) => (
-              <div className="d-flex gap-3 justify-content-between" key={intervention.id}>
+              <div className="d-flex justify-content-between" key={intervention.id}>
                 <p className="mb-1">
                   {intervention.name}
                 </p>
