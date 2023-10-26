@@ -10,6 +10,12 @@
                     "name":"Wendick",
                     "date":"2023-10-24",
                     "updates": []
+                },
+                {
+                    "id": 2,
+                    "name":"Test",
+                    "date":"2023-10-24",
+                    "updates": []
                 }
             ]
         },

@@ -28,9 +28,8 @@ export default function CurrentInterventions() {
       </h4>
       <div
         className="d-flex justify-content-center"
-        id="current-interventions"
       >
-        <ul className="list-group w-50">
+        <ul className="list-group" id="current-interventions">
           {currentStudents.map((student) => (
             <li className="list-group-item list-group-item-action flex-column align-items-center" key={student.id} value={student.id} onClick={handleClick}>
               <div className="d-flex w-150 justify-content-between">
@@ -38,7 +37,7 @@ export default function CurrentInterventions() {
                 <small>{student.interventions[0].date}</small>
               </div>
               <p className="mb-1">
-                {student.interventions[0].name}
+                {student.interventions.map(x => x.name).join(', ')}
               </p>
             </li>
           ))}
@@ -59,25 +58,23 @@ function StudentModal({ show, student, onClose}) {
         <Modal.Title>{student.name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="list-group-item list-group-item-action flex-column align-items-center" key={student.id}>
-          {
-            student.interventions.map((intervention) => (
-              <div className="d-flex justify-content-between" key={intervention.id}>
-                <p className="mb-1">
-                  {intervention.name}
-                </p>
-                <small>{intervention.date}</small>
-              </div>
-            ))
-          }
-          <div className="d-flex w-100 mt-3 justify-content-center">
-            <div>
-              <button type="button" className="btn btn-success btn-sm mx-2" onClick={onClose}>Utförd</button>
-            </div>
-            <div>
-              <button type="button" className="btn btn-danger btn-sm mx-2" onClick={onClose}>Frånvarande</button>
-            </div>
-          </div>
+        <div className="flex-column align-items-center" key={student.id}>
+          <ul className="list-group list-group-flush">
+            {
+              student.interventions.map((intervention) => (
+                <li className="list-group-item d-flex justify-content-between" key={intervention.id}>
+                  <p className="mb-1">
+                    <span className="align-middle" style={{fontWeight: "bold"}}>{intervention.name}</span>
+                    <small className="align-middle" style={{color: "grey"}}>&nbsp;{intervention.date}</small>
+                  </p>
+                  <div>
+                    <button type="button" className="btn btn-success btn-sm mx-2" onClick={onClose}>Utförd</button>
+                    <button type="button" className="btn btn-danger btn-sm mx-2" onClick={onClose}>Frånvarande</button>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </Modal.Body>
     </Modal>
