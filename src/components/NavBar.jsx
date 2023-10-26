@@ -31,7 +31,7 @@ export default function NavBar () {
         </ul>
       </nav>
       <button className="mobile-toggler d-lg-none" type="button" data-bs-toggle="modal" data-bs-target="#navbModal">
-        <FontAwesomeIcon icon="bars" size='2xl'/>
+        <FontAwesomeIcon icon="bars" size='2xl' color='black'/>
       </button>
 
       <div className="modal fade" id="navbModal" tabIndex="-1" aria-hidden="true">
