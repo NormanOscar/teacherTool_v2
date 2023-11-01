@@ -11,7 +11,7 @@ export default function Home() {
   const navigate = useNavigate();
   
   function changeInputText (newValue) {
-    setName(newValue)
+    setName(newValue);
   };
   
   const handleSubmit = (e) => {

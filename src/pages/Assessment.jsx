@@ -51,7 +51,7 @@ export default function Assessment() {
     
     var levelVal;
     if (levelSelect != null) {
-      if (levelSelect.value === 0) {
+      if (levelSelect.value == 0) {
         setInputResult({ msg: "Du måste fylla i alla fält", type: "danger" });
         return;
       }
@@ -99,6 +99,23 @@ export default function Assessment() {
     setInputResult({ msg: "Bedömning sparad!", type: "success" });
   }
 
+  function handleSelectChange(e) {
+    switch (e.target.id) {
+      case "gradingTool":
+        setSelectedTool(parseInt(e.target.value));
+        break;
+      case "area":
+        setSelectedArea(parseInt(e.target.value));
+        break;
+      case "criteria":
+        setSelectedCriteria(parseInt(e.target.value));
+        break;
+      default:
+        break;
+    }
+    setInputResult({ msg: null, type: null });
+  }
+
   return (
     <>
       <div>
@@ -115,7 +132,7 @@ export default function Assessment() {
               {inputResult.msg}
             </div>
           )}
-
+          
           <div className="form-outline mb-2" id="gradingTool-div">
             <label htmlFor="gradingTool">
               Bedömningsverktyg: <span className="required-symbol">*</span>
@@ -125,7 +142,7 @@ export default function Assessment() {
               id="gradingTool"
               name="gradingTool"
               value={selectedTool}
-              onChange={(e) => setSelectedTool(parseInt(e.target.value))}
+              onChange={handleSelectChange}
               required
             >
               <option value="0">Välj bedömningsverktyg</option>
@@ -153,70 +170,74 @@ export default function Assessment() {
               </div>
             </div>
           ) : null}
-
-          <div className="form-outline mb-2" id="area-div">
-            <label htmlFor="area">
-              Område: <span className="required-symbol">*</span>
-            </label>
-            <select
-              className="form-select border border-2"
-              id="area"
-              name="area"
-              value={selectedArea}
-              onChange={(e) => setSelectedArea(parseInt(e.target.value))}
-              required
-            >
-              <option value="0">Välj område</option>
-              {selectedTool != 0
-                ? data.areas
-                    .filter((area) =>
-                      area.gradingTool.includes(selectedTool)
-                    )
-                    .map((area) => (
+              
+          {selectedTool !== 0 ? (
+            <div className="form-outline mb-2" id="area-div">
+              <label htmlFor="area">
+                Område: <span className="required-symbol">*</span>
+              </label>
+              <select
+                className="form-select border border-2"
+                id="area"
+                name="area"
+                value={selectedArea}
+                onChange={handleSelectChange}
+                required
+              >
+                <option value="0">Välj område</option>
+                {selectedTool != 0
+                  ? data.areas
+                      .filter((area) =>
+                        area.gradingTool.includes(selectedTool)
+                      )
+                      .map((area) => (
+                        <option key={area.name} value={area.id}>
+                          {area.name}
+                        </option>
+                      ))
+                  : data.areas.map((area) => (
                       <option key={area.name} value={area.id}>
                         {area.name}
                       </option>
-                    ))
-                : data.areas.map((area) => (
-                    <option key={area.name} value={area.id}>
-                      {area.name}
-                    </option>
-                  ))}
-            </select>
-          </div>
-
-          <div className="form-outline mb-2" id="criteria-div">
-            <label htmlFor="criteria">
-              Kriteria: <span className="required-symbol">*</span>
-            </label>
-            <select
-              className="form-select border border-2"
-              id="criteria"
-              name="criteria"
-              value={selectedCriteria}
-              onChange={(e) => setSelectedCriteria(parseInt(e.target.value))}
-              required
-            >
-              <option value="0">Välj kriteria</option>
-              {selectedArea != 0 && selectedTool != 0
-                ? data.criteria
-                    .filter(
-                      (criteria) =>
-                        criteria.area.includes(selectedArea) &&
-                        criteria.gradingTool.includes(selectedTool)
-                    )
-                    .map((criteria) => (
+                    ))}
+              </select>
+            </div>
+          ) : null}
+          
+          {selectedTool !== 0 && selectedArea !== 0? (
+            <div className="form-outline mb-2" id="criteria-div">
+              <label htmlFor="criteria">
+                Kriteria: <span className="required-symbol">*</span>
+              </label>
+              <select
+                className="form-select border border-2"
+                id="criteria"
+                name="criteria"
+                value={selectedCriteria}
+                onChange={handleSelectChange}
+                required
+              >
+                <option value="0">Välj kriteria</option>
+                {selectedArea != 0 && selectedTool != 0
+                  ? data.criteria
+                      .filter(
+                        (criteria) =>
+                          criteria.area.includes(selectedArea) &&
+                          criteria.gradingTool.includes(selectedTool)
+                      )
+                      .map((criteria) => (
+                        <option key={criteria.name} value={criteria.id}>
+                          {criteria.name}
+                        </option>
+                      ))
+                  : data.criteria.map((criteria) => (
                       <option key={criteria.name} value={criteria.id}>
                         {criteria.name}
                       </option>
-                    ))
-                : data.criteria.map((criteria) => (
-                    <option key={criteria.name} value={criteria.id}>
-                      {criteria.name}
-                    </option>
-                  ))}
-            </select>
-          </div>
+                    ))}
+              </select>
+            </div>
+          ) : null}
 
           {selectedCriteria != 0 ? <Levels id={selectedCriteria} /> : null}
 
