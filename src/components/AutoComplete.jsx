@@ -13,15 +13,14 @@ export default function AutoComplete ({ change }) {
 
   const [selected, setSelected] = useState([]);
   function handleChange(selectedName) {
-    selectedName = selectedName[0].split(" (åk. ");
-    selectedName.splice(1, 1);
+    selectedName = selectedName;
     setSelected(selectedName);
     change(selectedName[0]);
   }
 
   return (
     <Typeahead
-      id="student_name"
+      id="name"
       onChange={handleChange}
       options={studentData.students.map((student) => student.name + " (åk. " + student.grade + ")")}
       selected={selected}

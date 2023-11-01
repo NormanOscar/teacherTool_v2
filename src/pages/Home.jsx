@@ -7,6 +7,7 @@ import CurrentInterventions from '../components/CurrentInterventions';
 
 export default function Home() {
   const [name, setName] = useState('');
+  const [inputError, setInputError] = useState(false);
   const navigate = useNavigate();
   
   function changeInputText (newValue) {
@@ -16,17 +17,30 @@ export default function Home() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name !== '') {
-      let student = studentData.students.filter((student) => student.name === name);
-      localStorage.setItem("studentId", JSON.stringify(student[0].id));
-      navigate('/assessment');
+      let student = studentData.students.filter((student) => student.name + " (åk. " + student.grade + ")" === name);
+      if (student.length > 0) {
+        localStorage.setItem("studentId", JSON.stringify(student[0].id));
+        navigate('/assessment');
+      }
+      else {
+        setInputError(true);
+      }
+    }
+    else {
+      setInputError(true);
     }
   };
   return (
     <>
       <div className="h-100">
-        <div className="d-flex justify-content-center my-5 main-div">
+        <div className="d-flex justify-content-center main-div">
           <form className="my-5" id="form-block">
             <h1 className="mb-4" style={{textAlign: 'center'}}>Hämta elev</h1>
+            {inputError && (
+              <div className="alert alert-danger" role="alert">
+                Eleven finns ej
+              </div>
+            )}
             <div className="form-outline mb-4">
               <label htmlFor="name">Elevens namn: <span className="required-symbol">*</span></label>
               <AutoComplete change={changeInputText} />

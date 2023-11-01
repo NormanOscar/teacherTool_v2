@@ -4,11 +4,23 @@ import Levels from "../components/Levels";
 import studentData from "../json/studentData.json";
 import data from "../json/data.json";
 
+function saveLocalStorage(data) {
+  let savedData = localStorage.getItem("studentData");
+  if (savedData === null) {
+    let studentDataList = [data];
+    localStorage.setItem("studentData", JSON.stringify(studentDataList));
+  } else {
+    let studentDataList = JSON.parse(savedData);
+    studentDataList.push(data);
+    localStorage.setItem("studentData", JSON.stringify(studentDataList));
+  }
+}
+
 export default function Assessment() {
   const [selectedTool, setSelectedTool] = useState(0);
   const [selectedArea, setSelectedArea] = useState(0);
   const [selectedCriteria, setSelectedCriteria] = useState(0);
-  const [inputError, setInputError] = useState(false);
+  const [inputResult, setInputResult] = useState({msg: null, type: null});
 
   let name = "";
   let student = "";
@@ -17,7 +29,7 @@ export default function Assessment() {
     student = studentData.students.filter(
       (student) => student.id === JSON.parse(localStorage.getItem("studentId"))
     );
-    name = student[0].name;
+    name = student[0].name + " (åk. " + student[0].grade + ")";
   } else {
     name = "Du måste välja en elev";
   }
@@ -31,16 +43,16 @@ export default function Assessment() {
       selectedCriteria === 0 ||
       student === ""
     ) {
-      setInputError(true);
+      setInputResult({ msg: "Du måste fylla i alla fält", type: "danger" });
       return;
     }
     const levelCheck = document.querySelector("#flexCheckDefault");
     const levelSelect = document.querySelector("#level");
-
+    
     var levelVal;
     if (levelSelect != null) {
       if (levelSelect.value === 0) {
-        setInputError(true);
+        setInputResult({ msg: "Du måste fylla i alla fält", type: "danger" });
         return;
       }
       levelVal = levelSelect.value;
@@ -77,19 +89,14 @@ export default function Assessment() {
       comment: commentVal
     };
     saveLocalStorage(studentData);
+    handleFormSubmit();
   }
-
-  function saveLocalStorage(data) {
-    let savedData = localStorage.getItem("studentData");
-    if (savedData === null) {
-      let studentDataList = [data];
-      localStorage.setItem("studentData", JSON.stringify(studentDataList));
-    } else {
-      let studentDataList = JSON.parse(savedData);
-      studentDataList.push(data);
-      localStorage.setItem("studentData", JSON.stringify(studentDataList));
-    }
-    window.location.reload();
+  
+  function handleFormSubmit() {
+    setSelectedTool(0);
+    setSelectedArea(0);
+    setSelectedCriteria(0);
+    setInputResult({ msg: "Bedömning sparad!", type: "success" });
   }
 
   return (
@@ -97,20 +104,20 @@ export default function Assessment() {
       <div>
         <p className="student-name">{name}</p>
       </div>
-      <div className="d-flex justify-content-center mt-5 main-div">
+      <div className="d-flex justify-content-center main-div">
         <form className="mb-4" id="form-block" onSubmit={handleForm}>
           <h1 className="mb-4" style={{ textAlign: "center" }}>
             Bedömning
           </h1>
 
-          {inputError && (
-            <div className="alert alert-danger" role="alert">
-              Du måste fylla i alla fält
+          {inputResult.type !== null && (
+            <div className={inputResult.type === "danger" ? "alert alert-danger" : "alert alert-success"} role="alert">
+              {inputResult.msg}
             </div>
           )}
 
           <div className="form-outline mb-2" id="gradingTool-div">
-            <label htmlFor="grading-tool">
+            <label htmlFor="gradingTool">
               Bedömningsverktyg: <span className="required-symbol">*</span>
             </label>
             <select
