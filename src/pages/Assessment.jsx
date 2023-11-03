@@ -20,7 +20,7 @@ export default function Assessment() {
   const [selectedTool, setSelectedTool] = useState(0);
   const [selectedArea, setSelectedArea] = useState(0);
   const [selectedCriteria, setSelectedCriteria] = useState(0);
-  const [inputResult, setInputResult] = useState({msg: null, type: null});
+  const [inputResult, setInputResult] = useState({ msg: null, type: null });
 
   let name = "";
   let student = "";
@@ -48,7 +48,7 @@ export default function Assessment() {
     }
     const levelCheck = document.querySelector("#flexCheckDefault");
     const levelSelect = document.querySelector("#level");
-    
+
     var levelVal;
     if (levelSelect != null) {
       if (levelSelect.value == 0) {
@@ -66,7 +66,7 @@ export default function Assessment() {
     ).name;
 
     if (selectedTool === 1) {
-      document.querySelectorAll(".gradingToolRadio").forEach(radioBtn => {
+      document.querySelectorAll(".gradingToolRadio").forEach((radioBtn) => {
         if (radioBtn.checked) {
           let mergedStr = gradingToolVal.concat(" ", radioBtn.value);
           gradingToolVal = mergedStr;
@@ -86,12 +86,12 @@ export default function Assessment() {
       areas: areaVal,
       criteria: criteriaVal,
       level: levelVal,
-      comment: commentVal
+      comment: commentVal,
     };
     saveLocalStorage(studentData);
     handleFormSubmit();
   }
-  
+
   function handleFormSubmit() {
     setSelectedTool(0);
     setSelectedArea(0);
@@ -118,21 +118,26 @@ export default function Assessment() {
 
   return (
     <>
-      <div>
-        <p className="student-name">{name}</p>
-      </div>
-      <div className="d-flex justify-content-center main-div">
+      <h5 className="student-name">{name}</h5>
+      <div className="d-flex justify-content-center">
         <form className="mb-4" id="form-block" onSubmit={handleForm}>
           <h1 className="mb-4" style={{ textAlign: "center" }}>
             Bedömning
           </h1>
 
           {inputResult.type !== null && (
-            <div className={inputResult.type === "danger" ? "alert alert-danger" : "alert alert-success"} role="alert">
+            <div
+              className={
+                inputResult.type === "danger"
+                  ? "alert alert-danger"
+                  : "alert alert-success"
+              }
+              role="alert"
+            >
               {inputResult.msg}
             </div>
           )}
-          
+
           <div className="form-outline mb-2" id="gradingTool-div">
             <label htmlFor="gradingTool">
               Bedömningsverktyg: <span className="required-symbol">*</span>
@@ -157,20 +162,54 @@ export default function Assessment() {
           {selectedTool === 1 ? (
             <div className="d-flex">
               <div className="mx-1">
-                <input type="radio" className="btn-check gradingToolRadio" name="options" id="option1" value="A" defaultChecked/>
-                <label className="btn btn-light border border-secondary px-4" htmlFor="option1">A</label>
+                <input
+                  type="radio"
+                  className="btn-check gradingToolRadio"
+                  name="options"
+                  id="option1"
+                  value="A"
+                  defaultChecked
+                />
+                <label
+                  className="btn btn-light border border-secondary px-4"
+                  htmlFor="option1"
+                >
+                  A
+                </label>
               </div>
               <div className="mx-1">
-                <input type="radio" className="btn-check gradingToolRadio" name="options" id="option2" value="B"/>
-                <label className="btn btn-light border border-secondary px-4" htmlFor="option2">B</label>
+                <input
+                  type="radio"
+                  className="btn-check gradingToolRadio"
+                  name="options"
+                  id="option2"
+                  value="B"
+                />
+                <label
+                  className="btn btn-light border border-secondary px-4"
+                  htmlFor="option2"
+                >
+                  B
+                </label>
               </div>
               <div className="mx-1">
-                <input type="radio" className="btn-check gradingToolRadio" name="options" id="option3" value="C"/>
-                <label className="btn btn-light border border-secondary px-4" htmlFor="option3">C</label>
+                <input
+                  type="radio"
+                  className="btn-check gradingToolRadio"
+                  name="options"
+                  id="option3"
+                  value="C"
+                />
+                <label
+                  className="btn btn-light border border-secondary px-4"
+                  htmlFor="option3"
+                >
+                  C
+                </label>
               </div>
             </div>
           ) : null}
-              
+
           {selectedTool !== 0 ? (
             <div className="form-outline mb-2" id="area-div">
               <label htmlFor="area">
@@ -187,9 +226,7 @@ export default function Assessment() {
                 <option value="0">Välj område</option>
                 {selectedTool != 0
                   ? data.areas
-                      .filter((area) =>
-                        area.gradingTool.includes(selectedTool)
-                      )
+                      .filter((area) => area.gradingTool.includes(selectedTool))
                       .map((area) => (
                         <option key={area.name} value={area.id}>
                           {area.name}
@@ -203,8 +240,8 @@ export default function Assessment() {
               </select>
             </div>
           ) : null}
-          
-          {selectedTool !== 0 && selectedArea !== 0? (
+
+          {selectedTool !== 0 && selectedArea !== 0 ? (
             <div className="form-outline mb-2" id="criteria-div">
               <label htmlFor="criteria">
                 Kriteria: <span className="required-symbol">*</span>
@@ -257,6 +294,30 @@ export default function Assessment() {
             Spara
           </button>
         </form>
+      </div>
+      <div>
+        <h4 className="mb-4 mt-5" style={{ textAlign: "center" }}>
+          Pågående interventioner
+        </h4>
+        {student[0].interventions.length !== 0 ? (
+          <div className="d-flex justify-content-center">
+            <ul className="list-group" id="current-interventions">
+              {student[0].interventions.map((intervention) => (
+                <li
+                  className="list-group-item flex-column align-items-center"
+                  key={intervention.id}
+                >
+                  <div className="d-flex w-150 justify-content-between">
+                    <h5 className="mb-1">{intervention.name}</h5>
+                    <small>{intervention.date}</small>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <p className="text-center">Inga pågående interventioner</p>
+        )}
       </div>
     </>
   );

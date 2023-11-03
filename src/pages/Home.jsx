@@ -42,7 +42,7 @@ export default function Home() {
               </div>
             )}
             <div className="form-outline mb-4">
-              <label htmlFor="name">Elevens namn: <span className="required-symbol">*</span></label>
+              <p style={{margin:0}}>Elevens namn: <span className="required-symbol">*</span></p>
               <AutoComplete change={changeInputText} />
             </div>
 

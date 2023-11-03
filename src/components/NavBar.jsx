@@ -45,11 +45,11 @@ export default function NavBar () {
               <div className="modal-line lines">
                 <NavLink className="nav-link" onClick={handleClick} to="/">Hämta elev</NavLink>
               </div>
-
+              <hr/>
               <div className="modal-line lines">
                 <NavLink className="nav-link" onClick={handleClick} to="/assessment">Bedömning</NavLink>
               </div>
-
+              <hr/>
               <div className="modal-line lines">
                 <NavLink className="nav-link" onClick={handleClick} to="/analyse">Analys</NavLink>
               </div>

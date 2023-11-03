@@ -73,7 +73,6 @@ body {
     align-items: center;
     width: 100%;
     margin: 0 auto;
-    padding-bottom: 16px;
     border-bottom: 0;
 }
 
@@ -92,13 +91,19 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-bottom: 10%;
+    padding: 1em;
+    margin: 0.5em 0 0.5em 0;
     cursor: pointer;
     transition: all .5s ease;
 }
 
 #current-interventions {
     width: 30% !important;
+}
+
+#gridColumns {
+    width: 100%;
+    margin: 0;
 }
 
 @media screen and (max-width: 1100px) {
@@ -117,6 +122,12 @@ body {
 }
 
 @media screen and (max-width: 750px) {
+    .student-name {
+        width: 100%;
+        margin: 0;
+        padding: 0 0 1em 0;
+        text-align: center;
+    }
     #form-block {
       width: 80%;
     }

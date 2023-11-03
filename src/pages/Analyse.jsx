@@ -21,7 +21,7 @@ export default function Analyse() {
           <h1 className="mb-4" style={{textAlign: 'center'}}>Analys</h1>
 
           <div className="form-outline mb-2" id="gradingTool-div">
-            <label htmlFor="grading-tool">Bedömningsverktyg: <span className="required-symbol">*</span></label>
+            <label htmlFor="gradingTool">Bedömningsverktyg: <span className="required-symbol">*</span></label>
             <select className="form-select border border-2" id="gradingTool" name="gradingTool" required>
               <option value="0">Välj bedömningsverktyg</option>
             </select>
@@ -45,13 +45,13 @@ export default function Analyse() {
 
             <div className="form-check mb-2" id="level-check-div">
               <label className="form-check-label" htmlFor="flexCheckDefault">Uppnår kriteria </label>
-              <input className="form-check-input border border-2" type="checkbox" id="flexCheckDefault" />
+              <input className="form-check-input border border-2" type="checkbox" id="flexCheckDefault" name='flexCheckDefault'/>
             </div>
           </div>
 
           <div className="form-outline mb-2">
             <label htmlFor="comment">Kommentar:</label>
-            <textarea className="form-control border border-2 form-text" rows="4" id="comment"></textarea>
+            <textarea className="form-control border border-2 form-text" rows="4" id="comment" name='comment'></textarea>
           </div>
 
           <button className="btn btn-primary btn-block w-100 mb-2 submitBtn">Spara</button>
