@@ -7,8 +7,19 @@ import {
   faFaceMeh,
   faFaceFrown,
 } from "@fortawesome/free-regular-svg-icons";
+import { useEffect } from "react";
 
 library.add(faFaceSmile, faFaceMeh, faFaceFrown);
+
+function getCurrentDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if needed
+  const day = today.getDate().toString().padStart(2, '0'); // Add leading zero if needed
+  const formattedDate = `${year}-${month}-${day}`;
+
+  return formattedDate;
+}
 
 export default function InterventionModal({
   show,
@@ -18,6 +29,16 @@ export default function InterventionModal({
 }) {
   const [isPresent, setIsPresent] = useState(true);
   const [performance, setPerformance] = useState("good");
+  const [selectedDate, setSelectedDate] = useState('');
+
+  useEffect(() => {
+    setSelectedDate(getCurrentDate()); // Set the default value to today's date
+  }, []);
+
+  const handleDateChange = (e) => {
+    console.log(e.target.value);
+    setSelectedDate(e.target.value);
+  }
 
   const handlePresent = () => {
     setIsPresent(!isPresent);
@@ -77,6 +98,8 @@ export default function InterventionModal({
               </label>
               <input
                 type="date"
+                value={selectedDate}
+                onChange={handleDateChange}
                 id="defaultForm-date"
                 className="form-control validate"
               />
