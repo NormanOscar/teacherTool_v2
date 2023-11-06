@@ -55,9 +55,14 @@ export default function InterventionModal({
       intervention: intervention.id,
       date: document.querySelector("#defaultForm-date").value,
       present: isPresent,
-      performance: performance,
-      assignment: document.querySelector("#assignment").value,
-      comment: document.querySelector("#comment").value,
+    }
+    if (isPresent) {
+      data.performance = performance;
+      data.assignment = document.querySelector("#assignment").value;
+      data.comment = document.querySelector("#comment").value;
+    } else {
+      data.reason = document.querySelector("#reason").value;
+      data.comment = document.querySelector("#absentComment").value;
     }
     console.log(data);
     onClose();
@@ -210,7 +215,38 @@ export default function InterventionModal({
                 </div>
               </div>
             </div>
-          ) : null}
+          ) : (
+            <div
+              className="col border-0 rounded-1"
+              style={{
+                padding: "1em 1em 0.5em 1em",
+                backgroundColor: "#ededed",
+              }}
+            >
+              <div className="row mb-3">
+                <div className="form-outline">
+                  <label htmlFor="reason">
+                    Anledning: <span className="required-symbol">*</span>
+                  </label>
+                  <input
+                    className="form-control border border-2 form-text"
+                    id="reason"
+                  />
+                </div>
+              </div>
+              <div className="row mb-3">
+                <div className="form-outline">
+                  <label htmlFor="absentComment">Kommentar:</label>
+                  <textarea
+                    className="form-control border border-2 form-text"
+                    rows="4"
+                    id="absentComment"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          )
+          }
           <div className="row mt-3">
             <div className="text-center">
               <button
