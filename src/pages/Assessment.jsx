@@ -2,17 +2,61 @@ import "../styles.css";
 import { useState } from "react";
 import Levels from "../components/Levels";
 import studentData from "../json/studentData.json";
+import studentList from "../json/studentList.json";
 import data from "../json/data.json";
+import { useEffect } from "react";
 
-function saveLocalStorage(data) {
-  let savedData = localStorage.getItem("studentData");
+function addStudentsToLocalStorage() {
+  let savedData = JSON.parse(localStorage.getItem("studentData"));
   if (savedData === null) {
-    let studentDataList = [data];
+    let studentDataList = [];
+    for (let i = 0; i < studentList.students.length; i++) {
+      studentDataList.push(studentList.students[i]);
+    }
     localStorage.setItem("studentData", JSON.stringify(studentDataList));
   } else {
-    let studentDataList = JSON.parse(savedData);
-    studentDataList.push(data);
-    localStorage.setItem("studentData", JSON.stringify(studentDataList));
+    for (let i = 0; i < studentList.students.length; i++) {
+      if (savedData.find((dataPoint) => dataPoint.id === studentList.students[i].id)) {
+        continue;
+      } else {
+        savedData.push(studentList.students[i]);
+        localStorage.setItem("studentData", JSON.stringify(savedData));
+      }
+    }
+  }
+}
+
+function saveLocalStorage(data) {
+  if (studentInLocalStorage(data.id)) {
+    let savedData = JSON.parse(localStorage.getItem("studentData"));
+    let student = savedData.filter((student) => student.id === data.id)[0];
+    let dataToSave = {
+      date: getCurrentDate(),
+      gradingTool: data.gradingTools,
+      area: data.areas,
+      criteria: data.criteria,
+      level: data.level,
+      comment: data.comment,
+    };
+    student.assessments.push(dataToSave);
+    localStorage.setItem("studentData", JSON.stringify(savedData));
+  }
+}
+
+function getCurrentDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if needed
+  const day = today.getDate().toString().padStart(2, '0'); // Add leading zero if needed
+  const formattedDate = `${year}-${month}-${day}`;
+
+  return formattedDate;
+}
+
+function studentInLocalStorage(studentId) {
+  let savedData = JSON.parse(localStorage.getItem("studentData"));
+  if (savedData !== null) {
+    return savedData.find((dataPoint) => dataPoint.id === studentId) ? true : false;
   }
 }
 
@@ -21,6 +65,10 @@ export default function Assessment() {
   const [selectedArea, setSelectedArea] = useState(0);
   const [selectedCriteria, setSelectedCriteria] = useState(0);
   const [inputResult, setInputResult] = useState({ msg: null, type: null });
+
+  useEffect(() => {
+    addStudentsToLocalStorage();
+  }, []);
 
   let name = "";
   let student = "";
@@ -81,6 +129,7 @@ export default function Assessment() {
 
     const studentData = {
       name: nameVal,
+      id: student[0].id,
       grade: gradeVal,
       gradingTools: gradingToolVal,
       areas: areaVal,

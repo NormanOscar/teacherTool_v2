@@ -1,0 +1,24 @@
+{
+  "interventions" : [
+    {
+      "id": 1,
+      "name": "Intervention 1",
+      "description": "Description 1"
+    },
+    {
+      "id": 2,
+      "name": "Intervention 2",
+      "description": "Description 2"
+    },
+    {
+      "id": 3,
+      "name": "Intervention 3",
+      "description": "Description 3"
+    },
+    {
+      "id": 4,
+      "name": "Intervention 4",
+      "description": "Description 4"
+    }
+  ]
+}

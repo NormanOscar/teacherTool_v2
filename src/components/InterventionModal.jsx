@@ -68,8 +68,13 @@ export default function InterventionModal({
     onClose();
   };
 
+  function hideModal() {
+    setIsPresent(true);
+    onClose();
+  }
+
   return (
-    <Modal show={show} onHide={onClose} centered>
+    <Modal show={show} onHide={hideModal} centered>
       <Modal.Header closeButton>
         <div className="col">
           <div className="row">
@@ -154,7 +159,7 @@ export default function InterventionModal({
                   <input
                     className="form-control border border-2 form-text"
                     id="assignment"
-                  ></input>
+                  />
                 </div>
               </div>
               <div className="row">
@@ -211,7 +216,8 @@ export default function InterventionModal({
                     className="form-control border border-2 form-text"
                     rows="4"
                     id="comment"
-                  ></textarea>
+                    style={{ resize: "none" }}
+                  />
                 </div>
               </div>
             </div>
@@ -241,7 +247,8 @@ export default function InterventionModal({
                     className="form-control border border-2 form-text"
                     rows="4"
                     id="absentComment"
-                  ></textarea>
+                    style={{ resize: "none" }}
+                  />
                 </div>
               </div>
             </div>

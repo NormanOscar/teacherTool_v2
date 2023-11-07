@@ -1,0 +1,44 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "Oscar Norman",
+      "grade" : 1,
+      "email" : "oscar.norman@example.com",
+      "assessments": [],
+      "interventions": []
+    },
+    {
+      "id": 2,
+      "name": "Oscar Norman",
+      "grade" : 2,
+      "email" : "oscar.norman@example.com",
+      "assessments": [],
+      "interventions": []
+    },
+    {
+      "id": 3,
+      "name": "Mari Udderyd",
+      "grade" : 1,
+      "email" : "mari.udderyd@example.com",
+      "assessments": [],
+      "interventions": []
+    },
+    {
+      "id": 4,
+      "name": "Niklas Andersson",
+      "grade" : 2,
+      "email" : "niklas.andersson@example.com",
+      "assessments": [],
+      "interventions": []
+    },
+    {
+      "id": 5,
+      "name": "Mattias Davidsson",
+      "grade" : 3,
+      "email" : "mattias.davidsson@example.com",
+      "assessments": [],
+      "interventions": []
+    }
+  ]
+}
