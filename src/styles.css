@@ -109,7 +109,15 @@ body {
     border: 1px solid black !important;
 }
 
+.confirmationModal {
+    min-width: 30vw;
+}
+
 @media screen and (max-width: 1100px) {
+    .confirmationModal {
+        min-width: 60vw !important;
+    }
+
     #form-block {
         width: 50%;
     }
@@ -125,6 +133,9 @@ body {
 }
 
 @media screen and (max-width: 750px) {
+    .confirmationModal {
+        min-width: 90vw !important;
+    }
     .student-name {
         width: 100%;
         margin: 0;
