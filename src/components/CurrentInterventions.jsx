@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import studentData from "../json/studentData.json";
 import StudentModal from "./StudentModal";
 import InterventionModal from "./InterventionModal";
+import ConfirmationModal from "./ConfirmationModal";
 
 export default function CurrentInterventions() {
   const [studentToShow, setStudentToShow] = useState(null);
   const [interventionToShow, setInterventionToShow] = useState(null);
   const [show, setShow] = useState(false);
   const [showIntervention, setShowIntervention] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const showModal = () => setShow(true);
   const showInterventionModal = () => setShowIntervention(true);
+  const showConfirmationModal = () => setShowConfirmation(true);
   const hideModal = () => setShow(false);
   const hideInterventionModal = () => setShowIntervention(false);
+  const hideConfirmationModal = () => setShowConfirmation(false);
 
   const currentStudents = studentData.students.filter(
     (student) => student.interventions.length > 0
@@ -35,12 +39,20 @@ export default function CurrentInterventions() {
 
   return (
     <>
+      {showConfirmation && (
+        <ConfirmationModal
+          show={showConfirmation}
+          closeModal={hideConfirmationModal}
+          onDeny={hideInterventionModal}
+        />
+      )}
       {interventionToShow && (
         <InterventionModal
           show={showIntervention}
           intervention={interventionToShow}
           student={studentToShow}
           onClose={hideInterventionModal}
+          showConfirmation={showConfirmationModal}
         />
       )}
       {studentToShow && (

@@ -26,6 +26,7 @@ export default function InterventionModal({
   intervention,
   student,
   onClose,
+  showConfirmation,
 }) {
   const [isPresent, setIsPresent] = useState(true);
   const [performance, setPerformance] = useState("good");
@@ -95,7 +96,7 @@ export default function InterventionModal({
               <button
                 type="button"
                 className="btn btn-danger btn-sm float-end"
-                onClick={onClose}
+                onClick={showConfirmation}
               >
                 Avsluta intervention
               </button>
