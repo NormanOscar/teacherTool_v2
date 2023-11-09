@@ -15,14 +15,19 @@ function addStudentsToLocalStorage() {
     }
     localStorage.setItem("studentData", JSON.stringify(studentDataList));
   } else {
-    for (let i = 0; i < studentList.students.length; i++) {
-      if (savedData.find((dataPoint) => dataPoint.id === studentList.students[i].id)) {
-        continue;
-      } else {
-        savedData.push(studentList.students[i]);
-        localStorage.setItem("studentData", JSON.stringify(savedData));
+    // Filter out objects without 'id'
+    let filteredSavedData = savedData.filter(obj => obj.hasOwnProperty('id'));
+
+    for (let student of studentList.students) {
+      let isAlreadyInLocalStorage = filteredSavedData.some(obj => obj.id === student.id);
+
+      if (!isAlreadyInLocalStorage) {
+        filteredSavedData.push(student);
       }
     }
+
+    // Update the localStorage with the modified data
+    localStorage.setItem("studentData", JSON.stringify(filteredSavedData));
   }
 }
 
