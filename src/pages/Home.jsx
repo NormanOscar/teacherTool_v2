@@ -1,14 +1,19 @@
 import '../styles.css';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import studentData from '../json/studentData.json';
 import AutoComplete from '../components/AutoComplete';
 import CurrentInterventions from '../components/CurrentInterventions';
+import { addStudentsToLocalStorage } from "../components/func";
 
 export default function Home() {
   const [name, setName] = useState('');
   const [inputError, setInputError] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    addStudentsToLocalStorage();
+  }, []);
   
   function changeInputText (newValue) {
     setName(newValue);
