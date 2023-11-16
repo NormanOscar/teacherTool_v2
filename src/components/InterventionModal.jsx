@@ -28,26 +28,40 @@ export default function InterventionModal({
   onClose,
   showConfirmation,
 }) {
-  const [isPresent, setIsPresent] = useState(true);
-  const [performance, setPerformance] = useState("good");
   const [selectedDate, setSelectedDate] = useState('');
+  const [isPresent, setIsPresent] = useState(true);
+  const [assignment, setAssignment] = useState("");
+  const [reason, setReason] = useState("");
+  const [performance, setPerformance] = useState("good");
+  const [inputResult, setInputResult] = useState(false);
 
   useEffect(() => {
     setSelectedDate(getCurrentDate()); // Set the default value to today's date
   }, []);
 
+  const handleAssignmentChange = (e) => {
+    setAssignment(e.target.value);
+    setInputResult(false);
+  }
+
+  const handleReasonChange = (e) => {
+    setReason(e.target.value);
+    setInputResult(false);
+  }
+
   const handleDateChange = (e) => {
-    console.log(e.target.value);
     setSelectedDate(e.target.value);
+    setInputResult(false);
   }
 
   const handlePresent = () => {
     setIsPresent(!isPresent);
+    setInputResult(false);
   };
 
   const handlePerformance = (e) => {
-    console.log(e.target.id);
     setPerformance(e.target.id);
+    setInputResult(false);
   }
 
   const handleSave = () => {
@@ -59,14 +73,18 @@ export default function InterventionModal({
     }
     if (isPresent) {
       data.performance = performance;
-      data.assignment = document.querySelector("#assignment").value;
+      data.assignment = assignment;
       data.comment = document.querySelector("#comment").value;
     } else {
-      data.reason = document.querySelector("#reason").value;
+      data.reason = reason;
       data.comment = document.querySelector("#absentComment").value;
     }
-    console.log(data);
-    onClose();
+    if ((isPresent && assignment === "") || (!isPresent && reason === "")) {
+      setInputResult(true);
+    } else {
+      // TODO: Send data to backend
+      onClose();
+    }
   };
 
   function hideModal() {
@@ -102,6 +120,15 @@ export default function InterventionModal({
               </button>
             </div>
           </div>
+
+          {inputResult ? (
+            <div
+              className="alert alert-danger"
+              role="alert"
+            >
+              Du måste fylla i alla fält markerade med en <span className="required-symbol">*</span>
+            </div>
+          ) : null}
           <div className="row my-3">
             <div className="md-form">
               <label htmlFor="defaultForm-date">
@@ -160,6 +187,8 @@ export default function InterventionModal({
                   <input
                     className="form-control border border-2 form-text"
                     id="assignment"
+                    type="text"
+                    onChange={handleAssignmentChange}
                   />
                 </div>
               </div>
@@ -238,6 +267,8 @@ export default function InterventionModal({
                   <input
                     className="form-control border border-2 form-text"
                     id="reason"
+                    type="text"
+                    onChange={handleReasonChange}
                   />
                 </div>
               </div>

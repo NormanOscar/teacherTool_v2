@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Typeahead } from 'react-bootstrap-typeahead';
-
 import studentData from '../json/studentData.json';
-
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 
