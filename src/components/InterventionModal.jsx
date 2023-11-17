@@ -8,18 +8,9 @@ import {
   faFaceFrown,
 } from "@fortawesome/free-regular-svg-icons";
 import { useEffect } from "react";
+import { getCurrentDate } from "../components/func";
 
 library.add(faFaceSmile, faFaceMeh, faFaceFrown);
-
-function getCurrentDate() {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if needed
-  const day = today.getDate().toString().padStart(2, '0'); // Add leading zero if needed
-  const formattedDate = `${year}-${month}-${day}`;
-
-  return formattedDate;
-}
 
 export default function InterventionModal({
   show,

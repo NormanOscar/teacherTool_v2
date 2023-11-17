@@ -24,3 +24,13 @@ export function addStudentsToLocalStorage() {
     localStorage.setItem("studentData", JSON.stringify(filteredSavedData));
   }
 }
+
+export function getCurrentDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if needed
+  const day = today.getDate().toString().padStart(2, '0'); // Add leading zero if needed
+  const formattedDate = `${year}-${month}-${day}`;
+
+  return formattedDate;
+}

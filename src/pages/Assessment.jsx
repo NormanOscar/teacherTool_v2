@@ -5,7 +5,7 @@ import studentData from "../json/studentData.json";
 import studentList from "../json/studentList.json";
 import data from "../json/data.json";
 import { useEffect } from "react";
-import { addStudentsToLocalStorage } from "../components/func";
+import { addStudentsToLocalStorage, getCurrentDate } from "../components/func";
 
 function saveLocalStorage(data) {
   if (studentInLocalStorage(data.id)) {
@@ -22,16 +22,6 @@ function saveLocalStorage(data) {
     student.assessments.push(dataToSave);
     localStorage.setItem("studentData", JSON.stringify(savedData));
   }
-}
-
-function getCurrentDate() {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if needed
-  const day = today.getDate().toString().padStart(2, '0'); // Add leading zero if needed
-  const formattedDate = `${year}-${month}-${day}`;
-
-  return formattedDate;
 }
 
 function studentInLocalStorage(studentId) {
