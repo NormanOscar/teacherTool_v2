@@ -5,7 +5,7 @@
             "id": 1,
             "grade" : 1,
             "assessments": [],
-            "interventions": [
+            "activities": [
                 {
                     "id": 1,
                     "name":"Wendick",
@@ -25,14 +25,14 @@
             "id": 2,
             "grade" : 2,
             "assessments": [],
-            "interventions": []
+            "activities": []
         },
         {
             "name": "Mari Udderyd",
             "id": 3,
             "grade" : 1,
             "assessments": [],
-            "interventions": [
+            "activities": [
                 {
                     "id": 1,
                     "name":"Wendick",
@@ -46,14 +46,14 @@
             "id": 4,
             "grade" : 2,
             "assessments": [],
-            "interventions": []
+            "activities": []
         },
         {
             "name": "Mattias Davidsson",
             "id": 5,
             "grade" : 3,
             "assessments": [],
-            "interventions": []
+            "activities": []
         }
     ]
 }

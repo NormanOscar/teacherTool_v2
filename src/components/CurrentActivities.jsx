@@ -1,20 +1,15 @@
 import React, { useState } from "react";
 import studentData from "../json/studentData.json";
 import StudentModal from "./StudentModal";
-import InterventionModal from "./InterventionModal";
 
-export default function CurrentInterventions() {
+export default function CurrentActivities() {
   const [studentToShow, setStudentToShow] = useState(null);
-  const [interventionToShow, setInterventionToShow] = useState(null);
   const [show, setShow] = useState(false);
-  const [showIntervention, setShowIntervention] = useState(false);
   const showModal = () => setShow(true);
-  const showInterventionModal = () => setShowIntervention(true);
   const hideModal = () => setShow(false);
-  const hideInterventionModal = () => setShowIntervention(false);
 
   const currentStudents = studentData.students.filter(
-    (student) => student.interventions.length > 0
+    (student) => student.activities.length > 0
   );
 
   function handleClick(e) {
@@ -24,34 +19,17 @@ export default function CurrentInterventions() {
     showModal();
   }
 
-  function handleInterventionClick(e) {
-    setInterventionToShow(
-      studentToShow.interventions.find(
-        (intervention) => intervention.id == e.currentTarget.value
-      )
-    );
-    showInterventionModal();
-  }
-
   return (
     <>
       
-      {interventionToShow && (
-        <InterventionModal
-          show={showIntervention}
-          intervention={interventionToShow}
-          student={studentToShow}
-          onClose={hideInterventionModal}
-        />
-      )}
       {studentToShow && (
-        <StudentModal show={show} student={studentToShow} onClose={hideModal} onInterventionClick={handleInterventionClick} />
+        <StudentModal show={show} student={studentToShow} onClose={hideModal} />
       )}
       <h4 className="mb-4 mt-5" style={{ textAlign: "center" }}>
-        Pågående interventioner
+        Pågående aktiviteter
       </h4>
       <div className="d-flex justify-content-center">
-        <ul className="list-group" id="current-interventions">
+        <ul className="list-group" id="current-activities">
           {currentStudents.map((student) => (
             <li
               className="list-group-item list-group-item-action flex-column align-items-center"
@@ -61,10 +39,10 @@ export default function CurrentInterventions() {
             >
               <div className="d-flex w-150 justify-content-between">
                 <h5 className="mb-1">{student.name + ' (åk. ' + student.grade + ')'}</h5>
-                <small>{student.interventions[0].date}</small>
+                <small>{student.activities[0].date}</small>
               </div>
               <p className="mb-1">
-                {student.interventions.map((x) => x.name).join(", ")}
+                {student.activities.map((x) => x.name).join(", ")}
               </p>
             </li>
           ))}

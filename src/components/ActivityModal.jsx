@@ -9,20 +9,18 @@ import {
   faFaceFrown,
 } from "@fortawesome/free-regular-svg-icons";
 import { useEffect } from "react";
-import { getCurrentDate } from "../components/func";
+import { getCurrentDate } from "./func";
 
 library.add(faFaceSmile, faFaceMeh, faFaceFrown);
 
-export default function InterventionModal({
+export default function ActivityModal({
   show,
-  intervention,
+  activity,
   student,
   onClose,
 }) {
-  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedDate, setSelectedDate] = useState("");
   const [isPresent, setIsPresent] = useState(true);
-  const [assignment, setAssignment] = useState("");
-  const [reason, setReason] = useState("");
   const [performance, setPerformance] = useState("good");
   const [inputResult, setInputResult] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -33,20 +31,10 @@ export default function InterventionModal({
     setSelectedDate(getCurrentDate()); // Set the default value to today's date
   }, []);
 
-  const handleAssignmentChange = (e) => {
-    setAssignment(e.target.value);
-    setInputResult(false);
-  }
-
-  const handleReasonChange = (e) => {
-    setReason(e.target.value);
-    setInputResult(false);
-  }
-
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
     setInputResult(false);
-  }
+  };
 
   const handlePresent = () => {
     setIsPresent(!isPresent);
@@ -56,25 +44,28 @@ export default function InterventionModal({
   const handlePerformance = (e) => {
     setPerformance(e.target.id);
     setInputResult(false);
-  }
+  };
 
   const handleSave = () => {
     let data = {
       student: student.id,
-      intervention: intervention.id,
+      activity: activity.id,
       date: document.querySelector("#defaultForm-date").value,
       present: isPresent,
-    }
+    };
     if (isPresent) {
       data.performance = performance;
-      data.assignment = assignment;
       data.comment = document.querySelector("#comment").value;
     } else {
-      data.reason = reason;
       data.comment = document.querySelector("#absentComment").value;
     }
+    if (selectedDate === "") {
+      setInputResult(true);
+      return;
+    } else {
       // TODO: Send data to backend
       onClose();
+    }
   };
 
   function hideModal() {
@@ -101,12 +92,12 @@ export default function InterventionModal({
           <div className="col">
             <div className="row">
               <Modal.Title>
-                {intervention.name}{" "}
-                <small style={{ color: "grey" }}>{intervention.date}</small>
+                {activity.name}{" "}
+                <small style={{ color: "grey" }}>{activity.date}</small>
               </Modal.Title>
             </div>
             <div className="row">
-              <p>{student.name + ' (åk. ' + student.grade + ')'}</p>
+              <p>{student.name + " (åk. " + student.grade + ")"}</p>
             </div>
           </div>
         </Modal.Header>
@@ -119,17 +110,14 @@ export default function InterventionModal({
                   className="btn btn-danger btn-sm float-end"
                   onClick={showConfirmationModal}
                 >
-                  Avsluta intervention
+                  Avsluta aktivitet
                 </button>
               </div>
             </div>
 
             {inputResult ? (
-              <div
-                className="alert alert-danger"
-                role="alert"
-              >
-                Du måste fylla i alla fält markerade med en <span className="required-symbol">*</span>
+              <div className="alert alert-danger" role="alert">
+                Du måste välja ett datum!
               </div>
             ) : null}
             <div className="row my-3">
@@ -182,24 +170,10 @@ export default function InterventionModal({
                   backgroundColor: "#ededed",
                 }}
               >
-                <div className="row mb-3">
-                  <div className="form-outline">
-                    <label htmlFor="assignment">
-                      Uppgift:
-                    </label>
-                    <input
-                      className="form-control border border-2 form-text"
-                      id="assignment"
-                      type="text"
-                      onChange={handleAssignmentChange}
-                    />
-                  </div>
-                </div>
                 <div className="row">
                   <div className="col">
-
                     <div className="row">
-                      <p style={{marginBottom: "4px"}}>Hur gick det?</p>
+                      <p style={{ marginBottom: "4px" }}>Hur gick det?</p>
                     </div>
                     <div className="row">
                       <div className="btn-group">
@@ -212,8 +186,16 @@ export default function InterventionModal({
                           defaultChecked
                           onChange={handlePerformance}
                         />
-                        <label className="btn performance-label" htmlFor="good" style={{backgroundColor: "#20b26b"}}>
-                          <FontAwesomeIcon icon={faFaceSmile} size='2xl' color="black"/>
+                        <label
+                          className="btn performance-label"
+                          htmlFor="good"
+                          style={{ backgroundColor: "#20b26b" }}
+                        >
+                          <FontAwesomeIcon
+                            icon={faFaceSmile}
+                            size="2xl"
+                            color="black"
+                          />
                         </label>
 
                         <input
@@ -224,8 +206,16 @@ export default function InterventionModal({
                           autoComplete="off"
                           onChange={handlePerformance}
                         />
-                        <label className="btn performance-label" htmlFor="neutral" style={{backgroundColor: "#ffe207"}}>
-                          <FontAwesomeIcon icon={faFaceMeh} size='2xl' color="black"/>
+                        <label
+                          className="btn performance-label"
+                          htmlFor="neutral"
+                          style={{ backgroundColor: "#ffe207" }}
+                        >
+                          <FontAwesomeIcon
+                            icon={faFaceMeh}
+                            size="2xl"
+                            color="black"
+                          />
                         </label>
                         <input
                           type="radio"
@@ -235,8 +225,16 @@ export default function InterventionModal({
                           autoComplete="off"
                           onChange={handlePerformance}
                         />
-                        <label className="btn performance-label" htmlFor="bad" style={{backgroundColor: "#ff3d4d"}}>
-                          <FontAwesomeIcon icon={faFaceFrown} size='2xl' color="black"/>
+                        <label
+                          className="btn performance-label"
+                          htmlFor="bad"
+                          style={{ backgroundColor: "#ff3d4d" }}
+                        >
+                          <FontAwesomeIcon
+                            icon={faFaceFrown}
+                            size="2xl"
+                            color="black"
+                          />
                         </label>
                       </div>
                     </div>
@@ -264,19 +262,6 @@ export default function InterventionModal({
               >
                 <div className="row mb-3">
                   <div className="form-outline">
-                    <label htmlFor="reason">
-                      Anledning: <span className="required-symbol">*</span>
-                    </label>
-                    <input
-                      className="form-control border border-2 form-text"
-                      id="reason"
-                      type="text"
-                      onChange={handleReasonChange}
-                    />
-                  </div>
-                </div>
-                <div className="row mb-3">
-                  <div className="form-outline">
                     <label htmlFor="absentComment">Kommentar:</label>
                     <textarea
                       className="form-control border border-2 form-text"
@@ -287,8 +272,7 @@ export default function InterventionModal({
                   </div>
                 </div>
               </div>
-            )
-            }
+            )}
             <div className="row mt-3">
               <div className="text-center">
                 <button

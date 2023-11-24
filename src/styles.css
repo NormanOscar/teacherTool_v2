@@ -96,7 +96,7 @@ body {
     transition: all .5s ease;
 }
 
-#current-interventions {
+#current-activities {
     width: 30% !important;
 }
 
@@ -125,7 +125,7 @@ body {
     #form-block {
         width: 50%;
     }
-    #current-interventions {
+    #current-activities {
         width: 50% !important;
     }
 }
@@ -152,7 +152,7 @@ body {
     #modal-dialog{
         width: 50%;
     }
-    #current-interventions {
+    #current-activities {
         width: 80% !important;
     }
 }

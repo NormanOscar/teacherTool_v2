@@ -6,7 +6,7 @@
       "grade" : 1,
       "email" : "oscar.norman@example.com",
       "assessments": [],
-      "interventions": []
+      "activities": []
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "grade" : 2,
       "email" : "oscar.norman@example.com",
       "assessments": [],
-      "interventions": []
+      "activities": []
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "grade" : 1,
       "email" : "mari.udderyd@example.com",
       "assessments": [],
-      "interventions": []
+      "activities": []
     },
     {
       "id": 4,
@@ -30,7 +30,7 @@
       "grade" : 2,
       "email" : "niklas.andersson@example.com",
       "assessments": [],
-      "interventions": []
+      "activities": []
     },
     {
       "id": 5,
@@ -38,7 +38,7 @@
       "grade" : 3,
       "email" : "mattias.davidsson@example.com",
       "assessments": [],
-      "interventions": []
+      "activities": []
     }
   ]
 }
