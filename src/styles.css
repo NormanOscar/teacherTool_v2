@@ -113,6 +113,10 @@ body {
     min-width: 30vw;
 }
 
+.performance-btn:checked + .performance-label {
+    border: solid 2px black;
+}
+
 @media screen and (max-width: 1100px) {
     .confirmationModal {
         min-width: 60vw !important;

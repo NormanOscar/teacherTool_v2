@@ -274,7 +274,7 @@ export default function Assessment() {
                     onChange={handleSelectChange}
                     required
                   >
-                    <option value="0">Välj kriteria</option>
+                    <option value="0">Välj kriterie</option>
                     {selectedArea != 0 && selectedTool != 0
                       ? data.criteria
                           .filter(
