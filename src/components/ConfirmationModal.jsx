@@ -9,7 +9,6 @@ export default function ConfirmationModal({ show, closeModal, onDeny }) {
 
   function onClose () {
     closeModal();
-
   }
 
   return (

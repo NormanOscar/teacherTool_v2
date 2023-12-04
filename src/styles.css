@@ -42,8 +42,8 @@ body {
 
 .student-name {
     width: fit-content;
-    margin: 0;
-    padding: 0 0 0 4rem;
+    margin: 1em 0 0 4rem;
+    text-align: center;
 }
 
 .change-student {
@@ -130,27 +130,16 @@ body {
     }
 }
 
-@media screen and (max-width: 1000px) {
-    .navbar {
-        display: none;
-    }
-}
-
 @media screen and (max-width: 750px) {
     .confirmationModal {
         min-width: 90vw !important;
     }
     .student-name {
         width: 100%;
-        margin: 0;
-        padding: 0 0 1em 0;
-        text-align: center;
+        margin: 1em 0 1em 0;
     }
     #form-block {
       width: 80%;
-    }
-    #modal-dialog{
-        width: 50%;
     }
     #current-activities {
         width: 80% !important;
@@ -160,8 +149,5 @@ body {
 @media screen and (max-width: 500px) {
     #form-block {
       width: 80%;
-    }
-    #modal-dialog{
-        width: 60%;
     }
 }
