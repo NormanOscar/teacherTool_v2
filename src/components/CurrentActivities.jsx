@@ -44,6 +44,7 @@ export default function CurrentActivities() {
               key={student.id}
               value={student.id}
               onClick={handleClick}
+              style={{ cursor: "pointer" }}
             >
               <div className="d-flex w-150 justify-content-between">
                 <h5 className="mb-1">{student.name + ' (åk. ' + student.grade + ')'}</h5>

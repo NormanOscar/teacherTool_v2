@@ -149,6 +149,7 @@ export default function Assessment() {
             </h3>
             <StudentActivities
               student={student[0]}
+              page="assessment"
             />
           </Col>
           <Col xs={12} md={4} style={{paddingTop: '2em'}}>

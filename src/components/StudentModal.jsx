@@ -16,6 +16,7 @@ export default function StudentModal({ show, student, onClose }) {
           <StudentActivities
             student={student}
             onClose={onClose}
+            page="studentModal"
           />
         </Modal.Body>
       </Modal>

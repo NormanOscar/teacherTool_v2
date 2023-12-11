@@ -1,17 +1,20 @@
 // Components/NavBar.js
-import { Nav, Navbar } from 'react-bootstrap';
+import { NavLink, Nav, Navbar } from 'react-bootstrap';
 
-export default function NavBar () {
-
+export default function NavBar() {
   return (
     <Navbar collapseOnSelect expand='sm' className="border-bottom px-2" style={{backgroundColor: '#e5e5e5'}}>
-      <Navbar.Toggle aria-controls='navbarScroll'></Navbar.Toggle>
+      <Navbar.Toggle aria-controls='navbarScroll' />
       <Navbar.Collapse id='navbarScroll'>
         <Nav className="navbar-nav p-3" activeKey={location.pathname}>
-          <Nav.Link href="/">Hämta elev</Nav.Link>
-          <Nav.Link href="/assessment">Bedömning</Nav.Link>
+            <NavLink href="/">
+              Hämta elev
+            </NavLink>
+            <NavLink href='/assessment'>
+              Bedömning
+            </NavLink>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
   );
-};
+}
