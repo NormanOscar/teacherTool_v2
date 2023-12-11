@@ -6,7 +6,25 @@
       "grade" : 1,
       "email" : "oscar.norman@example.com",
       "assessments": [],
-      "activities": []
+      "activeActivities": 2,
+      "activities": [
+        {
+          "id": 1,
+          "name":"Wendick",
+          "date":"2023-10-24",
+          "cancelled": false,
+          "cancelComment": "",
+          "updates": []
+      },
+      {
+          "id": 2,
+          "name":"Test",
+          "date":"2023-10-24",
+          "cancelled": false,
+          "cancelComment": "",
+          "updates": []
+      }
+      ]
     },
     {
       "id": 2,
@@ -14,6 +32,7 @@
       "grade" : 2,
       "email" : "oscar.norman@example.com",
       "assessments": [],
+      "activeActivities": 0,
       "activities": []
     },
     {
@@ -22,7 +41,17 @@
       "grade" : 1,
       "email" : "mari.udderyd@example.com",
       "assessments": [],
-      "activities": []
+      "activeActivities": 1,
+      "activities": [
+        {
+          "id": 1,
+          "name":"Wendick",
+          "date":"2023-10-18",
+          "cancelled": false,
+          "cancelComment": "",
+          "updates": []
+      }
+      ]
     },
     {
       "id": 4,
@@ -30,6 +59,7 @@
       "grade" : 2,
       "email" : "niklas.andersson@example.com",
       "assessments": [],
+      "activeActivities": 0,
       "activities": []
     },
     {
@@ -38,6 +68,7 @@
       "grade" : 3,
       "email" : "mattias.davidsson@example.com",
       "assessments": [],
+      "activeActivities": 0,
       "activities": []
     }
   ]

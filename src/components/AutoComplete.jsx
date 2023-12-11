@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Typeahead } from 'react-bootstrap-typeahead';
-import studentData from '../json/studentData.json';
+import studentList from '../json/studentList.json';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 
 export default function AutoComplete ({ change }) {
-  studentData.students.sort(function (a, b) {
+  studentList.students.sort(function (a, b) {
     return a.name.localeCompare(b.name);
   });
 
@@ -25,7 +25,7 @@ export default function AutoComplete ({ change }) {
       id="name"
       onChange={handleSelectChange}
       onInputChange={handleTypeChange}
-      options={studentData.students.map((student) => student.name + " (åk. " + student.grade + ")")}
+      options={studentList.students.map((student) => student.name + " (åk. " + student.grade + ")")}
       selected={selected}
     />
   );

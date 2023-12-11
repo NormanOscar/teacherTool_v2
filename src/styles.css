@@ -28,7 +28,7 @@ body {
 }
 
 #form-block {
-    width: 30%;
+    width: 100%;
 }
 
 .form-control, .form-select {
@@ -41,8 +41,6 @@ body {
 }
 
 .student-name {
-    width: fit-content;
-    margin: 1em 0 0 4rem;
     text-align: center;
 }
 
@@ -54,6 +52,10 @@ body {
 
 .mobile-toggler {
     background-color: transparent;
+}
+
+#current-activities {
+    width: 80%;
 }
 
 #modal-dialog{
@@ -96,10 +98,6 @@ body {
     transition: all .5s ease;
 }
 
-#current-activities {
-    width: 30% !important;
-}
-
 #gridColumns {
     width: 100%;
     margin: 0;
@@ -121,13 +119,6 @@ body {
     .confirmationModal {
         min-width: 60vw !important;
     }
-
-    #form-block {
-        width: 50%;
-    }
-    #current-activities {
-        width: 50% !important;
-    }
 }
 
 @media screen and (max-width: 750px) {
@@ -137,12 +128,6 @@ body {
     .student-name {
         width: 100%;
         margin: 1em 0 1em 0;
-    }
-    #form-block {
-      width: 80%;
-    }
-    #current-activities {
-        width: 80% !important;
     }
 }
 

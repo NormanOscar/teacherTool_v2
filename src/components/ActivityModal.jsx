@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import ConfirmationModal from "./ConfirmationModal";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,16 +15,13 @@ library.add(faFaceSmile, faFaceMeh, faFaceFrown);
 export default function ActivityModal({
   show,
   activity,
-  student,
+  selectedStudent,
   onClose,
 }) {
   const [selectedDate, setSelectedDate] = useState("");
   const [isPresent, setIsPresent] = useState(true);
   const [performance, setPerformance] = useState("good");
   const [inputResult, setInputResult] = useState(false);
-  const [showConfirmation, setShowConfirmation] = useState(false);
-  const showConfirmationModal = () => setShowConfirmation(true);
-  const hideConfirmationModal = () => setShowConfirmation(false);
 
   useEffect(() => {
     setSelectedDate(getCurrentDate()); // Set the default value to today's date
@@ -48,8 +44,6 @@ export default function ActivityModal({
 
   const handleSave = () => {
     let data = {
-      student: student.id,
-      activity: activity.id,
       date: document.querySelector("#defaultForm-date").value,
       present: isPresent,
     };
@@ -63,7 +57,11 @@ export default function ActivityModal({
       setInputResult(true);
       return;
     } else {
-      // TODO: Send data to backend
+      const storedData = JSON.parse(localStorage.getItem('studentData'));
+      const currentStudent = storedData.find((student) => student.id == selectedStudent.id);
+      const currentActivity = currentStudent.activities.find((activity) => activity.id == activity.id);
+      currentActivity.updates.push(data);
+      localStorage.setItem('studentData', JSON.stringify(storedData));
       onClose();
     }
   };
@@ -73,20 +71,8 @@ export default function ActivityModal({
     onClose();
   }
 
-  function hideConfirmation() {
-    setShowConfirmation(false);
-    hideModal();
-  }
-
   return (
     <>
-      {showConfirmation && (
-        <ConfirmationModal
-          show={showConfirmation}
-          closeModal={hideConfirmationModal}
-          onDeny={hideConfirmation}
-        />
-      )}
       <Modal show={show} onHide={hideModal} centered>
         <Modal.Header closeButton>
           <div className="col">
@@ -97,24 +83,12 @@ export default function ActivityModal({
               </Modal.Title>
             </div>
             <div className="row">
-              <p>{student.name + " (åk. " + student.grade + ")"}</p>
+              <p>{selectedStudent.name + " (åk. " + selectedStudent.grade + ")"}</p>
             </div>
           </div>
         </Modal.Header>
         <Modal.Body>
-          <div className="flex-column align-items-center" key={student.id}>
-            <div className="row mb-3">
-              <div className="container">
-                <button
-                  type="button"
-                  className="btn btn-danger btn-sm float-end"
-                  onClick={showConfirmationModal}
-                >
-                  Avsluta aktivitet
-                </button>
-              </div>
-            </div>
-
+          <div className="flex-column align-items-center" key={selectedStudent.id}>
             {inputResult ? (
               <div className="alert alert-danger" role="alert">
                 Du måste välja ett datum!

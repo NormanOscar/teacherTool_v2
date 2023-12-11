@@ -1,10 +1,19 @@
 import Modal from "react-bootstrap/Modal";
+import { useState } from "react";
 
-export default function ConfirmationModal({ show, closeModal, onDeny }) {
+export default function ConfirmationModal({ show, closeModal, activityId, selectedStudent }) {
+  const [comment, setComment] = useState("");
 
-  function onAccept () {
+  function onAccept() {
+    const storedData = JSON.parse(localStorage.getItem('studentData'));
+    const currentStudent = storedData.find((student) => student.id == selectedStudent.id);
+    currentStudent.activeActivities--;
+    const currentActivity = currentStudent.activities.find((activity) => activity.id == activityId);
+    currentActivity.cancelled = true;
+    currentActivity.cancelComment = comment;
+    localStorage.setItem('studentData', JSON.stringify(storedData));
+    window.location.reload(false);
     closeModal();
-    onDeny();
   }
 
   function onClose () {
@@ -29,6 +38,7 @@ export default function ConfirmationModal({ show, closeModal, onDeny }) {
                 rows="4"
                 id="comment"
                 style={{ resize: "none" }}
+                onChange={(e) => setComment(e.target.value)}
               />
             </div>
           </div>

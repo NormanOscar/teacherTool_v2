@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home.jsx';
-import Analyse from './pages/Analyse.jsx';
 import Assessment from './pages/Assessment.jsx';
+import Analyse from './pages/Analyse.jsx';
 import NavBar from './components/NavBar.jsx';
 
 export default function App() {

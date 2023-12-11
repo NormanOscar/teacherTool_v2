@@ -1,9 +1,8 @@
 import "../styles.css";
 import { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import Levels from "../components/Levels";
-import CurrentActivities from "../components/CurrentActivities";
-import studentData from "../json/studentData.json";
-import studentList from "../json/studentList.json";
+import StudentActivities from "../components/StudentActivities";
 import data from "../json/data.json";
 import { useEffect } from "react";
 import { addStudentsToLocalStorage, getCurrentDate } from "../components/func";
@@ -43,12 +42,12 @@ export default function Assessment() {
   useEffect(() => {
     addStudentsToLocalStorage();
   }, []);
-
+  
   let name = "";
   let student = "";
-
+  
   if (localStorage.getItem("studentId") !== null) {
-    student = studentData.students.filter(
+    student = JSON.parse(localStorage.getItem('studentData')).filter(
       (student) => student.id === JSON.parse(localStorage.getItem("studentId"))
     );
     name = student[0].name + " (åk. " + student[0].grade + ")";
@@ -141,186 +140,198 @@ export default function Assessment() {
 
   return (
     <>
-      <h4 className="student-name">{name}</h4>
-      <div className="d-flex justify-content-center">
-        <form className="mb-4" id="form-block" onSubmit={handleForm}>
-          <h1 className="mb-4" style={{ textAlign: "center" }}>
-            Bedömning
-          </h1>
+      <Container fluid>
+        <Row className="my-2">
+          <Col xs={12} md={4} style={{paddingTop: '2em'}}>
+            <h2 className="student-name">{name}</h2>
+            <h3 className="mb-4 mt-5" style={{ textAlign: "center" }}>
+              Pågående aktiviteter
+            </h3>
+            <StudentActivities
+              student={student[0]}
+            />
+          </Col>
+          <Col xs={12} md={4} style={{paddingTop: '2em'}}>
+            <div className="d-flex justify-content-center">
+              <form className="mb-4" id="form-block" onSubmit={handleForm}>
+                <h1 className="mb-4" style={{ textAlign: "center" }}>
+                  Bedömning
+                </h1>
 
-          {inputResult.type !== null && (
-            <div
-              className={
-                inputResult.type === "danger"
-                  ? "alert alert-danger"
-                  : "alert alert-success"
-              }
-              role="alert"
-            >
-              {inputResult.msg}
-            </div>
-          )}
+                {inputResult.type !== null && (
+                  <div
+                    className={
+                      inputResult.type === "danger"
+                        ? "alert alert-danger"
+                        : "alert alert-success"
+                    }
+                    role="alert"
+                  >
+                    {inputResult.msg}
+                  </div>
+                )}
 
-          <div className="form-outline mb-2" id="gradingTool-div">
-            <label htmlFor="gradingTool">
-              Bedömningsverktyg: <span className="required-symbol">*</span>
-            </label>
-            <select
-              className="form-select border border-2"
-              id="gradingTool"
-              name="gradingTool"
-              value={selectedTool}
-              onChange={handleSelectChange}
-              required
-            >
-              <option value="0">Välj bedömningsverktyg</option>
-              {data.gradingTools.map((option, index) => (
-                <option key={index} value={option.id}>
-                  {option.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {selectedTool === 1 ? (
-            <div className="d-flex">
-              <div className="mx-1">
-                <input
-                  type="radio"
-                  className="btn-check gradingToolRadio"
-                  name="options"
-                  id="option1"
-                  value="A"
-                  defaultChecked
-                />
-                <label
-                  className="btn btn-light border border-secondary px-4"
-                  htmlFor="option1"
-                >
-                  A
-                </label>
-              </div>
-              <div className="mx-1">
-                <input
-                  type="radio"
-                  className="btn-check gradingToolRadio"
-                  name="options"
-                  id="option2"
-                  value="B"
-                />
-                <label
-                  className="btn btn-light border border-secondary px-4"
-                  htmlFor="option2"
-                >
-                  B
-                </label>
-              </div>
-              <div className="mx-1">
-                <input
-                  type="radio"
-                  className="btn-check gradingToolRadio"
-                  name="options"
-                  id="option3"
-                  value="C"
-                />
-                <label
-                  className="btn btn-light border border-secondary px-4"
-                  htmlFor="option3"
-                >
-                  C
-                </label>
-              </div>
-            </div>
-          ) : null}
-
-          {selectedTool !== 0 ? (
-            <div className="form-outline mb-2" id="area-div">
-              <label htmlFor="area">
-                Område: <span className="required-symbol">*</span>
-              </label>
-              <select
-                className="form-select border border-2"
-                id="area"
-                name="area"
-                value={selectedArea}
-                onChange={handleSelectChange}
-                required
-              >
-                <option value="0">Välj område</option>
-                {selectedTool != 0
-                  ? data.areas
-                      .filter((area) => area.gradingTool.includes(selectedTool))
-                      .map((area) => (
-                        <option key={area.name} value={area.id}>
-                          {area.name}
-                        </option>
-                      ))
-                  : data.areas.map((area) => (
-                      <option key={area.name} value={area.id}>
-                        {area.name}
+                <div className="form-outline mb-2" id="gradingTool-div">
+                  <label htmlFor="gradingTool">
+                    Bedömningsverktyg: <span className="required-symbol">*</span>
+                  </label>
+                  <select
+                    className="form-select border border-2"
+                    id="gradingTool"
+                    name="gradingTool"
+                    value={selectedTool}
+                    onChange={handleSelectChange}
+                    required
+                  >
+                    <option value="0">Välj bedömningsverktyg</option>
+                    {data.gradingTools.map((option, index) => (
+                      <option key={index} value={option.id}>
+                        {option.name}
                       </option>
                     ))}
-              </select>
+                  </select>
+                </div>
+
+                {selectedTool === 1 ? (
+                  <div className="d-flex">
+                    <div className="mx-1">
+                      <input
+                        type="radio"
+                        className="btn-check gradingToolRadio"
+                        name="options"
+                        id="option1"
+                        value="A"
+                        defaultChecked
+                      />
+                      <label
+                        className="btn btn-light border border-secondary px-4"
+                        htmlFor="option1"
+                      >
+                        A
+                      </label>
+                    </div>
+                    <div className="mx-1">
+                      <input
+                        type="radio"
+                        className="btn-check gradingToolRadio"
+                        name="options"
+                        id="option2"
+                        value="B"
+                      />
+                      <label
+                        className="btn btn-light border border-secondary px-4"
+                        htmlFor="option2"
+                      >
+                        B
+                      </label>
+                    </div>
+                    <div className="mx-1">
+                      <input
+                        type="radio"
+                        className="btn-check gradingToolRadio"
+                        name="options"
+                        id="option3"
+                        value="C"
+                      />
+                      <label
+                        className="btn btn-light border border-secondary px-4"
+                        htmlFor="option3"
+                      >
+                        C
+                      </label>
+                    </div>
+                  </div>
+                ) : null}
+
+                {selectedTool !== 0 ? (
+                  <div className="form-outline mb-2" id="area-div">
+                    <label htmlFor="area">
+                      Område: <span className="required-symbol">*</span>
+                    </label>
+                    <select
+                      className="form-select border border-2"
+                      id="area"
+                      name="area"
+                      value={selectedArea}
+                      onChange={handleSelectChange}
+                      required
+                    >
+                      <option value="0">Välj område</option>
+                      {selectedTool != 0
+                        ? data.areas
+                            .filter((area) => area.gradingTool.includes(selectedTool))
+                            .map((area) => (
+                              <option key={area.name} value={area.id}>
+                                {area.name}
+                              </option>
+                            ))
+                        : data.areas.map((area) => (
+                            <option key={area.name} value={area.id}>
+                              {area.name}
+                            </option>
+                          ))}
+                    </select>
+                  </div>
+                ) : null}
+
+                {selectedTool !== 0 && selectedArea !== 0 ? (
+                  <div className="form-outline mb-2" id="criteria-div">
+                    <label htmlFor="criteria">
+                      Kriteria: <span className="required-symbol">*</span>
+                    </label>
+                    <select
+                      className="form-select border border-2"
+                      id="criteria"
+                      name="criteria"
+                      value={selectedCriteria}
+                      onChange={handleSelectChange}
+                      required
+                    >
+                      <option value="0">Välj kriterie</option>
+                      {selectedArea != 0 && selectedTool != 0
+                        ? data.criteria
+                            .filter(
+                              (criteria) =>
+                                criteria.area.includes(selectedArea) &&
+                                criteria.gradingTool.includes(selectedTool)
+                            )
+                            .map((criteria) => (
+                              <option key={criteria.name} value={criteria.id}>
+                                {criteria.name}
+                              </option>
+                            ))
+                        : data.criteria.map((criteria) => (
+                            <option key={criteria.name} value={criteria.id}>
+                              {criteria.name}
+                            </option>
+                          ))}
+                    </select>
+                  </div>
+                ) : null}
+
+                {selectedCriteria != 0 ? <Levels id={selectedCriteria} /> : null}
+
+                <div className="form-outline mb-2">
+                  <label htmlFor="comment">Kommentar:</label>
+                  <textarea
+                    className="form-control border border-2 form-text"
+                    rows="4"
+                    id="comment"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-block w-100 mb-2 submitBtn"
+                >
+                  Spara
+                </button>
+              </form>
             </div>
-          ) : null}
-
-          {selectedTool !== 0 && selectedArea !== 0 ? (
-            <div className="form-outline mb-2" id="criteria-div">
-              <label htmlFor="criteria">
-                Kriteria: <span className="required-symbol">*</span>
-              </label>
-              <select
-                className="form-select border border-2"
-                id="criteria"
-                name="criteria"
-                value={selectedCriteria}
-                onChange={handleSelectChange}
-                required
-              >
-                <option value="0">Välj kriterie</option>
-                {selectedArea != 0 && selectedTool != 0
-                  ? data.criteria
-                      .filter(
-                        (criteria) =>
-                          criteria.area.includes(selectedArea) &&
-                          criteria.gradingTool.includes(selectedTool)
-                      )
-                      .map((criteria) => (
-                        <option key={criteria.name} value={criteria.id}>
-                          {criteria.name}
-                        </option>
-                      ))
-                  : data.criteria.map((criteria) => (
-                      <option key={criteria.name} value={criteria.id}>
-                        {criteria.name}
-                      </option>
-                    ))}
-              </select>
-            </div>
-          ) : null}
-
-          {selectedCriteria != 0 ? <Levels id={selectedCriteria} /> : null}
-
-          <div className="form-outline mb-2">
-            <label htmlFor="comment">Kommentar:</label>
-            <textarea
-              className="form-control border border-2 form-text"
-              rows="4"
-              id="comment"
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            className="btn btn-primary btn-block w-100 mb-2 submitBtn"
-          >
-            Spara
-          </button>
-        </form>
-      </div>
-      <div className="pb-5">
-        <CurrentActivities />
-      </div>
+          </Col>
+          <Col xs={12} md={4}></Col>
+        </Row>
+      </Container>
     </>
   );
 }
