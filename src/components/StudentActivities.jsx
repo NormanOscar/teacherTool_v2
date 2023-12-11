@@ -47,9 +47,8 @@ export default function StudentActivities({ student, onClose, page }) {
       <div className="flex-column align-items-center">
         {student.activeActivities > 0 ? (
           <div className="d-flex justify-content-center">
-
-            <ul className="list-group list-group-flush" style={{width: "90%" }}>
-              {student.activities.filter((activity) => activity.cancelled === false).map((activity) => (
+            <ul className="list-group list-group-flush" style={{width: page === "assessment" ? "90%" : "100%" }}>
+              {student.activities.filter((activity) => !activity.cancelled).map((activity) => (
                 <li
                   className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                   key={activity.id}
@@ -95,7 +94,7 @@ export default function StudentActivities({ student, onClose, page }) {
             <div className="d-flex d-flex justify-content-center">
               <button
                 type="button"
-                className="btn btn-primary btn-md mt-3"
+                className="btn btn-primary btn-md my-3"
                 onClick={onClose}
               >
                 Starta ny aktivitet

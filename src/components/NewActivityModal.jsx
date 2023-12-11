@@ -2,26 +2,7 @@ import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
 import { getCurrentDate } from "./func";
 
-export default function ConfirmationModal({ show, closeModal, activityId, selectedStudent }) {
-  const [comment, setComment] = useState("");
-
-  function onAccept() {
-    const storedData = JSON.parse(localStorage.getItem('studentData'));
-    const currentStudent = storedData.find((student) => student.id == selectedStudent.id);
-    currentStudent.activeActivities--;
-    currentStudent.cancelledActivities++;
-    const currentActivity = currentStudent.activities.find((activity) => activity.id == activityId);
-    currentActivity.cancelled = true;
-    currentActivity.cancelComment = comment;
-    currentActivity.cancelDate = getCurrentDate();
-    localStorage.setItem('studentData', JSON.stringify(storedData));
-    window.location.reload(false);
-    closeModal();
-  }
-
-  function onClose () {
-    closeModal();
-  }
+export default function NewActivityModal({ closeModal, selectedStudent }) {
 
   return (
     <Modal dialogClassName="confirmationModal" show={show} onHide={onClose} centered>

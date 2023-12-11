@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Levels from "../components/Levels";
 import StudentActivities from "../components/StudentActivities";
+import CancelledStudentActivities from "../components/CancelledStudentActivities";
 import data from "../json/data.json";
 import { useEffect } from "react";
 import { addStudentsToLocalStorage, getCurrentDate } from "../components/func";
@@ -141,10 +142,10 @@ export default function Assessment() {
   return (
     <>
       <Container fluid>
-        <Row className="my-2">
-          <Col xs={12} md={4} style={{paddingTop: '2em'}}>
-            <h2 className="student-name">{name}</h2>
-            <h3 className="mb-4 mt-5" style={{ textAlign: "center" }}>
+        <h2 className="student-name">{name}</h2>
+        <Row className="mb-2 pt-1">
+          <Col xs={12} md={4}>
+            <h3 className="mb-4" style={{ textAlign: "center" }}>
               Pågående aktiviteter
             </h3>
             <StudentActivities
@@ -152,7 +153,7 @@ export default function Assessment() {
               page="assessment"
             />
           </Col>
-          <Col xs={12} md={4} style={{paddingTop: '2em'}}>
+          <Col xs={12} md={4}>
             <div className="d-flex justify-content-center">
               <form className="mb-4" id="form-block" onSubmit={handleForm}>
                 <h1 className="mb-4" style={{ textAlign: "center" }}>
@@ -330,7 +331,15 @@ export default function Assessment() {
               </form>
             </div>
           </Col>
-          <Col xs={12} md={4}></Col>
+          <Col xs={12} md={4}>
+            <h3 className="mb-4" style={{ textAlign: "center" }}>
+              Avslutade aktiviteter
+            </h3>
+            <CancelledStudentActivities
+              student={student[0]}
+              page="assessment"
+            />
+          </Col>
         </Row>
       </Container>
     </>

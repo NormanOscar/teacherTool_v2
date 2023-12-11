@@ -7,6 +7,7 @@
       "email" : "oscar.norman@example.com",
       "assessments": [],
       "activeActivities": 2,
+      "cancelledActivities": 0,
       "activities": [
         {
           "id": 1,
@@ -14,6 +15,7 @@
           "date":"2023-10-24",
           "cancelled": false,
           "cancelComment": "",
+          "cancelDate": "",
           "updates": []
       },
       {
@@ -22,6 +24,7 @@
           "date":"2023-10-24",
           "cancelled": false,
           "cancelComment": "",
+          "cancelDate": "",
           "updates": []
       }
       ]
@@ -33,6 +36,7 @@
       "email" : "oscar.norman@example.com",
       "assessments": [],
       "activeActivities": 0,
+      "cancelledActivities": 0,
       "activities": []
     },
     {
@@ -42,6 +46,7 @@
       "email" : "mari.udderyd@example.com",
       "assessments": [],
       "activeActivities": 1,
+      "cancelledActivities": 0,
       "activities": [
         {
           "id": 1,
@@ -49,6 +54,7 @@
           "date":"2023-10-18",
           "cancelled": false,
           "cancelComment": "",
+          "cancelDate": "",
           "updates": []
       }
       ]
@@ -60,6 +66,7 @@
       "email" : "niklas.andersson@example.com",
       "assessments": [],
       "activeActivities": 0,
+      "cancelledActivities": 0,
       "activities": []
     },
     {
@@ -69,6 +76,7 @@
       "email" : "mattias.davidsson@example.com",
       "assessments": [],
       "activeActivities": 0,
+      "cancelledActivities": 0,
       "activities": []
     }
   ]

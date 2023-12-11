@@ -42,6 +42,7 @@ body {
 
 .student-name {
     text-align: center;
+    margin-top: 1em;
 }
 
 .change-student {
