@@ -1,7 +1,7 @@
 // App.js
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home.jsx';
-import Assessment from './pages/assessment.jsx';
+import Assessment from './pages/Assessment.jsx';
 import NavBar from './components/NavBar.jsx';
 
 export default function App() {
