@@ -34,15 +34,14 @@ export default function CancelledStudentActivities({ student, page }) {
                   <hr />
                   <div>
                     <p>Avstämningar:</p>
-                    {activity.updates.lenght > 0 ? (
-
+                    {activity.updates.length > 0 ? (
                       <ul className="mx-2">
                         {activity.updates.map((update, index) => (
                           <li key={index}>
                             <Row className="d-flex justify-content-between">
                               <span style={{ color: "grey", width: 'fit-content' }}>{update.date}</span>
-                              <span style={{ color: update.isPresent ? "green" : "red", width: 'fit-content' }}>
-                                {update.isPresent ? "Närvarande" : "Frånvarande"}
+                              <span style={{ color: update.present ? "green" : "red", width: 'fit-content' }}>
+                                {update.present ? "Närvarande" : "Frånvarande"}
                               </span>
                             </Row>
                             <Row>

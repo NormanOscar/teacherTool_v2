@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import StudentModal from "./StudentModal";
+import NewActivity from "./NewActivity";
+import { Col, Row } from "react-bootstrap";
 
 export default function CurrentActivities() {
   const [studentToShow, setStudentToShow] = useState(null);
@@ -36,31 +38,33 @@ export default function CurrentActivities() {
       <h3 className="mb-4 mt-5" style={{ textAlign: "center" }}>
         Pågående aktiviteter
       </h3>
-      <div className="d-flex justify-content-center">
-        <ul className="list-group" id="current-activities">
-          {currentStudents.filter((student) => student.activeActivities > 0).map((student) => (
-            <li
-              className="list-group-item list-group-item-action flex-column align-items-center"
-              key={student.id}
-              value={student.id}
-              onClick={handleClick}
-              style={{ cursor: "pointer" }}
-            >
-              <div className="d-flex w-150 justify-content-between">
-                <h5 className="mb-1">{student.name + ' (åk. ' + student.grade + ')'}</h5>
-                <small>{student.activities[0].date}</small>
-              </div>
-              <p className="mb-1">
-                {student.activities
-                  .filter((activity) => !activity.cancelled)
-                  .map((x) => x.name)
-                  .join(", ")
-                }
-              </p>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Col>
+        <Row className="d-flex justify-content-center">
+          <ul className="list-group" id="current-activities">
+            {currentStudents.filter((student) => student.activeActivities > 0).map((student) => (
+              <li
+                className="list-group-item list-group-item-action flex-column align-items-center"
+                key={student.id}
+                value={student.id}
+                onClick={handleClick}
+                style={{ cursor: "pointer" }}
+              >
+                <div className="d-flex w-150 justify-content-between">
+                  <h5 className="mb-1">{student.name + ' (åk. ' + student.grade + ')'}</h5>
+                  <small>{student.activities[0].date}</small>
+                </div>
+                <p className="mb-1">
+                  {student.activities
+                    .filter((activity) => !activity.cancelled)
+                    .map((x) => x.name)
+                    .join(", ")
+                  }
+                </p>
+              </li>
+            ))}
+          </ul>
+        </Row>
+      </Col>
     </>
   );
 }

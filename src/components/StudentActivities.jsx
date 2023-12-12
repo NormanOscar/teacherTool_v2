@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ActivityModal from "./ActivityModal";
 import ConfirmationModal from "./ConfirmationModal";
+import NewActivity from "./NewActivity";
 
 export default function StudentActivities({ student, onClose, page }) {
   const [activityToShow, setActivityToShow] = useState(null);
@@ -91,16 +92,11 @@ export default function StudentActivities({ student, onClose, page }) {
         ) : (
           <p className="text-center">Inga pågående aktiviteter</p>
         )}
-            <div className="d-flex d-flex justify-content-center">
-              <button
-                type="button"
-                className="btn btn-primary btn-md my-3"
-                onClick={onClose}
-              >
-                Starta ny aktivitet
-              </button>
-            </div>
-          </div>
+        <NewActivity
+          selectedStudent={student}
+          page="assessment"
+        />
+      </div>
     </>
   );
 }

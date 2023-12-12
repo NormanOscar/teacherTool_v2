@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { useEffect } from "react";
 import { getCurrentDate } from "./func";
+import { Col, Row } from "react-bootstrap";
 
 library.add(faFaceSmile, faFaceMeh, faFaceFrown);
 
@@ -75,17 +76,17 @@ export default function ActivityModal({
     <>
       <Modal show={show} onHide={hideModal} centered>
         <Modal.Header closeButton>
-          <div className="col">
-            <div className="row">
+          <Col>
+            <Row>
               <Modal.Title>
                 {activity.name}{" "}
                 <small style={{ color: "grey" }}>{activity.date}</small>
               </Modal.Title>
-            </div>
-            <div className="row">
+            </Row>
+            <Row>
               <p>{selectedStudent.name + " (åk. " + selectedStudent.grade + ")"}</p>
-            </div>
-          </div>
+            </Row>
+          </Col>
         </Modal.Header>
         <Modal.Body>
           <div className="flex-column align-items-center" key={selectedStudent.id}>
@@ -94,7 +95,7 @@ export default function ActivityModal({
                 Du måste välja ett datum!
               </div>
             ) : null}
-            <div className="row my-3">
+            <Row className="my-3">
               <div className="md-form">
                 <label htmlFor="defaultForm-date">
                   Datum: <span className="required-symbol">*</span>
@@ -107,8 +108,8 @@ export default function ActivityModal({
                   className="form-control validate"
                 />
               </div>
-            </div>
-            <div className="row d-flex justify-content-center mt-3">
+            </Row>
+            <Row className="d-flex justify-content-center mt-3">
               <div className="btn-group">
                 <input
                   type="radio"
@@ -135,21 +136,21 @@ export default function ActivityModal({
                   Frånvarande
                 </label>
               </div>
-            </div>
+            </Row>
             {isPresent ? (
-              <div
-                className="col border-0 rounded-1"
+              <Col
+                className="border-0 rounded-1"
                 style={{
                   padding: "1em 1em 0.5em 1em",
                   backgroundColor: "#ededed",
                 }}
               >
-                <div className="row">
-                  <div className="col">
-                    <div className="row">
+                <Row>
+                  <Col>
+                    <Row>
                       <p style={{ marginBottom: "4px" }}>Hur gick det?</p>
-                    </div>
-                    <div className="row">
+                    </Row>
+                    <Row>
                       <div className="btn-group">
                         <input
                           type="radio"
@@ -211,10 +212,10 @@ export default function ActivityModal({
                           />
                         </label>
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="row my-3">
+                    </Row>
+                  </Col>
+                </Row>
+                <Row className="my-3">
                   <div className="form-outline">
                     <label htmlFor="comment">Kommentar:</label>
                     <textarea
@@ -224,17 +225,17 @@ export default function ActivityModal({
                       style={{ resize: "none" }}
                     />
                   </div>
-                </div>
-              </div>
+                </Row>
+              </Col>
             ) : (
-              <div
-                className="col border-0 rounded-1"
+              <Col
+                className="border-0 rounded-1"
                 style={{
                   padding: "1em 1em 0.5em 1em",
                   backgroundColor: "#ededed",
                 }}
               >
-                <div className="row mb-3">
+                <Row className="mb-3">
                   <div className="form-outline">
                     <label htmlFor="absentComment">Kommentar:</label>
                     <textarea
@@ -244,10 +245,10 @@ export default function ActivityModal({
                       style={{ resize: "none" }}
                     />
                   </div>
-                </div>
-              </div>
+                </Row>
+              </Col>
             )}
-            <div className="row mt-3">
+            <Row className="mt-3">
               <div className="text-center">
                 <button
                   type="submit"
@@ -257,7 +258,7 @@ export default function ActivityModal({
                   Spara
                 </button>
               </div>
-            </div>
+            </Row>
           </div>
         </Modal.Body>
       </Modal>

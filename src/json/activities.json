@@ -2,23 +2,23 @@
   "activities" : [
     {
       "id": 1,
-      "name": "Intervention 1",
-      "description": "Description 1"
+      "name": "Wendick",
+      "description": "Beskrivning 1"
     },
     {
       "id": 2,
-      "name": "Intervention 2",
-      "description": "Description 2"
+      "name": "Aktivitet 2",
+      "description": "Beskrivning 2"
     },
     {
       "id": 3,
-      "name": "Intervention 3",
-      "description": "Description 3"
+      "name": "Aktivitet 3",
+      "description": "Beskrivning 3"
     },
     {
       "id": 4,
-      "name": "Intervention 4",
-      "description": "Description 4"
+      "name": "Aktivitet 4",
+      "description": "Beskrivning 4"
     }
   ]
 }

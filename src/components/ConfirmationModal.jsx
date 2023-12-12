@@ -1,6 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
 import { getCurrentDate } from "./func";
+import { Col, Row } from "react-bootstrap";
 
 export default function ConfirmationModal({ show, closeModal, activityId, selectedStudent }) {
   const [comment, setComment] = useState("");
@@ -27,13 +28,13 @@ export default function ConfirmationModal({ show, closeModal, activityId, select
     <Modal dialogClassName="confirmationModal" show={show} onHide={onClose} centered>
       <Modal.Body>
         <p>Vill du verkligen avsluta aktiviteten?</p>
-        <div 
-          className="col border-0 rounded-1" style={{
+        <Col 
+          className="border-0 rounded-1" style={{
             padding: "1em",
             margin: "1em 0 1em 0",
             backgroundColor: "#ededed",
           }}>
-          <div className="row my-3">
+          <Row className="my-3">
             <div className="form-outline">
               <label htmlFor="comment">Kommentar:</label>
               <textarea
@@ -44,8 +45,8 @@ export default function ConfirmationModal({ show, closeModal, activityId, select
                 onChange={(e) => setComment(e.target.value)}
               />
             </div>
-          </div>
-        </div>
+          </Row>
+        </Col>
       </Modal.Body>
       <Modal.Footer>
         <button type="button" className="btn btn-secondary" onClick={onClose}>Avbryt</button>
