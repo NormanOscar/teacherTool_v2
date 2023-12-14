@@ -10,6 +10,7 @@ export default function NewActivity({ selectedStudent, page }) {
   const hideModal = () => setShow(false);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedActivity, setSelectedActivity] = useState("0");
+  const [inputResult, setInputResult] = useState({ msg: null, type: null });
 
   useEffect(() => {
     setSelectedDate(getCurrentDate()); // Set the default value to today's date
@@ -17,9 +18,23 @@ export default function NewActivity({ selectedStudent, page }) {
 
   function handleDateChange(e) {
     setSelectedDate(e.target.value);
+    setInputResult({ msg: null, type: null });
+  }
+
+  function handleActivityChange(e) {
+    setSelectedActivity(e.target.value);
+    setInputResult({ msg: null, type: null });
   }
 
   function handleSave() {
+    if (selectedDate === "") {
+      setInputResult({ msg: "Du måste välja ett datum", type: "danger" });
+      return;
+    } else if (selectedActivity === "0") {
+      setInputResult({ msg: "Du måste välja en aktivitet", type: "danger" });
+      return;
+    }
+
     const storedData = JSON.parse(localStorage.getItem('studentData'));
     const currentStudent = storedData.find((student) => student.id == selectedStudent.id);
     const sortedActivities = currentStudent.activities.sort((a, b) => a.id - b.id);
@@ -43,7 +58,7 @@ export default function NewActivity({ selectedStudent, page }) {
   return (
     <>
       {show && (
-          <Modal dialogClassName="confirmationModal" show={show} onHide={hideModal} centered>
+        <Modal dialogClassName="confirmationModal" show={show} onHide={hideModal} centered>
           <Modal.Header closeButton>
             <Modal.Title>
               Ny aktivetet
@@ -51,6 +66,18 @@ export default function NewActivity({ selectedStudent, page }) {
           </Modal.Header>
           <Modal.Body>
             <h4 className="text-center">{selectedStudent.name}</h4>
+            {inputResult.type !== null && (
+              <div
+                className={
+                  inputResult.type === "danger"
+                    ? "alert alert-danger"
+                    : "alert alert-success"
+                }
+                role="alert"
+              >
+                {inputResult.msg}
+              </div>
+            )}
             <Col
               className="border-0 rounded-1" style={{
                 padding: "1em",
@@ -80,7 +107,7 @@ export default function NewActivity({ selectedStudent, page }) {
                     id="defaultForm-Activity"
                     className="form-select border border-2"
                     value={selectedActivity}
-                    onChange={(e) => setSelectedActivity(e.target.value)}
+                    onChange={handleActivityChange}
                   >
                     <option value="0">Välj en aktivetet</option>
                     {activities.map((activity, index) => {
