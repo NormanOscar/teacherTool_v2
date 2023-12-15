@@ -35,7 +35,7 @@ export default function CurrentActivities() {
       {studentToShow && (
         <StudentModal show={show} student={studentToShow} onClose={hideModal} />
       )}
-      <h3 className="mb-4 mt-5" style={{ textAlign: "center" }}>
+      <h3 className="m-4" style={{ textAlign: "center" }}>
         Pågående aktiviteter
       </h3>
       <Col>

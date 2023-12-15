@@ -1,6 +1,6 @@
 import "../styles.css";
 import { useNavigate } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import studentList from "../json/studentList.json";
 import AutoComplete from "../components/AutoComplete";
@@ -39,34 +39,36 @@ export default function Home() {
   return (
     <>
       <Container fluid>
-        <Row className="my-2">
+        <Row className="my-4">
           <Col xs={12} md={4} style={{paddingTop: '2em'}}></Col>
           <Col xs={12} md={4} style={{paddingTop: '2em'}}>
-            <div className="d-flex justify-content-center main-div">
-              <form id="form-block">
-                <h1 className="mb-4" style={{ textAlign: "center" }}>
-                  Hämta elev
-                </h1>
-                {inputError && (
-                  <div className="alert alert-danger" role="alert">
-                    Eleven finns ej
+            <Card className="p-3 my-2">
+              <div className="d-flex justify-content-center main-div">
+                <form id="form-block">
+                  <h2 className="mb-4" style={{ textAlign: "center" }}>
+                    Hämta elev
+                  </h2>
+                  {inputError && (
+                    <div className="alert alert-danger" role="alert">
+                      Eleven finns ej
+                    </div>
+                  )}
+                  <div className="form-outline mb-4">
+                    <p style={{ margin: 0 }}>
+                      Elevens namn: <span className="required-symbol">*</span>
+                    </p>
+                    <AutoComplete change={changeInputText} />
                   </div>
-                )}
-                <div className="form-outline mb-4">
-                  <p style={{ margin: 0 }}>
-                    Elevens namn: <span className="required-symbol">*</span>
-                  </p>
-                  <AutoComplete change={changeInputText} />
-                </div>
 
-                <button
-                  className="btn btn-primary btn-block w-100 mb-2 submitBtn"
-                  onClick={handleSubmit}
-                >
-                  Sök
-                </button>
-              </form>
-            </div>
+                  <button
+                    className="btn btn-primary btn-block w-100 mb-2 submitBtn"
+                    onClick={handleSubmit}
+                  >
+                    Sök
+                  </button>
+                </form>
+              </div>
+            </Card>
             <CurrentActivities />
           </Col>
           <Col xs={12} md={4} style={{paddingTop: '2em'}}></Col>

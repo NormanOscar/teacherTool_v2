@@ -6,7 +6,7 @@ export default function NavBar() {
     <Navbar collapseOnSelect expand='sm' className="border-bottom px-2" style={{backgroundColor: '#e5e5e5'}}>
       <Navbar.Toggle aria-controls='navbarScroll' />
       <Navbar.Collapse id='navbarScroll'>
-        <Nav className="navbar-nav p-3" activeKey={location.pathname}>
+        <Nav className="navbar-nav px-3" activeKey={location.pathname}>
             <NavLink href="/">
               Hämta elev
             </NavLink>
