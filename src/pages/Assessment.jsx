@@ -171,15 +171,6 @@ export default function Assessment() {
                   page="assessment"
                 />
               </Card>
-              <Card className="p-4 my-2">
-                <h3 className="mb-4" style={{ textAlign: "center" }}>
-                  Pågående aktiviteter
-                </h3>
-                <StudentActivities
-                  student={student}
-                  page="assessment"
-                />
-              </Card>
             </Col>
             <Col xs={12} md={4}>
               <Card className="p-4 my-2">
