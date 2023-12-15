@@ -48,7 +48,7 @@ export default function StudentActivities({ student, onClose, page }) {
       <div className="flex-column align-items-center">
         {student.activeActivities > 0 ? (
           <div className="d-flex justify-content-center">
-            <ul className="list-group list-group-flush overflow-auto custom-scrollbar" style={{width: page === "assessment" ? "90%" : "100%", maxHeight: '400px' }}>
+            <ul className="list-group list-group-flush overflow-auto custom-scrollbar" style={{width: page === "assessment" ? "90%" : "100%", maxHeight: '300px' }}>
               {student.activities.filter((activity) => !activity.cancelled).map((activity) => (
                 <li
                   className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"

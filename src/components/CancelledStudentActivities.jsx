@@ -9,7 +9,7 @@ export default function CancelledStudentActivities({ student, page }) {
         {student.cancelledActivities > 0 ? (
           <div className="d-flex justify-content-center">
 
-            <ul className="list-group list-group-flush overflow-auto custom-scrollbar" style={{ maxHeight: "400px", width: "90%" }}>
+            <ul className="list-group list-group-flush overflow-auto custom-scrollbar" style={{ maxHeight: "300px", width: "90%" }}>
               {student.activities.filter((activity) => activity.cancelled).map((activity) => (
                 <li
                   className="list-group-item"
