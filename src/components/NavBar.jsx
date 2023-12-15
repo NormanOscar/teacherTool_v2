@@ -3,7 +3,7 @@ import { NavLink, Nav, Navbar } from 'react-bootstrap';
 
 export default function NavBar() {
   return (
-    <Navbar collapseOnSelect expand='sm' className="border-bottom px-2" style={{backgroundColor: '#e5e5e5'}}>
+    <Navbar collapseOnSelect expand='sm' className="border-bottom px-2" fixed='top' style={{backgroundColor: '#e5e5e5'}}>
       <Navbar.Toggle aria-controls='navbarScroll' />
       <Navbar.Collapse id='navbarScroll'>
         <Nav className="navbar-nav px-3" activeKey={location.pathname}>
