@@ -95,7 +95,7 @@ export default function Assessment() {
     if (selectedTool === 1) {
       let anyChecked = false;
 
-      document.querySelectorAll(".gradingToolRadio").forEach((radioBtn) => {
+      document.querySelectorAll(".gradingToolRadio-btn").forEach((radioBtn) => {
         if (radioBtn.checked) {
           anyChecked = true;
           let mergedStr = gradingToolVal.concat(" ", radioBtn.value);
