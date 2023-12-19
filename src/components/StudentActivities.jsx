@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ActivityModal from "./ActivityModal";
 import ConfirmationModal from "./ConfirmationModal";
 import NewActivity from "./NewActivity";
+import { Row, Col } from "react-bootstrap";
 
 export default function StudentActivities({ student, onClose, page }) {
   const [activityToShow, setActivityToShow] = useState(null);
@@ -51,40 +52,47 @@ export default function StudentActivities({ student, onClose, page }) {
             <ul className="list-group list-group-flush overflow-auto custom-scrollbar" style={{width: page === "assessment" ? "90%" : "100%", maxHeight: '300px' }}>
               {student.activities.filter((activity) => !activity.cancelled).map((activity) => (
                 <li
-                  className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                  className="list-group-item list-group-item-action"
                   key={activity.id}
                   value={activity.id}
                   style={{ backgroundColor: page === 'assessment' ? "#ffffff" : "transparent" }}
                 >
-                  <p className="mb-0">
-                    <span
-                      className="align-middle"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      {activity.name}
-                    </span>
-                    <small className="align-middle" style={{ color: "grey" }}>
-                      &nbsp;{activity.date}
-                    </small>
-                  </p>
-                  <div>
-                    <button
-                      type="button"
-                      className="btn btn-success btn-sm mx-2"
-                      value={activity.id}
-                      onClick={handleActivityClick}
-                    >
-                      Avstämning
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-danger btn-sm float-end"
-                      value={activity.id}
-                      onClick={handleConfirmationClick}
-                    >
-                      Avsluta aktivitet
-                    </button>
-                  </div>
+                  <Row className="d-flex justify-content-between align-items-center">
+                    <Col>
+                        <Col>
+                          <Row>
+                            <p className="mb-0 align-middle" style={{ fontWeight: "bold" }}>
+                              {activity.name}
+                            </p> 
+                          </Row>
+                          <Row>
+                            <small className="align-middle" style={{ color: "grey" }}>
+                              &nbsp;{activity.date}
+                            </small>
+                          </Row>
+                        </Col>
+                    </Col>
+                    <Col className="d-flex align-items-center">
+                        <button
+                          type="button"
+                          className="btn btn-success btn-sm"
+                          value={activity.id}
+                          onClick={handleActivityClick}
+                          style={{ width: "120px", marginRight: "5px" }}
+                        >
+                          Avstämning
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-danger btn-sm"
+                          value={activity.id}
+                          onClick={handleConfirmationClick}
+                          style={{ width: "120px" }}
+                        >
+                          Avsluta aktivitet
+                        </button>
+                    </Col>
+                  </Row>
                 </li>
               ))}
             </ul>

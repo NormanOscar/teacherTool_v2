@@ -44,6 +44,10 @@ export default function Assessment() {
   const [selectedStudent, setSelectedStudent] = useState(null);
 
   useEffect(() => {
+    if (!localStorage.getItem("login")) {
+      window.location.href = "/login";
+    }
+
     addStudentsToLocalStorage();
   }, []);
   
@@ -157,15 +161,15 @@ export default function Assessment() {
       {localStorage.getItem("studentId") !== null ? (
         <Container fluid>
           <Container className="text-center">
-            <h2 className="student-name d-inline-block">{name}</h2>
+            <h3 className="student-name d-inline-block">{name}</h3>
           </Container>
 
           <Row className="mb-2 pt-1">
             <Col xs={12} md={4}>
               <Card className="p-4 my-2">
-                <h3 className="mb-4" style={{ textAlign: "center" }}>
+                <h4 className="mb-4" style={{ textAlign: "center" }}>
                   Pågående aktiviteter
-                </h3>
+                </h4>
                 <StudentActivities
                   student={student}
                   page="assessment"
@@ -176,9 +180,9 @@ export default function Assessment() {
               <Card className="p-4 my-2">
                 <div className="d-flex justify-content-center">
                   <form className="mb-4" id="form-block" onSubmit={handleForm}>
-                    <h3 className="mb-4" style={{ textAlign: "center" }}>
+                    <h4 className="mb-4" style={{ textAlign: "center" }}>
                       Bedömning
-                    </h3>
+                    </h4>
 
                     {inputResult.type !== null && (
                       <div
@@ -223,14 +227,11 @@ export default function Assessment() {
                             name="options"
                             id="option1"
                             value="A"
-                            /* disabled={
-                              student.assessments.length > 0 && student.assessments.find((assessment) => assessment.gradingTool.includes("Skolverket A") || assessment.gradingTool.includes("Skolverket B") || assessment.gradingTool.includes("Skolverket C"))
-                            } */
+                            defaultChecked
                           />
                           <label
                             className="btn btn-light border border-secondary px-4 gradingToolRadio-label"
                             htmlFor="option1"
-                            style={student.assessments.length > 0 && student.assessments.find((assessment) => assessment.gradingTool.includes("Skolverket A") || assessment.gradingTool.includes("Skolverket B") || assessment.gradingTool.includes("Skolverket C")) ? {backgroundColor: "green", color: "white"} : null}
                           >
                             A
                           </label>
@@ -242,14 +243,10 @@ export default function Assessment() {
                             name="options"
                             id="option2"
                             value="B"
-                            /* disabled={
-                              student.assessments.length > 0 && student.assessments.find((assessment) => assessment.gradingTool.includes("Skolverket B") || assessment.gradingTool.includes("Skolverket C"))
-                            } */
                           />
                           <label
                             className="btn btn-light border border-secondary px-4  gradingToolRadio-label"
                             htmlFor="option2"
-                            style={student.assessments.length > 0 && student.assessments.find((assessment) => assessment.gradingTool.includes("Skolverket B") || assessment.gradingTool.includes("Skolverket C")) ? {backgroundColor: "green", color: "white"} : null}
                           >
                             B
                           </label>
@@ -261,14 +258,10 @@ export default function Assessment() {
                             name="options"
                             id="option3"
                             value="C"
-                            /* disabled={
-                              student.assessments.length > 0 && student.assessments.find((assessment) => assessment.gradingTool.includes("Skolverket C"))
-                            } */
                           />
                           <label
                             className="btn btn-light border border-secondary px-4  gradingToolRadio-label"
                             htmlFor="option3"
-                            style={student.assessments.length > 0 && student.assessments.find((assessment) => assessment.gradingTool.includes("Skolverket C")) ? {backgroundColor: "green", color: "white"} : null}
                           >
                             C
                           </label>
@@ -365,9 +358,9 @@ export default function Assessment() {
             </Col>
             <Col xs={12} md={4}>
               <Card className="p-4 my-2">
-                <h3 className="mb-4" style={{ textAlign: "center" }}>
+                <h4 className="mb-4" style={{ textAlign: "center" }}>
                   Avslutade aktiviteter
-                </h3>
+                </h4>
                 <CancelledStudentActivities
                   student={student}
                   page="assessment"
@@ -382,10 +375,10 @@ export default function Assessment() {
             <Col xs={12} md={4} style={{ paddingTop: "2em" }}></Col>
             <Col xs={12} md={4} style={{ paddingTop: "2em" }}>
               <Card className="p-3 my-4">
-                <h3 className="text-center mb-4">Ingen elev vald</h3>
+                <h4 className="text-center mb-4">Ingen elev vald</h4>
                 <button
                   className="btn btn-primary btn-block w-100 mb-2 submitBtn"
-                  onClick={() => navigate("/")}
+                  onClick={() => window.location.href = "/"}
                 >
                   Välj en elev
                 </button>

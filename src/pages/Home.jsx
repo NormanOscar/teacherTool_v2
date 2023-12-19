@@ -1,5 +1,4 @@
 import "../styles.css";
-import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import studentList from "../json/studentList.json";
@@ -10,11 +9,14 @@ import { addStudentsToLocalStorage } from "../components/func";
 export default function Home() {
   const [name, setName] = useState("");
   const [inputError, setInputError] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!localStorage.getItem("login")) {
+      window.location.href = "/login";
+    }
     addStudentsToLocalStorage();
   }, []);
+
 
   function changeInputText(newValue) {
     setName(newValue);
@@ -28,7 +30,7 @@ export default function Home() {
       );
       if (student.length > 0) {
         localStorage.setItem("studentId", JSON.stringify(student[0].id));
-        navigate("/assessment");
+        window.location.href = "/assessment";
       } else {
         setInputError(true);
       }

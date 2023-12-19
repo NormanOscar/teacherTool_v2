@@ -12,6 +12,10 @@ body {
     background-color: #F1F3F2 !important;
 }
 
+label, input, select, option, textarea, button {
+    font-size: small !important;
+}
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: black;
     opacity: 1; /* Firefox */
