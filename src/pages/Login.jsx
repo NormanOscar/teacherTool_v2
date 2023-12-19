@@ -25,7 +25,7 @@ export default function Login() {
 
   const checkUser = () => {
     let users = JSON.parse(localStorage.getItem("userData"));
-    let user = users.find((user) => user.username === username);
+    let user = users.find((user) => user.username === username || user.email === username);
     if (user) {
       if (user.password === password) {
         localStorage.setItem("login", true);

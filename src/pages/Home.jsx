@@ -9,12 +9,15 @@ import { addStudentsToLocalStorage } from "../components/func";
 export default function Home() {
   const [name, setName] = useState("");
   const [inputError, setInputError] = useState(false);
+  const [students, setStudents] = useState([]);
 
   useEffect(() => {
     if (!localStorage.getItem("login")) {
       window.location.href = "/login";
     }
     addStudentsToLocalStorage();
+    
+    setStudents(JSON.parse(localStorage.getItem("studentData")));
   }, []);
 
 
@@ -25,7 +28,7 @@ export default function Home() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name !== "") {
-      let student = studentList.students.filter(
+      let student = students.filter(
         (student) => student.name + " (åk. " + student.grade + ")" === name
       );
       if (student.length > 0) {

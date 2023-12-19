@@ -14,7 +14,6 @@ export default function NavBar() {
       let userId = JSON.parse(localStorage.getItem('userId'));
       let users = JSON.parse(localStorage.getItem('userData'));
       let user = users.find(user => user.id === userId);
-      console.log(user);
       setUser(user);
     }
   }, []);

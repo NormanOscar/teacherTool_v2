@@ -7,7 +7,7 @@
       "password": "admin",
       "firstName": "Admin",
       "lastName": "Admin",
-      "email": ""
+      "email": "admin@example.com"
     },
     {
       "id": 2,
@@ -16,7 +16,7 @@
       "password": "teacher",
       "firstName": "Teacher",
       "lastName": "One",
-      "email": ""
+      "email": "teacher@example.com"
     }
   ]
 }
