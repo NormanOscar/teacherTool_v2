@@ -61,3 +61,32 @@ export function getCurrentDate() {
 
   return formattedDate;
 }
+
+export function saveUpdatedUser(field, inputValue) {
+  let users = JSON.parse(localStorage.getItem("userData"));
+  let user = users.find(user => user.id === JSON.parse(localStorage.getItem("userId")));
+
+  switch (field) {
+    case "Förnamn":
+      user.firstName = inputValue;
+      break;
+    case "Efternamn":
+      user.lastName = inputValue;
+      break;
+    case "E-post":
+      user.email = inputValue;
+      break;
+    case "Användarnamn":
+      user.username = inputValue;
+      break;
+    case "Lösenord":
+      user.password = inputValue;
+      break;
+    default:
+      break;
+  }
+
+  localStorage.setItem("userData", JSON.stringify(users));
+
+  window.location.href = "/profile";
+}
