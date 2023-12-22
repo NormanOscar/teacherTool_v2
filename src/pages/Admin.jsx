@@ -43,7 +43,15 @@ export default function Admin() {
     <>
       <Container fluid>
         <Row className="my-4">
-          <Col xs={12} md={4} style={{paddingTop: '2em'}}>
+        <Col xs={12} md={3} style={{paddingTop: '2em'}}>
+            <Card className="p-4 my-2">
+              <h4 className="mb-4" style={{ textAlign: "center" }}>
+                Admin
+              </h4>
+              <p>Här kan du som admin lägga till nya elever, aktiviteter samt bedömngsmaterial.</p>
+            </Card>
+          </Col>
+          <Col xs={12} md={3} style={{paddingTop: '2em'}}>
             <Card className="p-4 my-2">
               <h4 className="mb-4" style={{ textAlign: "center" }}>
                 Användare
@@ -83,16 +91,10 @@ export default function Admin() {
               />
             )}
           </Col>
-          <Col xs={12} md={4} style={{paddingTop: '2em'}}>
-            <Card className="p-4 my-2">
-              <h4 className="mb-4" style={{ textAlign: "center" }}>
-                Admin
-              </h4>
-              <p>Här kan du som admin lägga till nya elever, aktiviteter samt bedömngsmaterial.</p>
-            </Card>
-          </Col>
-          <Col xs={12} md={4} style={{paddingTop: '2em'}}>
+          <Col xs={12} md={3} style={{paddingTop: '2em'}}>
             <AddNewStudent />
+          </Col>
+          <Col xs={12} md={3} style={{paddingTop: '2em'}}>
             <Card className="p-4 my-2">
               <h4 className="mb-4" style={{ textAlign: "center" }}>
                 Aktiviteter

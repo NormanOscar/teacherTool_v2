@@ -37,40 +37,53 @@ export default function NavBar() {
         </Container>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='navbarScroll' />
-      <Navbar.Collapse id='navbarScroll'>
-        <Nav className='custom-navbar' activeKey={location.pathname}>
+      <Navbar.Collapse id='navbarScroll' className='w-100'>
           {login ? (
             <>
-              <NavLink href='/' className='text-center mr-auto'>
-                Hämta elev
-              </NavLink>
-              <NavLink href='/assessment' className='text-center mr-auto'>
-                Bedömning
-              </NavLink>
-              <NavDropdown title={<FontAwesomeIcon icon={faUser} size="lg" />} id="collapsible-nav-dropdown" className='text-center ml-auto'>
+            <Nav className='custom-navbar' activeKey={location.pathname}>
+              <Nav.Item>
+                <NavLink href='/' className='text-center'>
+                  Hämta elev
+                </NavLink>
+              </Nav.Item>
+              <Nav.Item>
+                <NavLink href='/assessment' className='text-center'>
+                  Bedömning
+                </NavLink>
+              </Nav.Item>
+            </Nav>
+            
+            <Nav  
+            className='custom-navbar' activeKey={location.pathname} style={{marginLeft: 'auto'}}>
+              {user && user.role === 'admin' && (
+                <>
+                  <Nav.Item>
+                    <NavLink href='/admin' className='text-center'>
+                      Admin
+                    </NavLink>
+                  </Nav.Item>
+                </>
+              )}
+              <NavDropdown align="end" title={<FontAwesomeIcon icon={faUser} size="lg" />} id="collapsible-nav-dropdown" className='text-center'>
                 <NavDropdown.Item href="/profile" className='text-center'>
                   Profil
                 </NavDropdown.Item>
-                {user && user.role === 'admin' && (
-                  <>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href='/admin' className='text-center'>
-                      Admin
-                    </NavDropdown.Item>
-                  </>
-                )}
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/logout" className='text-center'>
                   Logga ut
                 </NavDropdown.Item>
               </NavDropdown>
+            </Nav>
             </>
           ) : (
-            <NavLink href='/login' className='text-center'>
-              Logga in
-            </NavLink>
+            <Nav className='custom-navbar' activeKey={location.pathname} style={{marginLeft: 'auto'}}>
+              <Nav.Item>
+                <NavLink href='/login' className='text-center'>
+                  Logga in
+                </NavLink>
+              </Nav.Item>
+            </Nav>
           )}
-        </Nav>
       </Navbar.Collapse>
     </Navbar>
   );
