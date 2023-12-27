@@ -1,7 +1,5 @@
-import "../styles.css";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import studentList from "../json/studentList.json";
 import AutoComplete from "../components/AutoComplete";
 import CurrentActivities from "../components/CurrentActivities";
 import { addStudentsToLocalStorage } from "../components/func";

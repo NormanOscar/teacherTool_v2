@@ -2,11 +2,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import Assessment from './pages/Assessment.jsx';
+import Analyse from './pages/Analyse.jsx';
 import NavBar from './components/NavBar.jsx';
 import Login from './pages/Login.jsx';
 import Profile from './pages/Profile.jsx';
 import Admin from './pages/Admin.jsx';
 import Logout from './pages/Logout.jsx';
+import "./style/styles.css";
 
 export default function App() {
   return (
@@ -15,6 +17,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/assessment" element={<Assessment />} />
+        <Route path='/analyse' element={<Analyse />}/>
         <Route path='/login' element={<Login />}/>
         <Route path='/profile' element={<Profile />}/>
         <Route path='/admin' element={<Admin />}/>

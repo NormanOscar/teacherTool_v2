@@ -1,13 +1,10 @@
-import "../styles.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import Levels from "../components/Levels";
 import StudentActivities from "../components/StudentActivities";
 import CancelledStudentActivities from "../components/CancelledStudentActivities";
 import data from "../json/data.json";
-import { useEffect } from "react";
 import { addStudentsToLocalStorage, getCurrentDate } from "../components/func";
-import { useNavigate } from "react-router-dom";
 
 function saveLocalStorage(data) {
   if (studentInLocalStorage(data.id)) {
@@ -36,12 +33,10 @@ function studentInLocalStorage(studentId) {
 }
 
 export default function Assessment() {
-  const navigate = useNavigate();
   const [selectedTool, setSelectedTool] = useState(0);
   const [selectedArea, setSelectedArea] = useState(0);
   const [selectedCriteria, setSelectedCriteria] = useState(0);
   const [inputResult, setInputResult] = useState({ msg: null, type: null });
-  const [selectedStudent, setSelectedStudent] = useState(null);
 
   useEffect(() => {
     if (!localStorage.getItem("login")) {
@@ -160,10 +155,19 @@ export default function Assessment() {
     <>
       {localStorage.getItem("studentId") !== null ? (
         <Container fluid>
-          <Container className="text-center">
-            <h3 className="student-name d-inline-block">{name}</h3>
-          </Container>
-
+          <Row className="pt-2">
+            <Col xs={12} md={2}></Col>
+            <Col xs={12} md={8}>
+              <Container className="text-center">
+                <h3 className="student-name d-inline-block">{name}</h3>
+              </Container>
+            </Col>
+            <Col xs={12} md={2}>
+              <Container className="d-flex justify-content-center align-items-center w-100 h-100">
+                <button className="btn btn-primary px-5 py-3" onClick={() => window.location.href = "/analyse"}>Analys</button>
+              </Container>
+            </Col>
+          </Row>
           <Row className="mb-2 pt-1">
             <Col xs={12} md={4}>
               <Card className="p-4 my-2">
