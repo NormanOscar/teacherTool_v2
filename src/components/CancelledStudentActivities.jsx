@@ -36,7 +36,7 @@ export default function CancelledStudentActivities({ student, page }) {
                     <p>Avstämningar:</p>
                     {activity.updates.length > 0 ? (
                       <ul className="mx-2">
-                        {activity.updates.map((update, index) => (
+                        {activity.updates.sort((a, b) => new Date(b.date) - new Date(a.date)).map((update, index) => (
                           <li key={index}>
                             <Row className="d-flex justify-content-between">
                               <span style={{ color: "grey", width: 'fit-content' }}>{update.date}</span>

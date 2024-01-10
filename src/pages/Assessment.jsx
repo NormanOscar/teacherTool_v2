@@ -48,12 +48,21 @@ export default function Assessment() {
   
   let name = "";
   let student = "";
+  let flag = {
+    name: "",
+    color: "",
+  };
   
   if (localStorage.getItem("studentId") !== null) {
     student = JSON.parse(localStorage.getItem('studentData')).find(
       (student) => student.id === JSON.parse(localStorage.getItem("studentId"))
     );
     name = student.name + " (åk. " + student.grade + ")";
+    if (student.flag) {
+      if (student.flag === "ok") { flag.name = "Ok"; flag.color = "green"; }
+      else if (student.flag === "indentify") { flag.name = "Indikera"; flag.color = "yellow"; }
+      else if (student.flag === "danger") { flag.name = "Befara"; flag.color = "red"; }
+    }
   } else {
     name = "Du måste välja en elev";
   }
@@ -132,6 +141,7 @@ export default function Assessment() {
     setSelectedArea(0);
     setSelectedCriteria(0);
     setInputResult({ msg: "Bedömning sparad!", type: "success" });
+    document.querySelector("#comment").value = "";
   }
 
   function handleSelectChange(e) {
@@ -158,8 +168,14 @@ export default function Assessment() {
           <Row className="pt-2">
             <Col xs={12} md={2}></Col>
             <Col xs={12} md={8}>
-              <Container className="text-center">
+              <Container className="text-center d-flex justify-content-center align-items-center py-2">
                 <h3 className="student-name d-inline-block">{name}</h3>
+                {flag.name !== "" && (
+                  <>
+                    <span>&nbsp;</span>
+                    <span className="px-2 py-1" style={{backgroundColor: flag.color, borderRadius: '5px'}}>{flag.name}</span>
+                  </>
+                )}
               </Container>
             </Col>
             <Col xs={12} md={2}>
@@ -168,7 +184,7 @@ export default function Assessment() {
               </Container>
             </Col>
           </Row>
-          <Row className="mb-2 pt-1">
+          <Row className="mb-2">
             <Col xs={12} md={4}>
               <Card className="p-4 my-2">
                 <h4 className="mb-4" style={{ textAlign: "center" }}>
@@ -388,7 +404,7 @@ export default function Assessment() {
                 </button>
               </Card>
             </Col>
-                  <Col xs={12} md={4} style={{ paddingTop: "2em" }}></Col>
+            <Col xs={12} md={4} style={{ paddingTop: "2em" }}></Col>
           </Row>
         </Container>
       )}

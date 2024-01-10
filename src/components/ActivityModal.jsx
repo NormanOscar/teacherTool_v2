@@ -60,7 +60,7 @@ export default function ActivityModal({
     } else {
       const storedData = JSON.parse(localStorage.getItem('studentData'));
       const currentStudent = storedData.find((student) => student.id == selectedStudent.id);
-      const currentActivity = currentStudent.activities.find((activity) => activity.id == activity.id);
+      const currentActivity = currentStudent.activities.find((oneActivity) => oneActivity.id == activity.id);
       currentActivity.updates.push(data);
       localStorage.setItem('studentData', JSON.stringify(storedData));
       onClose();

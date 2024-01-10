@@ -75,10 +75,10 @@ export default function StudentActivities({ student, onClose, page }) {
                     <Col className="d-flex align-items-center">
                         <button
                           type="button"
-                          className="btn btn-success btn-sm"
+                          className="btn btn-sm"
                           value={activity.id}
                           onClick={handleActivityClick}
-                          style={{ width: "120px", marginRight: "5px" }}
+                          style={{ width: "120px", marginRight: "5px", backgroundColor: '#20b26b' }}
                         >
                           Avstämning
                         </button>

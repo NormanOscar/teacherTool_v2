@@ -33,6 +33,10 @@ label, input, select, option, textarea, button {
     color: red;
 }
 
+.student-name {
+    margin: 0;
+}
+
 #form-block {
     width: 100%;
 }
@@ -44,12 +48,6 @@ label, input, select, option, textarea, button {
 .active {
     color: #0C5ED7 !important;
     text-decoration: underline !important;
-}
-
-.student-name {
-    text-align: center;
-    margin-top: 0.5em;
-    width: fit-content;
 }
 
 .change-student {
@@ -115,7 +113,7 @@ label, input, select, option, textarea, button {
     min-width: 30vw;
 }
 
-.performance-btn:checked + .performance-label, .gradingToolRadio-btn:checked + .gradingToolRadio-label {
+.performance-btn:checked + .performance-label, .gradingToolRadio-btn:checked + .gradingToolRadio-label, .flag-btn:checked + .flag-label {
     border: solid 2px black !important;
 }
 
@@ -145,8 +143,7 @@ label, input, select, option, textarea, button {
     &::-webkit-scrollbar-thumb:hover {
       background-color: #555; /* Set the color of the thumb on hover */
     }
-  }
-  
+}
 
 @media screen and (max-width: 1100px) {
     .confirmationModal {
@@ -157,10 +154,6 @@ label, input, select, option, textarea, button {
 @media screen and (max-width: 750px) {
     .confirmationModal {
         min-width: 90vw !important;
-    }
-    .student-name {
-        width: 100%;
-        margin: 1em 0 1em 0;
     }
 }
 
