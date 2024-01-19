@@ -1,5 +1,6 @@
 import { students } from "../json/studentList.json";
 import { users } from "../json/userList.json";
+import { activities } from "../json/activities.json";
 
 export function addStudentsToLocalStorage() {
   let savedData = JSON.parse(localStorage.getItem("studentData"));
@@ -48,6 +49,32 @@ export function addUsersToLocalStorage() {
 
     // Update the localStorage with the modified data
     localStorage.setItem("userData", JSON.stringify(filteredSavedData));
+  }
+
+}
+
+export function addActivitiesToLocalStorage() {
+  let savedData = JSON.parse(localStorage.getItem("activityData"));
+  if (savedData === null) {
+    let activityDataList = [];
+    for (let i = 0; i < activities.length; i++) {
+      activityDataList.push(activities[i]);
+    }
+    localStorage.setItem("activityData", JSON.stringify(activityDataList));
+  } else {
+    // Filter out objects without 'id'
+    let filteredSavedData = savedData.filter(obj => obj.hasOwnProperty('id'));
+
+    for (let activity of activities) {
+      let isAlreadyInLocalStorage = filteredSavedData.some(obj => obj.id === activity.id);
+
+      if (!isAlreadyInLocalStorage) {
+        filteredSavedData.push(activity);
+      }
+    }
+
+    // Update the localStorage with the modified data
+    localStorage.setItem("activityData", JSON.stringify(filteredSavedData));
   }
 
 }

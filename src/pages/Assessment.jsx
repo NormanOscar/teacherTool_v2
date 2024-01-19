@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import Levels from "../components/Levels";
-import StudentActivities from "../components/StudentActivities";
-import CancelledStudentActivities from "../components/CancelledStudentActivities";
+
+import Levels from "../components/Assessment/Levels";
+import StudentActivities from "../components/Assessment/StudentActivities";
+import CancelledStudentActivities from "../components/Assessment/CancelledStudentActivities";
+
 import data from "../json/data.json";
 import { addStudentsToLocalStorage, getCurrentDate } from "../components/func";
 
@@ -45,23 +47,30 @@ export default function Assessment() {
 
     addStudentsToLocalStorage();
   }, []);
-  
+
   let name = "";
   let student = "";
   let flag = {
     name: "",
     color: "",
   };
-  
+
   if (localStorage.getItem("studentId") !== null) {
-    student = JSON.parse(localStorage.getItem('studentData')).find(
+    student = JSON.parse(localStorage.getItem("studentData")).find(
       (student) => student.id === JSON.parse(localStorage.getItem("studentId"))
     );
     name = student.name + " (åk. " + student.grade + ")";
     if (student.flag) {
-      if (student.flag === "ok") { flag.name = "Ok"; flag.color = "green"; }
-      else if (student.flag === "indentify") { flag.name = "Indikera"; flag.color = "yellow"; }
-      else if (student.flag === "danger") { flag.name = "Befara"; flag.color = "red"; }
+      if (student.flag === "ok") {
+        flag.name = "Ok";
+        flag.color = "green";
+      } else if (student.flag === "indentify") {
+        flag.name = "Indikera";
+        flag.color = "yellow";
+      } else if (student.flag === "danger") {
+        flag.name = "Befara";
+        flag.color = "red";
+      }
     }
   } else {
     name = "Du måste välja en elev";
@@ -71,12 +80,15 @@ export default function Assessment() {
     e.preventDefault();
 
     if (selectedTool === 0) {
-      setInputResult({ msg: "Du måste välja bedömningsverktyg", type: "danger" });
+      setInputResult({
+        msg: "Du måste välja bedömningsverktyg",
+        type: "danger",
+      });
       return;
     } else if (selectedArea === 0) {
       setInputResult({ msg: "Du måste välja område", type: "danger" });
       return;
-    }else if (selectedCriteria === 0) {
+    } else if (selectedCriteria === 0) {
       setInputResult({ msg: "Du måste välja kriterie", type: "danger" });
       return;
     }
@@ -112,7 +124,10 @@ export default function Assessment() {
       });
 
       if (!anyChecked) {
-        setInputResult({ msg: "Du måste välja en nivå på Skolverket", type: "danger" });
+        setInputResult({
+          msg: "Du måste välja en nivå på Skolverket",
+          type: "danger",
+        });
         return;
       }
     }
@@ -173,14 +188,27 @@ export default function Assessment() {
                 {flag.name !== "" && (
                   <>
                     <span>&nbsp;</span>
-                    <span className="px-2 py-1" style={{backgroundColor: flag.color, borderRadius: '5px'}}>{flag.name}</span>
+                    <span
+                      className="px-2 py-1"
+                      style={{
+                        backgroundColor: flag.color,
+                        borderRadius: "5px",
+                      }}
+                    >
+                      {flag.name}
+                    </span>
                   </>
                 )}
               </Container>
             </Col>
             <Col xs={12} md={2}>
               <Container className="d-flex justify-content-center align-items-center w-100 h-100">
-                <button className="btn btn-primary px-5 py-3" onClick={() => window.location.href = "/analyse"}>Analys</button>
+                <button
+                  className="btn btn-primary px-5 py-3"
+                  onClick={() => (window.location.href = "/analyse")}
+                >
+                  Analys
+                </button>
               </Container>
             </Col>
           </Row>
@@ -190,10 +218,7 @@ export default function Assessment() {
                 <h4 className="mb-4" style={{ textAlign: "center" }}>
                   Pågående aktiviteter
                 </h4>
-                <StudentActivities
-                  student={student}
-                  page="assessment"
-                />
+                <StudentActivities student={student} page="assessment" />
               </Card>
             </Col>
             <Col xs={12} md={4}>
@@ -219,7 +244,8 @@ export default function Assessment() {
 
                     <div className="form-outline mb-2" id="gradingTool-div">
                       <label htmlFor="gradingTool">
-                        Bedömningsverktyg: <span className="required-symbol">*</span>
+                        Bedömningsverktyg:{" "}
+                        <span className="required-symbol">*</span>
                       </label>
                       <select
                         className="form-select border border-2"
@@ -305,7 +331,9 @@ export default function Assessment() {
                           <option value="0">Välj område</option>
                           {selectedTool != 0
                             ? data.areas
-                                .filter((area) => area.gradingTool.includes(selectedTool))
+                                .filter((area) =>
+                                  area.gradingTool.includes(selectedTool)
+                                )
                                 .map((area) => (
                                   <option key={area.name} value={area.id}>
                                     {area.name}
@@ -323,7 +351,7 @@ export default function Assessment() {
                     {selectedTool !== 0 && selectedArea !== 0 ? (
                       <div className="form-outline mb-2" id="criteria-div">
                         <label htmlFor="criteria">
-                          Kriteria: <span className="required-symbol">*</span>
+                          Kriterium: <span className="required-symbol">*</span>
                         </label>
                         <select
                           className="form-select border border-2"
@@ -342,7 +370,10 @@ export default function Assessment() {
                                     criteria.gradingTool.includes(selectedTool)
                                 )
                                 .map((criteria) => (
-                                  <option key={criteria.name} value={criteria.id}>
+                                  <option
+                                    key={criteria.name}
+                                    value={criteria.id}
+                                  >
                                     {criteria.name}
                                   </option>
                                 ))
@@ -355,7 +386,9 @@ export default function Assessment() {
                       </div>
                     ) : null}
 
-                    {selectedCriteria != 0 ? <Levels id={selectedCriteria} /> : null}
+                    {selectedCriteria != 0 ? (
+                      <Levels id={selectedCriteria} />
+                    ) : null}
 
                     <div className="form-outline mb-2">
                       <label htmlFor="comment">Kommentar:</label>
@@ -398,7 +431,7 @@ export default function Assessment() {
                 <h4 className="text-center mb-4">Ingen elev vald</h4>
                 <button
                   className="btn btn-primary btn-block w-100 mb-2 submitBtn"
-                  onClick={() => window.location.href = "/"}
+                  onClick={() => (window.location.href = "/")}
                 >
                   Välj en elev
                 </button>

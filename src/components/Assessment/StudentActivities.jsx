@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+import { Row, Col } from "react-bootstrap";
+
 import ActivityModal from "./ActivityModal";
 import ConfirmationModal from "./ConfirmationModal";
-import NewActivity from "./NewActivity";
-import { Row, Col } from "react-bootstrap";
+import NewActivity from "../NewActivity";
 
 export default function StudentActivities({ student, onClose, page }) {
   const [activityToShow, setActivityToShow] = useState(null);
@@ -35,7 +36,7 @@ export default function StudentActivities({ student, onClose, page }) {
           show={showConfirmation}
           closeModal={hideConfirmationModal}
           activityId={confirmationActivity}
-          selectedStudent = {student}
+          selectedStudent={student}
         />
       )}
       {activityToShow && (
@@ -49,36 +50,57 @@ export default function StudentActivities({ student, onClose, page }) {
       <div className="flex-column align-items-center">
         {student.activeActivities > 0 ? (
           <div className="d-flex justify-content-center">
-            <ul className="list-group list-group-flush overflow-auto custom-scrollbar" style={{width: page === "assessment" ? "90%" : "100%", maxHeight: '300px' }}>
-              {student.activities.filter((activity) => !activity.cancelled).map((activity) => (
-                <li
-                  className="list-group-item list-group-item-action"
-                  key={activity.id}
-                  value={activity.id}
-                  style={{ backgroundColor: page === 'assessment' ? "#ffffff" : "transparent" }}
-                >
-                  <Row className="d-flex justify-content-between align-items-center">
-                    <Col>
+            <ul
+              className="list-group list-group-flush overflow-auto custom-scrollbar"
+              style={{
+                width: page === "assessment" ? "90%" : "100%",
+                maxHeight: "300px",
+              }}
+            >
+              {student.activities
+                .filter((activity) => !activity.cancelled)
+                .map((activity) => (
+                  <li
+                    className="list-group-item list-group-item-action"
+                    key={activity.id}
+                    value={activity.id}
+                    style={{
+                      backgroundColor:
+                        page === "assessment" ? "#ffffff" : "transparent",
+                    }}
+                  >
+                    <Row className="d-flex justify-content-between align-items-center">
+                      <Col>
                         <Col>
                           <Row>
-                            <p className="mb-0 align-middle" style={{ fontWeight: "bold" }}>
+                            <p
+                              className="mb-0 align-middle"
+                              style={{ fontWeight: "bold" }}
+                            >
                               {activity.name}
-                            </p> 
+                            </p>
                           </Row>
                           <Row>
-                            <small className="align-middle" style={{ color: "grey" }}>
+                            <small
+                              className="align-middle"
+                              style={{ color: "grey" }}
+                            >
                               &nbsp;{activity.date}
                             </small>
                           </Row>
                         </Col>
-                    </Col>
-                    <Col className="d-flex align-items-center">
+                      </Col>
+                      <Col className="d-flex align-items-center">
                         <button
                           type="button"
                           className="btn btn-sm"
                           value={activity.id}
                           onClick={handleActivityClick}
-                          style={{ width: "120px", marginRight: "5px", backgroundColor: '#20b26b' }}
+                          style={{
+                            width: "120px",
+                            marginRight: "5px",
+                            backgroundColor: "#20b26b",
+                          }}
                         >
                           Avstämning
                         </button>
@@ -91,19 +113,16 @@ export default function StudentActivities({ student, onClose, page }) {
                         >
                           Avsluta aktivitet
                         </button>
-                    </Col>
-                  </Row>
-                </li>
-              ))}
+                      </Col>
+                    </Row>
+                  </li>
+                ))}
             </ul>
           </div>
         ) : (
           <p className="text-center">Inga pågående aktiviteter</p>
         )}
-        <NewActivity
-          selectedStudent={student}
-          page="assessment"
-        />
+        <NewActivity selectedStudent={student} page="assessment" />
       </div>
     </>
   );

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
-import EditCard from "../components/EditCard";
+
+import EditCard from "../components/Profile/EditCard";
 
 library.add(faEdit);
 
@@ -13,32 +15,35 @@ export default function Profile() {
   const [chosenField, setChosenField] = useState(null);
 
   useEffect(() => {
-    if (!localStorage.getItem('login')) {
-      window.location.href = '/login';
+    if (!localStorage.getItem("login")) {
+      window.location.href = "/login";
     }
 
-    let userId = JSON.parse(localStorage.getItem('userId'));
-    let users = JSON.parse(localStorage.getItem('userData'));
-    setUser(users.find(user => user.id === userId));
+    let userId = JSON.parse(localStorage.getItem("userId"));
+    let users = JSON.parse(localStorage.getItem("userData"));
+    setUser(users.find((user) => user.id === userId));
   }, []);
 
   const handleEdit = (e) => {
     setShowEditCard(false);
     setChosenField(e.target.id);
     setShowEditCard(true);
-  }
+  };
 
   return (
     <>
       <Container fluid>
         <Row className="my-4">
-          <Col xs={12} md={4} style={{paddingTop: '2em'}}></Col>
-          <Col xs={12} md={4} style={{paddingTop: '2em'}}>
+          <Col xs={12} md={4} style={{ paddingTop: "2em" }}></Col>
+          <Col xs={12} md={4} style={{ paddingTop: "2em" }}>
             <Card className="p-4 my-2">
               <h4 className="mb-4" style={{ textAlign: "center" }}>
                 Profil
               </h4>
-              <ul className="list-group list-group-flush overflow-auto custom-scrollbar" style={{ maxHeight: "300px" }}>
+              <ul
+                className="list-group list-group-flush overflow-auto custom-scrollbar"
+                style={{ maxHeight: "300px" }}
+              >
                 <li className="list-group-item">
                   <Row>
                     <Col>
@@ -47,7 +52,13 @@ export default function Profile() {
                       </p>
                     </Col>
                     <Col className="d-flex align-items-center justify-content-end">
-                      <FontAwesomeIcon icon={faEdit} size="lg" id="Förnamn" onClick={handleEdit} />
+                      <FontAwesomeIcon
+                        icon={faEdit}
+                        size="lg"
+                        id="Förnamn"
+                        className="icons"
+                        onClick={handleEdit}
+                      />
                     </Col>
                   </Row>
                 </li>
@@ -59,7 +70,13 @@ export default function Profile() {
                       </p>
                     </Col>
                     <Col className="d-flex align-items-center justify-content-end">
-                      <FontAwesomeIcon icon={faEdit} size="lg" id="Efternamn" onClick={handleEdit} />
+                      <FontAwesomeIcon
+                        icon={faEdit}
+                        size="lg"
+                        id="Efternamn"
+                        className="icons"
+                        onClick={handleEdit}
+                      />
                     </Col>
                   </Row>
                 </li>
@@ -71,7 +88,13 @@ export default function Profile() {
                       </p>
                     </Col>
                     <Col className="d-flex align-items-center justify-content-end">
-                      <FontAwesomeIcon icon={faEdit} size="lg" id="Email" onClick={handleEdit} />
+                      <FontAwesomeIcon
+                        icon={faEdit}
+                        size="lg"
+                        id="Email"
+                        className="icons"
+                        onClick={handleEdit}
+                      />
                     </Col>
                   </Row>
                 </li>
@@ -83,7 +106,13 @@ export default function Profile() {
                       </p>
                     </Col>
                     <Col className="d-flex align-items-center justify-content-end">
-                      <FontAwesomeIcon icon={faEdit} size="lg" id="Användarnamn" onClick={handleEdit} />
+                      <FontAwesomeIcon
+                        icon={faEdit}
+                        size="lg"
+                        id="Användarnamn"
+                        className="icons"
+                        onClick={handleEdit}
+                      />
                     </Col>
                   </Row>
                 </li>
@@ -95,19 +124,21 @@ export default function Profile() {
                       </p>
                     </Col>
                     <Col className="d-flex align-items-center justify-content-end">
-                      <FontAwesomeIcon icon={faEdit} size="lg" id="Lösenord" onClick={handleEdit} />
+                      <FontAwesomeIcon
+                        icon={faEdit}
+                        size="lg"
+                        id="Lösenord"
+                        className="icons"
+                        onClick={handleEdit}
+                      />
                     </Col>
                   </Row>
                 </li>
               </ul>
             </Card>
-            {showEditCard && (
-              <EditCard
-                field={chosenField}
-              />
-            )}
+            {showEditCard && <EditCard field={chosenField} />}
           </Col>
-          <Col xs={12} md={4} style={{paddingTop: '2em'}}></Col>
+          <Col xs={12} md={4} style={{ paddingTop: "2em" }}></Col>
         </Row>
       </Container>
     </>

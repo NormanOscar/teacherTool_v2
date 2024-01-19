@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import Modal from "react-bootstrap/Modal";
-import StudentActivities from "./StudentActivities";
+import { Modal } from "react-bootstrap";
+
+import StudentActivities from "../Assessment/StudentActivities";
 
 export default function StudentModal({ show, student, onClose }) {
-
   return (
     <>
       <Modal show={show} onHide={onClose} centered>

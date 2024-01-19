@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 
 export default function CancelledStudentActivities({ student, page }) {
-
   return (
     <>
       <div className="flex-column align-items-center">

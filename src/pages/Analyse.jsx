@@ -271,7 +271,7 @@ export default function Analyse() {
                                 {activity.name}
                               </span>
                               <small className="align-middle" style={{ color: "grey" }}>
-                                {activity.date} - {activity.cancelDate}
+                                {activity.date} - {activity.cancelDate === "" ? "Pågående" : activity.cancelDate}
                               </small>
                             </p>
                             <div>

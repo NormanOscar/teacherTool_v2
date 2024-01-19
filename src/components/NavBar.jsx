@@ -1,6 +1,6 @@
-// Import necessary modules
-import { NavLink, Nav, Navbar, NavDropdown, Container } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
+import { NavLink, Nav, Navbar, NavDropdown, Container } from 'react-bootstrap';
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -64,7 +64,7 @@ export default function NavBar() {
                   </Nav.Item>
                 </>
               )}
-              <NavDropdown align="end" title={<FontAwesomeIcon icon={faUser} size="lg" />} id="collapsible-nav-dropdown" className='text-center'>
+              <NavDropdown align="end" title={<FontAwesomeIcon icon={faUser} size="lg" className='icons' />} id="collapsible-nav-dropdown" className='text-center'>
                 <NavDropdown.Item href="/profile" className='text-center'>
                   Profil
                 </NavDropdown.Item>

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
-import { saveUpdatedUser } from "../components/func";
+import React, { useState } from "react";
+import { Card } from "react-bootstrap";
+import { saveUpdatedUser } from "../func";
 
 export default function EditCard({ field }) {
   const [inputValue, setInputValue] = useState("");
@@ -27,7 +27,7 @@ export default function EditCard({ field }) {
         break;
     }
     setInputResult({ msg: null, type: null });
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,11 +48,18 @@ export default function EditCard({ field }) {
       } else if (newPassword !== confirmationPassword) {
         setInputResult({ msg: "Lösenorden matchar inte", type: "danger" });
         return;
-      } else if (oldPassword !== JSON.parse(localStorage.getItem("userData")).password) {
+      } else if (
+        oldPassword !== JSON.parse(localStorage.getItem("userData")).password
+      ) {
         setInputResult({ msg: "Fel gammalt lösenord", type: "danger" });
         return;
-      } else if (newPassword === JSON.parse(localStorage.getItem("userData")).password) {
-        setInputResult({ msg: "Nya lösenordet måste vara annorlunda", type: "danger" });
+      } else if (
+        newPassword === JSON.parse(localStorage.getItem("userData")).password
+      ) {
+        setInputResult({
+          msg: "Nya lösenordet måste vara annorlunda",
+          type: "danger",
+        });
         return;
       } else {
         saveUpdatedUser(field, newPassword);
@@ -60,21 +67,21 @@ export default function EditCard({ field }) {
     } else {
       saveUpdatedUser(field, inputValue);
     }
-  }
+  };
 
-  return(
+  return (
     <Card className="p-4 my-2">
       <h4 className="mb-4" style={{ textAlign: "center" }}>
         Byt {field}
       </h4>
       <form>
         {inputResult.msg !== null && (
-          <div 
+          <div
             className={
               inputResult.type === "danger"
-              ? "alert alert-danger"
-              : "alert alert-success"
-            } 
+                ? "alert alert-danger"
+                : "alert alert-success"
+            }
             role="alert"
           >
             {inputResult.msg}
@@ -140,5 +147,5 @@ export default function EditCard({ field }) {
         </div>
       </form>
     </Card>
-  )
+  );
 }

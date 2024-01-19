@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import Modal from "react-bootstrap/Modal";
+import React, { useState, useEffect } from "react";
+import { Col, Row, Modal } from "react-bootstrap";
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,9 +8,8 @@ import {
   faFaceMeh,
   faFaceFrown,
 } from "@fortawesome/free-regular-svg-icons";
-import { useEffect } from "react";
-import { getCurrentDate } from "./func";
-import { Col, Row } from "react-bootstrap";
+
+import { getCurrentDate } from "../func";
 
 library.add(faFaceSmile, faFaceMeh, faFaceFrown);
 
@@ -58,11 +58,15 @@ export default function ActivityModal({
       setInputResult(true);
       return;
     } else {
-      const storedData = JSON.parse(localStorage.getItem('studentData'));
-      const currentStudent = storedData.find((student) => student.id == selectedStudent.id);
-      const currentActivity = currentStudent.activities.find((oneActivity) => oneActivity.id == activity.id);
+      const storedData = JSON.parse(localStorage.getItem("studentData"));
+      const currentStudent = storedData.find(
+        (student) => student.id == selectedStudent.id
+      );
+      const currentActivity = currentStudent.activities.find(
+        (oneActivity) => oneActivity.id == activity.id
+      );
       currentActivity.updates.push(data);
-      localStorage.setItem('studentData', JSON.stringify(storedData));
+      localStorage.setItem("studentData", JSON.stringify(storedData));
       onClose();
     }
   };
@@ -84,12 +88,17 @@ export default function ActivityModal({
               </Modal.Title>
             </Row>
             <Row>
-              <p>{selectedStudent.name + " (åk. " + selectedStudent.grade + ")"}</p>
+              <p>
+                {selectedStudent.name + " (åk. " + selectedStudent.grade + ")"}
+              </p>
             </Row>
           </Col>
         </Modal.Header>
         <Modal.Body>
-          <div className="flex-column align-items-center" key={selectedStudent.id}>
+          <div
+            className="flex-column align-items-center"
+            key={selectedStudent.id}
+          >
             {inputResult ? (
               <div className="alert alert-danger" role="alert">
                 Du måste välja ett datum!
@@ -170,6 +179,7 @@ export default function ActivityModal({
                             icon={faFaceSmile}
                             size="2xl"
                             color="black"
+                            className="icons"
                           />
                         </label>
 
@@ -190,6 +200,7 @@ export default function ActivityModal({
                             icon={faFaceMeh}
                             size="2xl"
                             color="black"
+                            className="icons"
                           />
                         </label>
                         <input
@@ -209,6 +220,7 @@ export default function ActivityModal({
                             icon={faFaceFrown}
                             size="2xl"
                             color="black"
+                            className="icons"
                           />
                         </label>
                       </div>
