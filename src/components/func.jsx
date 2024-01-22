@@ -117,3 +117,8 @@ export function saveUpdatedUser(field, inputValue) {
 
   window.location.href = "/profile";
 }
+
+export function getTeacher (teacherId) {
+  let teachers = JSON.parse(localStorage.getItem('userData'));
+  return teachers.find((teacher) => teacher.id === teacherId);
+};

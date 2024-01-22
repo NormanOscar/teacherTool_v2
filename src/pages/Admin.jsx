@@ -6,7 +6,8 @@ import UsersCard from "../components/Admin/Users/UserCards";
 import ActivityCards from "../components/Admin/Activities/ActivityCards";
 
 export default function Admin() {
-  const [chosenCard, setChosenCard] = useState(2);
+  const storedChosenCard = localStorage.getItem("chosenCard");
+  const [chosenCard, setChosenCard] = useState(storedChosenCard ? parseInt(storedChosenCard) : 0);
   let users = JSON.parse(localStorage.getItem("userData"));
 
   useEffect(() => {
@@ -20,6 +21,11 @@ export default function Admin() {
       window.location.href = "/login";
     }
   }, []);
+
+  const handleCardSelection = (cardIndex) => {
+    setChosenCard(cardIndex);
+    localStorage.setItem("chosenCard", cardIndex.toString());
+  };
 
   return (
     <>
@@ -36,26 +42,20 @@ export default function Admin() {
               </p>
               <ListGroup style={{ border: 0 }}>
                 <ListGroup.Item
-                  className="adminMenuItem"
-                  onClick={() => {
-                    setChosenCard(0);
-                  }}
+                  className={`adminMenuItem ${chosenCard === 0 ? "selectedAdminPage" : ""}`}
+                  onClick={() => handleCardSelection(0)}
                 >
                   Användare
                 </ListGroup.Item>
                 <ListGroup.Item
-                  className="adminMenuItem"
-                  onClick={() => {
-                    setChosenCard(1);
-                  }}
+                  className={`adminMenuItem ${chosenCard === 1 ? "selectedAdminPage" : ""}`}
+                  onClick={() => handleCardSelection(1)}
                 >
                   Elever
                 </ListGroup.Item>
                 <ListGroup.Item
-                  className="adminMenuItem"
-                  onClick={() => {
-                    setChosenCard(2);
-                  }}
+                  className={`adminMenuItem ${chosenCard === 2 ? "selectedAdminPage" : ""}`}
+                  onClick={() => handleCardSelection(2)}
                 >
                   Aktiviteter
                 </ListGroup.Item>

@@ -7,6 +7,7 @@ import { faFaceSmile, faFaceMeh, faFaceFrown } from '@fortawesome/free-regular-s
 library.add(faFaceSmile, faFaceMeh, faFaceFrown);
 
 import Loading from '../components/Loading';
+import { getTeacher } from '../components/func';
 
 export default function Analyse() {
   const [student, setStudent] = useState({});
@@ -64,7 +65,6 @@ export default function Analyse() {
             absentCount++;
           }
 
-          console.log(update.performance);
           if (update.performance === 'good') {
             goodCount++;
           } else if (update.performance === 'neutral') {
@@ -103,6 +103,8 @@ export default function Analyse() {
       }));
     }
   }, [loading]);
+
+  
 
   const handleFlagChange = (e) => {
     setFlag(e.target.id);
@@ -213,6 +215,7 @@ export default function Analyse() {
                                   {assessment.date}
                                 </small>
                               </p>
+                              <span>Lärare: {getTeacher(assessment.teacher).firstName + " " + getTeacher(assessment.teacher).lastName}</span>
                               <div>
                                 <Row className="d-flex justify-content-between">
                                   <span style={{ width: 'fit-content' }}>{assessment.area} &rarr; {assessment.criteria} &rarr; {assessment.level}</span>

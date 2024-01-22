@@ -10,6 +10,7 @@ import { addStudentsToLocalStorage, getCurrentDate } from "../components/func";
 
 function saveLocalStorage(data) {
   if (studentInLocalStorage(data.id)) {
+    const logedInUserId = JSON.parse(localStorage.getItem("userId"));
     let savedData = JSON.parse(localStorage.getItem("studentData"));
     let student = savedData.filter((student) => student.id === data.id)[0];
     let dataToSave = {
@@ -19,6 +20,7 @@ function saveLocalStorage(data) {
       criteria: data.criteria,
       level: data.level,
       comment: data.comment,
+      teacher: logedInUserId,
     };
     student.assessments.push(dataToSave);
     localStorage.setItem("studentData", JSON.stringify(savedData));

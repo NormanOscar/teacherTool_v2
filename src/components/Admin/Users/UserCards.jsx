@@ -9,10 +9,10 @@ export default function UsersCard() {
     <>
       <Row>
         <Col xs={12} md={6}>
-          <AddUser />
+          <UserList />
         </Col>
         <Col xs={12} md={6}>
-          <UserList />
+          <AddUser />
         </Col>
       </Row>
     </>

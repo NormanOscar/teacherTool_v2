@@ -54,9 +54,6 @@ export default function ActivityList() {
           );
         })}
       </ul>
-      <Col className="d-flex justify-content-center mt-4 ">
-        <button className="btn btn-primary w-50">Lägg till aktivitet</button>
-      </Col>
     </Card>
   );
 }

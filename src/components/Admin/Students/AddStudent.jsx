@@ -47,36 +47,39 @@ export default function AddStudent() {
     } else if (selectedGrade === "0") {
       setInputResult({ msg: "Årskurs saknas", type: "danger" });
       return;
+    } else {
+
+      let students = JSON.parse(localStorage.getItem('studentData'));
+  
+      if (students.find(student => student.email === email)) {
+        setInputResult({ msg: "Email finns redan", type: "danger" });
+        return;
+      }
+  
+      let sortedStudents = students.sort((a, b) => a.id - b.id);
+      let id = sortedStudents[sortedStudents.length - 1].id + 1;
+  
+      let data = {
+        id : id,
+        name : firstName + " " + lastName,
+        grade : Number(selectedGrade),
+        email : email,
+        assessments : [],
+        activeActivities : 0,
+        cancelledActivities : 0,
+        activities : [],
+      }
+  
+      students.push(data);
+      localStorage.setItem('studentData', JSON.stringify(students));
+      setInputResult({ msg: "Elev tillagd", type: "success" });
+      setSelectedGrade("0");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
     }
 
-    let students = JSON.parse(localStorage.getItem('studentData'));
-
-    if (students.find(student => student.email === email)) {
-      setInputResult({ msg: "Email finns redan", type: "danger" });
-      return;
-    }
-
-    let sortedStudents = students.sort((a, b) => a.id - b.id);
-    let id = sortedStudents[sortedStudents.length - 1].id + 1;
-
-    let data = {
-      id : id,
-      name : firstName + " " + lastName,
-      grade : Number(selectedGrade),
-      email : email,
-      assessments : [],
-      activeActivities : 0,
-      cancelledActivities : 0,
-      activities : [],
-    }
-
-    students.push(data);
-    localStorage.setItem('studentData', JSON.stringify(students));
-    setInputResult({ msg: "Elev tillagd", type: "success" });
-    setSelectedGrade("0");
-    setFirstName("");
-    setLastName("");
-    setEmail("");
+    window.location.reload(false);
   }
 
   return(
