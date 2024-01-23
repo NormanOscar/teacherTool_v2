@@ -3,13 +3,13 @@ import { Col, Row } from "react-bootstrap";
 import AddStudent from "./AddStudent";
 import StudentList from "./StudentList";
 
-export default function UsersCard() {
+export default function StudentCards({ showModal, setObject, setEditType }) {
 
   return (
     <>
       <Row>
         <Col xs={12} md={6}>
-          <StudentList />
+          <StudentList showModal={showModal} setObject={setObject} setEditType={setEditType} />
         </Col>
         <Col xs={12} md={6}>
           <AddStudent />

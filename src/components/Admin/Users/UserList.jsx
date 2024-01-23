@@ -18,6 +18,14 @@ export default function AddUser() {
 
     window.location.reload(false);
   };
+
+  const handleEditClick = (e) => {
+    let activityId = Number(e.currentTarget.id);
+    let selectedActivity = activities.find((activity) => activity.id === activityId);
+    setActivityToShow(selectedActivity);
+    showModal();
+  }
+
   return(
     <Card className="p-4 my-2">
       <h4 className="mb-4" style={{ textAlign: "center" }}>
@@ -44,6 +52,7 @@ export default function AddUser() {
                       size="lg"
                       id={user.id}
                       className="icons"
+                      onClick={handleEditClick}
                     />
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <FontAwesomeIcon

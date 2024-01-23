@@ -2,12 +2,20 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col, Card, ListGroup } from "react-bootstrap";
 
 import StudentCards from "../components/Admin/Students/StudentCards";
-import UsersCard from "../components/Admin/Users/UserCards";
+import UsersCards from "../components/Admin/Users/UserCards";
 import ActivityCards from "../components/Admin/Activities/ActivityCards";
+import AdminEdit from "../components/Admin/AdminEdit";
 
 export default function Admin() {
   const storedChosenCard = localStorage.getItem("chosenCard");
-  const [chosenCard, setChosenCard] = useState(storedChosenCard ? parseInt(storedChosenCard) : 0);
+  const [chosenCard, setChosenCard] = useState(storedChosenCard ? parseInt(storedChosenCard) : 2);
+  const [show, setShow] = useState(false);
+  const [objectToShow, setObjectToShow] = useState({});
+  const [editType, setEditType] = useState("");
+  const setObject = (obj) => setObjectToShow(obj);
+  const showModal = () => setShow(true);
+  const hideModal = () => setShow(false);
+
   let users = JSON.parse(localStorage.getItem("userData"));
 
   useEffect(() => {
@@ -29,6 +37,14 @@ export default function Admin() {
 
   return (
     <>
+      {show && (
+        <AdminEdit
+          editType={editType}
+          editObj={objectToShow}
+          show={show}
+          onClose={hideModal}
+        />
+      )}
       <Container fluid>
         <Row className="my-4">
           <Col xs={12} md={3} style={{ paddingTop: "2em" }}>
@@ -64,11 +80,11 @@ export default function Admin() {
           </Col>
           <Col xs={12} md={9} style={{ paddingTop: "2em" }}>
             {chosenCard === 0 ? (
-              <UsersCard />
+              <UsersCards showModal={showModal} setObject={setObject} setEditType={setEditType} />
             ) : chosenCard === 1 ? (
-              <StudentCards />
+              <StudentCards showModal={showModal} setObject={setObject} setEditType={setEditType} />
             ) : (
-              <ActivityCards />
+              <ActivityCards showModal={showModal} setObject={setObject} setEditType={setEditType} />
             )}
           </Col>
         </Row>

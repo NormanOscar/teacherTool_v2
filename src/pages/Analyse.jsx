@@ -215,7 +215,9 @@ export default function Analyse() {
                                   {assessment.date}
                                 </small>
                               </p>
-                              <span>Lärare: {getTeacher(assessment.teacher).firstName + " " + getTeacher(assessment.teacher).lastName}</span>
+                              {assessment.teacher && (
+                                <span>Lärare: {getTeacher(assessment.teacher).firstName + " " + getTeacher(assessment.teacher).lastName}</span>
+                              )}
                               <div>
                                 <Row className="d-flex justify-content-between">
                                   <span style={{ width: 'fit-content' }}>{assessment.area} &rarr; {assessment.criteria} &rarr; {assessment.level}</span>

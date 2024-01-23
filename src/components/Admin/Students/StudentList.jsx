@@ -6,7 +6,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 
 library.add(faTrash, faPen);
 
-export default function AddUser() {
+export default function StudentList({ showModal, setObject, setEditType }) {
   let students = JSON.parse(localStorage.getItem("studentData"));
 
   const removeStudent = (e) => {
@@ -18,48 +18,60 @@ export default function AddUser() {
 
     window.location.reload(false);
   };
+
+  const handleEditClick = (e) => {
+    let studentId = Number(e.currentTarget.id);
+    let selectedStudent = students.find((student) => student.id === studentId);
+    setObject(selectedStudent);
+    setEditType("student");
+    showModal();
+  }
+
   return(
-    <Card className="p-4 my-2">
-      <h4 className="mb-4" style={{ textAlign: "center" }}>
-        Elever
-      </h4>
-      <ul
-        className="list-group list-group-flush overflow-auto custom-scrollbar"
-        style={{ maxHeight: "400px" }}
-      >
-        {students &&
-          students.map((student, index) => {
-            return (
-              <li key={index} className="list-group-item">
-                <Row>
-                  <Col>
-                    <p className="mb-0 d-flex justify-content-between">
-                      {student.name + " (åk. " + student.grade + ")"}
-                    </p>
-                    <p className="mb-0">{student.email}</p>
-                  </Col>
-                  <Col className="d-flex align-items-center justify-content-end">
-                    <FontAwesomeIcon
-                      icon={faPen}
-                      size="lg"
-                      id={student.id}
-                      className="icons"
-                    />
-                    <span>&nbsp;&nbsp;&nbsp;</span>
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      size="lg"
-                      color="red"
-                      id={student.id}
-                      className="icons"
-                      onClick={removeStudent}
-                    />
-                  </Col>
-                </Row>
-              </li>
-            );
-          })}
-      </ul>
-    </Card>
+    <>
+      <Card className="p-4 my-2">
+        <h4 className="mb-4" style={{ textAlign: "center" }}>
+          Elever
+        </h4>
+        <ul
+          className="list-group list-group-flush overflow-auto custom-scrollbar"
+          style={{ maxHeight: "400px" }}
+        >
+          {students &&
+            students.map((student, index) => {
+              return (
+                <li key={index} className="list-group-item">
+                  <Row>
+                    <Col>
+                      <p className="mb-0 d-flex justify-content-between">
+                        {student.name + " (åk. " + student.grade + ")"}
+                      </p>
+                      <p className="mb-0">{student.email}</p>
+                    </Col>
+                    <Col className="d-flex align-items-center justify-content-end">
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        size="lg"
+                        className="icons"
+                        id={student.id}
+                        onClick={handleEditClick}
+                      />
+                      <span>&nbsp;&nbsp;&nbsp;</span>
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        size="lg"
+                        color="red"
+                        id={student.id}
+                        className="icons"
+                        onClick={removeStudent}
+                      />
+                    </Col>
+                  </Row>
+                </li>
+              );
+            })}
+        </ul>
+      </Card>
+    </>
   )
 }
