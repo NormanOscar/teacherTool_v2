@@ -33,6 +33,7 @@ export default function StudentList({ showModal, setObject, setEditType }) {
         <h4 className="mb-4" style={{ textAlign: "center" }}>
           Elever
         </h4>
+        <span className="text-end px-2 mb-1">Totalt: {students.length}</span>
         <ul
           className="list-group list-group-flush overflow-auto custom-scrollbar"
           style={{ maxHeight: "400px" }}
@@ -49,22 +50,25 @@ export default function StudentList({ showModal, setObject, setEditType }) {
                       <p className="mb-0">{student.email}</p>
                     </Col>
                     <Col className="d-flex align-items-center justify-content-end">
-                      <FontAwesomeIcon
-                        icon={faPen}
-                        size="lg"
-                        className="icons"
-                        id={student.id}
-                        onClick={handleEditClick}
-                      />
-                      <span>&nbsp;&nbsp;&nbsp;</span>
-                      <FontAwesomeIcon
-                        icon={faTrash}
-                        size="lg"
-                        color="red"
-                        id={student.id}
-                        className="icons"
-                        onClick={removeStudent}
-                      />
+                      <div className="mx-1">
+                        <FontAwesomeIcon
+                          icon={faPen}
+                          size="lg"
+                          className="icons"
+                          id={student.id}
+                          onClick={handleEditClick}
+                        />
+                      </div>
+                      <div className="mx-1">
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          size="lg"
+                          color="red"
+                          id={student.id}
+                          className="icons"
+                          onClick={removeStudent}
+                        />
+                      </div>
                     </Col>
                   </Row>
                 </li>

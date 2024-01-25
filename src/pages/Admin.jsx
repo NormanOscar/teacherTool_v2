@@ -47,7 +47,7 @@ export default function Admin() {
       )}
       <Container fluid>
         <Row className="my-4">
-          <Col xs={12} md={3} style={{ paddingTop: "2em" }}>
+          <Col xs={12} md={2} style={{ paddingTop: "2em" }}>
             <Card className="p-4 my-2">
               <h4 className="mb-4" style={{ textAlign: "center" }}>
                 Admin
@@ -78,7 +78,7 @@ export default function Admin() {
               </ListGroup>
             </Card>
           </Col>
-          <Col xs={12} md={9} style={{ paddingTop: "2em" }}>
+          <Col xs={12} md={10} style={{ paddingTop: "2em" }}>
             {chosenCard === 0 ? (
               <UsersCards showModal={showModal} setObject={setObject} setEditType={setEditType} />
             ) : chosenCard === 1 ? (

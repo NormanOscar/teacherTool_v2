@@ -6,7 +6,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 
 library.add(faTrash, faPen);
 
-export default function AddUser() {
+export default function AddUser({ showModal, setObject, setEditType }) {
   let users = JSON.parse(localStorage.getItem("userData"));
 
   const removeUser = (e) => {
@@ -20,9 +20,10 @@ export default function AddUser() {
   };
 
   const handleEditClick = (e) => {
-    let activityId = Number(e.currentTarget.id);
-    let selectedActivity = activities.find((activity) => activity.id === activityId);
-    setActivityToShow(selectedActivity);
+    let userId = Number(e.currentTarget.id);
+    let selectedUser = users.find((user) => user.id === userId);
+    setObject(selectedUser);
+    setEditType("user");
     showModal();
   }
 
@@ -31,6 +32,7 @@ export default function AddUser() {
       <h4 className="mb-4" style={{ textAlign: "center" }}>
         Användare
       </h4>
+      <span className="text-end px-2 mb-1">Totalt: {users.length}</span>
       <ul
         className="list-group list-group-flush overflow-auto custom-scrollbar"
         style={{ maxHeight: "400px" }}
@@ -47,22 +49,25 @@ export default function AddUser() {
                     <p className="mb-0">{user.email}</p>
                   </Col>
                   <Col className="d-flex align-items-center justify-content-end">
-                    <FontAwesomeIcon
-                      icon={faPen}
-                      size="lg"
-                      id={user.id}
-                      className="icons"
-                      onClick={handleEditClick}
-                    />
-                    <span>&nbsp;&nbsp;&nbsp;</span>
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      size="lg"
-                      color="red"
-                      id={user.id}
-                      className="icons"
-                      onClick={removeUser}
-                    />
+                    <div className="mx-1">
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        size="lg"
+                        id={user.id}
+                        className="icons"
+                        onClick={handleEditClick}
+                      />
+                    </div>
+                    <div className="mx-1">
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        size="lg"
+                        color="red"
+                        id={user.id}
+                        className="icons"
+                        onClick={removeUser}
+                      />
+                    </div>
                   </Col>
                 </Row>
               </li>

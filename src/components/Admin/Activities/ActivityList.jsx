@@ -33,6 +33,7 @@ export default function ActivityList({ showModal, setObject, setEditType }) {
         <h4 className="mb-4" style={{ textAlign: "center" }}>
           Aktiviteter
         </h4>
+        <span className="text-end px-2 mb-1">Totalt: {activities.length}</span>
         <ul
           className="list-group list-group-flush overflow-auto custom-scrollbar"
           style={{ maxHeight: "400px" }}

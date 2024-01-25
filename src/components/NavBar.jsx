@@ -55,11 +55,19 @@ export default function NavBar() {
             
             <Nav  
             className='custom-navbar' activeKey={location.pathname} style={{marginLeft: 'auto'}}>
-              {user && user.role === 'admin' && (
+              {user && user.role === 'admin' ? (
                 <>
                   <Nav.Item>
                     <NavLink href='/admin' className='text-center'>
                       Admin
+                    </NavLink>
+                  </Nav.Item>
+                </>
+              ) : (
+                <>
+                  <Nav.Item>
+                    <NavLink href='' className='text-center'>
+                      {user && user.firstName + ' ' + user.lastName}
                     </NavLink>
                   </Nav.Item>
                 </>

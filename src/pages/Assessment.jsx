@@ -204,7 +204,7 @@ export default function Assessment() {
               </Container>
             </Col>
             <Col xs={12} md={2}>
-              <Container className="d-flex justify-content-center align-items-center w-100 h-100">
+              <Container className="d-flex justify-content-end align-items-center w-100 h-100">
                 <button
                   className="btn btn-primary px-5 py-3"
                   onClick={() => (window.location.href = "/analyse")}
