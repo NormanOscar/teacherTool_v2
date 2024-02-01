@@ -10,10 +10,11 @@ export default function AutoComplete ({ change }) {
   if (!students) {
     addStudentsToLocalStorage();
     addActivitiesToLocalStorage();
+  } else {
+    students.sort(function (a, b) {
+      return a.name.localeCompare(b.name);
+    });
   }
-  students.sort(function (a, b) {
-    return a.name.localeCompare(b.name);
-  });
 
   const [selected, setSelected] = useState([]);
 
