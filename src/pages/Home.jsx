@@ -13,6 +13,7 @@ export default function Home() {
   useEffect(() => {
     if (!localStorage.getItem("login")) {
       window.location.href = "/login";
+      console.log('no login');
     }
     addStudentsToLocalStorage();
     addActivitiesToLocalStorage();
