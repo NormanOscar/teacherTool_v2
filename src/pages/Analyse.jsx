@@ -31,7 +31,7 @@ export default function Analyse() {
   });
 
   useEffect(() => {
-    if (!localStorage.getItem('login')) {
+    if (!localStorage.getItem("login") || !localStorage.getItem("userId")) {
       window.location.href = '/login';
     }
 

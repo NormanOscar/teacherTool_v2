@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import AutoComplete from "../components/Home/AutoComplete";
 import CurrentActivities from "../components/Home/CurrentActivities";
-import { addStudentsToLocalStorage, addActivitiesToLocalStorage } from "../components/func";
+import { addStudentsToLocalStorage, addActivitiesToLocalStorage, addUsersToLocalStorage } from "../components/func";
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -11,12 +11,12 @@ export default function Home() {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    if (!localStorage.getItem("login")) {
+    if (!localStorage.getItem("login") || !localStorage.getItem("userId")){
       window.location.href = "/login";
-      console.log('no login');
     }
     addStudentsToLocalStorage();
     addActivitiesToLocalStorage();
+    addUsersToLocalStorage();
 
     setStudents(JSON.parse(localStorage.getItem("studentData")));
   }, []);

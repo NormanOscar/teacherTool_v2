@@ -19,14 +19,14 @@ export default function Admin() {
   let users = JSON.parse(localStorage.getItem("userData"));
 
   useEffect(() => {
-    if (localStorage.getItem("login")) {
+    if (!localStorage.getItem("login") || !localStorage.getItem("userId")) {
+      window.location.href = "/login";
+    } else {
       let userId = JSON.parse(localStorage.getItem("userId"));
       let user = users.find((user) => user.id === userId);
       if (user.role !== "admin") {
         window.location.href = "/";
       }
-    } else {
-      window.location.href = "/login";
     }
   }, []);
 

@@ -43,7 +43,7 @@ export default function Assessment() {
   const [inputResult, setInputResult] = useState({ msg: null, type: null });
 
   useEffect(() => {
-    if (!localStorage.getItem("login")) {
+    if (!localStorage.getItem("login") || !localStorage.getItem("userId")) {
       window.location.href = "/login";
     }
 
