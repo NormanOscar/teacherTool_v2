@@ -6,7 +6,7 @@ import { addStudentsToLocalStorage, addActivitiesToLocalStorage } from "../func"
 
 export default function AutoComplete ({ change }) {
   const students = JSON.parse(localStorage.getItem('studentData'));
-  console.log(students);
+
   if (!students) {
     addStudentsToLocalStorage();
     addActivitiesToLocalStorage();
@@ -28,12 +28,16 @@ export default function AutoComplete ({ change }) {
   }
 
   return (
-    <Typeahead
-      id="name"
-      onChange={handleSelectChange}
-      onInputChange={handleTypeChange}
-      options={students.map((student) => student.name + " (åk. " + student.grade + ")")}
-      selected={selected}
-    />
+    <>
+      {students && (
+        <Typeahead
+          id="name"
+          onChange={handleSelectChange}
+          onInputChange={handleTypeChange}
+          options={students.map((student) => student.name + " (åk. " + student.grade + ")")}
+          selected={selected}
+        />
+      )}
+    </>
   );
 };
