@@ -83,7 +83,7 @@ export default function Login() {
                     className="btn btn-primary btn-block w-100 mb-2 submitBtn"
                     onClick={handleSubmit}
                   >
-                    Sök
+                    Logga in
                   </button>
                 </form>
               </div>
