@@ -45,7 +45,9 @@ export default function Home() {
     <>
       <Container fluid>
         <Row className="my-4">
-          <Col xs={12} md={4} style={{ paddingTop: "2em" }}></Col>
+          <Col xs={12} md={4} style={{ paddingTop: "2em" }}>
+            <CurrentActivities />
+          </Col>
           <Col xs={12} md={4} style={{ paddingTop: "2em" }}>
             <Card className="p-3 my-2">
               <div className="d-flex justify-content-center main-div">
@@ -74,7 +76,6 @@ export default function Home() {
                 </form>
               </div>
             </Card>
-            <CurrentActivities />
           </Col>
           <Col xs={12} md={4} style={{ paddingTop: "2em" }}></Col>
         </Row>

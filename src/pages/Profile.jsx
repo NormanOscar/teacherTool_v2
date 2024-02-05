@@ -5,13 +5,16 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 
-import EditCard from "../components/Profile/EditCard";
+import EditFirstName from "../components/Profile/EditFirstName";
+import EditLastName from "../components/Profile/EditLastName";
+import EditEmail from "../components/Profile/EditEmail";
+import EditUsername from "../components/Profile/EditUsername";
+import EditPassword from "../components/Profile/EditPassword";
 
 library.add(faEdit);
 
 export default function Profile() {
   const [user, setUser] = useState({});
-  const [showEditCard, setShowEditCard] = useState(false);
   const [chosenField, setChosenField] = useState(null);
 
   useEffect(() => {
@@ -23,12 +26,6 @@ export default function Profile() {
     let users = JSON.parse(localStorage.getItem("userData"));
     setUser(users.find((user) => user.id === userId));
   }, []);
-
-  const handleEdit = (e) => {
-    setShowEditCard(false);
-    setChosenField(e.target.id);
-    setShowEditCard(true);
-  };
 
   return (
     <>
@@ -55,9 +52,9 @@ export default function Profile() {
                       <FontAwesomeIcon
                         icon={faEdit}
                         size="lg"
-                        id="Förnamn"
+                        id="0"
                         className="icons"
-                        onClick={handleEdit}
+                        onClick={() => setChosenField("0")}
                       />
                     </Col>
                   </Row>
@@ -73,9 +70,9 @@ export default function Profile() {
                       <FontAwesomeIcon
                         icon={faEdit}
                         size="lg"
-                        id="Efternamn"
+                        id="1"
                         className="icons"
-                        onClick={handleEdit}
+                        onClick={() => setChosenField("1")}
                       />
                     </Col>
                   </Row>
@@ -84,16 +81,16 @@ export default function Profile() {
                   <Row>
                     <Col>
                       <p className="mb-0">
-                        <strong>Email:</strong> {user.email}
+                        <strong>E-post:</strong> {user.email}
                       </p>
                     </Col>
                     <Col className="d-flex align-items-center justify-content-end">
                       <FontAwesomeIcon
                         icon={faEdit}
                         size="lg"
-                        id="Email"
+                        id="2"
                         className="icons"
-                        onClick={handleEdit}
+                        onClick={() => setChosenField("2")}
                       />
                     </Col>
                   </Row>
@@ -109,9 +106,9 @@ export default function Profile() {
                       <FontAwesomeIcon
                         icon={faEdit}
                         size="lg"
-                        id="Användarnamn"
+                        id="3"
                         className="icons"
-                        onClick={handleEdit}
+                        onClick={() => setChosenField("3")}
                       />
                     </Col>
                   </Row>
@@ -127,18 +124,27 @@ export default function Profile() {
                       <FontAwesomeIcon
                         icon={faEdit}
                         size="lg"
-                        id="Lösenord"
+                        id="4"
                         className="icons"
-                        onClick={handleEdit}
+                        onClick={() => setChosenField("4")}
                       />
                     </Col>
                   </Row>
                 </li>
               </ul>
             </Card>
-            {showEditCard && <EditCard field={chosenField} />}
           </Col>
-          <Col xs={12} md={4} style={{ paddingTop: "2em" }}></Col>
+          <Col xs={12} md={4} style={{ paddingTop: "2em" }}>
+            {chosenField && (
+              <>
+                {chosenField === "0" && <EditFirstName />}
+                {chosenField === "1" && <EditLastName />}
+                {chosenField === "2" && <EditEmail />}
+                {chosenField === "3" && <EditUsername />}
+                {chosenField === "4" && <EditPassword />}
+              </>
+            )}
+          </Col>
         </Row>
       </Container>
     </>

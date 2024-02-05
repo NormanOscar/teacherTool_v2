@@ -12,10 +12,12 @@ export function addStudentsToLocalStorage() {
     localStorage.setItem("studentData", JSON.stringify(studentDataList));
   } else {
     // Filter out objects without 'id'
-    let filteredSavedData = savedData.filter(obj => obj.hasOwnProperty('id'));
+    let filteredSavedData = savedData.filter((obj) => obj.hasOwnProperty("id"));
 
     for (let student of students) {
-      let isAlreadyInLocalStorage = filteredSavedData.some(obj => obj.id === student.id);
+      let isAlreadyInLocalStorage = filteredSavedData.some(
+        (obj) => obj.id === student.id
+      );
 
       if (!isAlreadyInLocalStorage) {
         filteredSavedData.push(student);
@@ -37,10 +39,12 @@ export function addUsersToLocalStorage() {
     localStorage.setItem("userData", JSON.stringify(userDataList));
   } else {
     // Filter out objects without 'id'
-    let filteredSavedData = savedData.filter(obj => obj.hasOwnProperty('id'));
+    let filteredSavedData = savedData.filter((obj) => obj.hasOwnProperty("id"));
 
     for (let user of users) {
-      let isAlreadyInLocalStorage = filteredSavedData.some(obj => obj.id === user.id);
+      let isAlreadyInLocalStorage = filteredSavedData.some(
+        (obj) => obj.id === user.id
+      );
 
       if (!isAlreadyInLocalStorage) {
         filteredSavedData.push(user);
@@ -50,7 +54,6 @@ export function addUsersToLocalStorage() {
     // Update the localStorage with the modified data
     localStorage.setItem("userData", JSON.stringify(filteredSavedData));
   }
-
 }
 
 export function addActivitiesToLocalStorage() {
@@ -63,10 +66,12 @@ export function addActivitiesToLocalStorage() {
     localStorage.setItem("activityData", JSON.stringify(activityDataList));
   } else {
     // Filter out objects without 'id'
-    let filteredSavedData = savedData.filter(obj => obj.hasOwnProperty('id'));
+    let filteredSavedData = savedData.filter((obj) => obj.hasOwnProperty("id"));
 
     for (let activity of activities) {
-      let isAlreadyInLocalStorage = filteredSavedData.some(obj => obj.id === activity.id);
+      let isAlreadyInLocalStorage = filteredSavedData.some(
+        (obj) => obj.id === activity.id
+      );
 
       if (!isAlreadyInLocalStorage) {
         filteredSavedData.push(activity);
@@ -76,14 +81,13 @@ export function addActivitiesToLocalStorage() {
     // Update the localStorage with the modified data
     localStorage.setItem("activityData", JSON.stringify(filteredSavedData));
   }
-
 }
 
 export function getCurrentDate() {
   const today = new Date();
   const year = today.getFullYear();
-  const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if needed
-  const day = today.getDate().toString().padStart(2, '0'); // Add leading zero if needed
+  const month = (today.getMonth() + 1).toString().padStart(2, "0"); // Add leading zero if needed
+  const day = today.getDate().toString().padStart(2, "0"); // Add leading zero if needed
   const formattedDate = `${year}-${month}-${day}`;
 
   return formattedDate;
@@ -91,7 +95,9 @@ export function getCurrentDate() {
 
 export function saveUpdatedUser(field, inputValue) {
   let users = JSON.parse(localStorage.getItem("userData"));
-  let user = users.find(user => user.id === JSON.parse(localStorage.getItem("userId")));
+  let user = users.find(
+    (user) => user.id === JSON.parse(localStorage.getItem("userId"))
+  );
 
   switch (field) {
     case "Förnamn":
@@ -118,7 +124,7 @@ export function saveUpdatedUser(field, inputValue) {
   window.location.href = "/profile";
 }
 
-export function getTeacher (teacherId) {
-  let teachers = JSON.parse(localStorage.getItem('userData'));
+export function getTeacher(teacherId) {
+  let teachers = JSON.parse(localStorage.getItem("userData"));
   return teachers.find((teacher) => teacher.id === teacherId);
-};
+}
