@@ -1,182 +1,194 @@
 * {
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
 }
 
 html,
 body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: #F1F3F2 !important;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f1f3f2 !important;
 }
 
-label, input, select, option, textarea, button {
-    font-size: small !important;
+label,
+input,
+select,
+option,
+textarea,
+button {
+  font-size: small !important;
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: black;
-    opacity: 1; /* Firefox */
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1; /* Firefox */
 }
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: black;
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: black;
 }
 
-::-ms-input-placeholder { /* Microsoft Edge */
-    color: black;
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: black;
 }
 
 .required-symbol {
-    color: red;
+  color: red;
 }
 
 .student-name {
-    margin: 0;
+  margin: 0;
 }
 
 #form-block {
-    width: 100%;
+  width: 100%;
 }
 
-.form-control, .form-select {
-    padding: 5px !important;
+.form-control,
+.form-select {
+  padding: 5px !important;
 }
 
 .active {
-    color: #0C5ED7 !important;
-    text-decoration: underline !important;
+  color: #0c5ed7 !important;
+  text-decoration: underline !important;
 }
 
 .change-student {
-    font-size: large;
-    width: fit-content;
-    color: #5898f9;
+  font-size: large;
+  width: fit-content;
+  color: #5898f9;
 }
 
 .mobile-toggler {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 #current-activities {
-    width: 80%;
+  width: 90%;
+  padding: 0;
 }
 
-#modal-dialog{
-    margin: 0;
-    width: 30%;
+#modal-dialog {
+  margin: 0;
+  width: 30%;
 }
 
-#modal-content{
-    width: 100vw;
-    background-color: #ededed;
+#modal-content {
+  width: 100vw;
+  background-color: #ededed;
 }
 
-#modal-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin: 0 auto;
-    border-bottom: 0;
+#modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  border-bottom: 0;
 }
 
-#modal-header .btn-close{
-    opacity: 1;
-    margin: 0;
+#modal-header .btn-close {
+  opacity: 1;
+  margin: 0;
 }
 
-#modal-body{
-    margin: 0 5%;
-    flex: unset;
+#modal-body {
+  margin: 0 5%;
+  flex: unset;
 }
 
-#modal-body .lines{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 1em;
-    margin: 0.5em 0 0.5em 0;
-    cursor: pointer;
-    transition: all .5s ease;
+#modal-body .lines {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1em;
+  margin: 0.5em 0 0.5em 0;
+  cursor: pointer;
+  transition: all 0.5s ease;
 }
 
 #gridColumns {
-    width: 100%;
-    margin: 0;
+  width: 100%;
+  margin: 0;
 }
 
 .confirmationModal {
-    min-width: 30vw;
+  min-width: 30vw;
 }
 
-.performance-btn:checked + .performance-label, .gradingToolRadio-btn:checked + .gradingToolRadio-label, .flag-btn:checked + .flag-label {
-    border: solid 2px black !important;
+.performance-btn:checked + .performance-label,
+.gradingToolRadio-btn:checked + .gradingToolRadio-label,
+.flag-btn:checked + .flag-label {
+  border: solid 2px black !important;
 }
 
 /* Assuming you have a class "custom-scrollbar" */
 .custom-scrollbar {
-    /* Style the scrollbar track */
-    scrollbar-width: thin; /* For Firefox */
-    scrollbar-color: #f0f0f0 #ccc; /* For Firefox */
-  
-    /* Style the scrollbar for WebKit browsers */
-    &::-webkit-scrollbar {
-      width: 8px; /* Set the width of the scrollbar */
-    }
-  
-    /* Style the scrollbar thumb for WebKit browsers */
-    &::-webkit-scrollbar-thumb {
-      background-color: #888; /* Set the color of the thumb */
-      border-radius: 4px; /* Round the corners of the thumb */
-    }
-  
-    /* Style the scrollbar track on hover for WebKit browsers */
-    &::-webkit-scrollbar-track:hover {
-      background-color: #f0f0f0; /* Set the color of the track on hover */
-    }
-  
-    /* Style the scrollbar thumb on hover for WebKit browsers */
-    &::-webkit-scrollbar-thumb:hover {
-      background-color: #555; /* Set the color of the thumb on hover */
-    }
+  /* Style the scrollbar track */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #f0f0f0 #ccc; /* For Firefox */
+
+  /* Style the scrollbar for WebKit browsers */
+  &::-webkit-scrollbar {
+    width: 8px; /* Set the width of the scrollbar */
+  }
+
+  /* Style the scrollbar thumb for WebKit browsers */
+  &::-webkit-scrollbar-thumb {
+    background-color: #888; /* Set the color of the thumb */
+    border-radius: 4px; /* Round the corners of the thumb */
+  }
+
+  /* Style the scrollbar track on hover for WebKit browsers */
+  &::-webkit-scrollbar-track:hover {
+    background-color: #f0f0f0; /* Set the color of the track on hover */
+  }
+
+  /* Style the scrollbar thumb on hover for WebKit browsers */
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Set the color of the thumb on hover */
+  }
 }
 
 .icons {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .adminMenuItem {
-    text-decoration: underline;
-    cursor: pointer;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .adminMenuItem:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .selectedAdminPage {
-    color: #0C5ED7;
-    text-decoration: none;
+  color: #0c5ed7;
+  text-decoration: none;
 }
 
 @media screen and (max-width: 1100px) {
-    .confirmationModal {
-        min-width: 60vw !important;
-    }
+  .confirmationModal {
+    min-width: 60vw !important;
+  }
 }
 
 @media screen and (max-width: 750px) {
-    .confirmationModal {
-        min-width: 90vw !important;
-    }
+  .confirmationModal {
+    min-width: 90vw !important;
+  }
 }
 
 @media screen and (max-width: 500px) {
-    #form-block {
-      width: 80%;
-    }
+  #form-block {
+    width: 80%;
+  }
 }

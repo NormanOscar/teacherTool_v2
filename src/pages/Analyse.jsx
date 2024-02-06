@@ -158,14 +158,14 @@ export default function Analyse() {
                       type="radio"
                       className="btn-check flag-btn"
                       name="flag-options"
-                      id="indentify"
+                      id="indicate"
                       autoComplete="off"
                       onChange={handleFlagChange}
-                      checked={flag === 'indentify'}
+                      checked={flag === 'indicate'}
                     />
                     <label
                       className="btn flag-label py-3 px-4"
-                      htmlFor="indentify"
+                      htmlFor="indicate"
                       style={{ backgroundColor: "#ffe207" }}
                     >
                       Indikera

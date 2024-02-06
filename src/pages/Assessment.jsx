@@ -65,13 +65,13 @@ export default function Assessment() {
     if (student.flag) {
       if (student.flag === "ok") {
         flag.name = "Ok";
-        flag.color = "green";
-      } else if (student.flag === "indentify") {
+        flag.color = "#20b26b";
+      } else if (student.flag === "indicate") {
         flag.name = "Indikera";
-        flag.color = "yellow";
+        flag.color = "#ffe207";
       } else if (student.flag === "danger") {
         flag.name = "Befara";
-        flag.color = "red";
+        flag.color = "#ff3d4d";
       }
     }
   } else {
