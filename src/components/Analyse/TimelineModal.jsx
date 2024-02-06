@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { Row, Col, Modal } from "react-bootstrap";
+import { Row, Modal } from "react-bootstrap";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,10 +10,9 @@ import {
 
 library.add(faFaceSmile, faFaceMeh, faFaceFrown);
 
-import Loading from "../Loading";
 import { getTeacher } from "../func";
 
-export default function TimelineModal({ item, show, onClose }) {
+export default function TimeLineModal({ item, show, onClose }) {
   return (
     <>
       <Modal show={show} onHide={onClose} centered>
