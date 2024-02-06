@@ -182,18 +182,13 @@ export default function Student() {
     <>
       {localStorage.getItem("studentId") !== null ? (
         <Container fluid>
-          <Row className="pt-2">
-            <Col xs={12} md={12} className="text-center">
-              <h3 className="text-decoration-underline">
-                Elevsida
-              </h3>
-            </Col>
-          </Row>
-          <Row>
+          <Row className="mt-2">
             <Col xs={12} md={2}></Col>
             <Col xs={12} md={8}>
               <Container className="text-center d-flex justify-content-center align-items-center py-2">
-                <h3 className="student-name d-inline-block">{name}</h3>
+                <h3 className="student-name d-inline-block">
+                  {name} - Elevsida
+                </h3>
                 {flag.name !== "" && (
                   <>
                     <span>&nbsp;</span>
@@ -210,7 +205,11 @@ export default function Student() {
                 )}
               </Container>
             </Col>
-            <Col xs={12} md={2} className="d-flex justify-content-end align-items-center">
+            <Col
+              xs={12}
+              md={2}
+              className="d-flex justify-content-end align-items-center"
+            >
               <button
                 className="btn btn-primary px-5 py-3"
                 onClick={() => (window.location.href = "/analyse")}
@@ -421,10 +420,7 @@ export default function Student() {
                 <h4 className="mb-4" style={{ textAlign: "center" }}>
                   Avslutade aktiviteter
                 </h4>
-                <CancelledStudentActivities
-                  student={student}
-                  page="student"
-                />
+                <CancelledStudentActivities student={student} page="student" />
               </Card>
             </Col>
           </Row>

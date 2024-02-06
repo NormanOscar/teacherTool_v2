@@ -128,3 +128,48 @@ export function getTeacher(teacherId) {
   let teachers = JSON.parse(localStorage.getItem("userData"));
   return teachers.find((teacher) => teacher.id === teacherId);
 }
+
+export function getTimelineData(student) {
+  let items = [];
+  let id = 0;
+
+  student.assessments.map((assessment) => {
+    let assessmentDate = new Date(assessment.date);
+    items.push({
+      id: id,
+      date: assessmentDate,
+      type: "Bedömning",
+      name: assessment.gradingTool,
+      color: "#F28800",
+      obj: assessment,
+    });
+    id++;
+  });
+
+  student.activities.map((activity) => {
+    let activityDate = new Date(activity.date);
+    items.push({
+      id: id,
+      date: activityDate,
+      type: "Aktivitet",
+      name: activity.name,
+      color: "#00A8CC",
+      obj: activity,
+    });
+    id++;
+    activity.updates.map((update) => {
+      let updateDate = new Date(update.date);
+      items.push({
+        id: id,
+        date: updateDate,
+        type: "Avstämning",
+        name: "",
+        color: "#DC6390",
+        obj: update,
+      });
+      id++;
+    });
+  });
+
+  return items;
+}

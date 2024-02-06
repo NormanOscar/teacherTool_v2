@@ -175,6 +175,28 @@ button {
   text-decoration: none;
 }
 
+.timeLine-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.timeLine-text, .timeLine-dot {
+  cursor: pointer;
+}
+
+.timeLine-line {
+  height: 2px;
+  width: 100%;
+  background-color: lightgray;
+  z-index: 1;
+}
+
 @media screen and (max-width: 1100px) {
   .confirmationModal {
     min-width: 60vw !important;

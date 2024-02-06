@@ -4,13 +4,29 @@
             "name": "Oscar Norman",
             "id": 1,
             "grade" : 1,
-            "assessments": [],
+            "assessments": [
+                {
+                    "date":"2024-02-06",
+                    "gradingTool":"Skolverket A",
+                    "area":"Läsa",
+                    "criteria":"Avkodning",
+                    "level":"1 (Logografisk ljudning)",
+                    "comment":"","teacher":1
+                }
+            ],
             "activities": [
                 {
                     "id": 1,
                     "name":"Wendick",
                     "date":"2023-10-24",
-                    "updates": []
+                    "updates": [
+                        {
+                            "date":"2024-02-06",
+                            "present":true,
+                            "performance":"good",
+                            "comment":""
+                        }
+                    ]
                 },
                 {
                     "id": 2,
