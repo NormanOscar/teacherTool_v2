@@ -140,6 +140,13 @@ export default function Analyse() {
         ) : (
           <>
             <Row className="pt-2">
+              <Col xs={12} md={12} className="text-center">
+                <h3 className="text-decoration-underline">
+                  Analys
+                </h3>
+              </Col>
+            </Row>
+            <Row>
               <Col
                 xs={12}
                 md={2}
@@ -147,7 +154,7 @@ export default function Analyse() {
               >
                 <button
                   className="btn btn-primary py-3 px-4"
-                  onClick={() => (window.location.href = "/assessment")}
+                  onClick={() => (window.location.href = "/student")}
                 >
                   Tillbaka
                 </button>
@@ -159,14 +166,14 @@ export default function Analyse() {
               >
                 <Container className="text-center d-flex justify-content-center">
                   <h3 className="student-name d-inline-block">
-                    {student.name + " (åk. " + student.grade + ") - Analys"}
+                    {student.name + " (åk. " + student.grade + ")"}
                   </h3>
                 </Container>
               </Col>
               <Col
                 xs={12}
                 md={2}
-                className="d-flex justify-content-center align-items-center"
+                className="d-flex justify-content-end align-items-center"
               >
                 <div className="btn-group">
                   <input

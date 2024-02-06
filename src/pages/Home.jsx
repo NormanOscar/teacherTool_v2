@@ -34,7 +34,7 @@ export default function Home() {
       );
       if (student.length > 0) {
         localStorage.setItem("studentId", JSON.stringify(student[0].id));
-        window.location.href = "/assessment";
+        window.location.href = "/student";
       } else {
         setInputError(true);
       }

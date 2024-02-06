@@ -53,7 +53,7 @@ export default function StudentActivities({ student, onClose, page }) {
             <ul
               className="list-group list-group-flush overflow-auto custom-scrollbar"
               style={{
-                width: page === "assessment" ? "90%" : "100%",
+                width: page === "student" ? "90%" : "100%",
                 maxHeight: "300px",
               }}
             >
@@ -66,7 +66,7 @@ export default function StudentActivities({ student, onClose, page }) {
                     value={activity.id}
                     style={{
                       backgroundColor:
-                        page === "assessment" ? "#ffffff" : "transparent",
+                        page === "student" ? "#ffffff" : "transparent",
                     }}
                   >
                     <Row className="d-flex justify-content-between align-items-center">
@@ -122,7 +122,7 @@ export default function StudentActivities({ student, onClose, page }) {
         ) : (
           <p className="text-center">Inga pågående aktiviteter</p>
         )}
-        <NewActivity selectedStudent={student} page="assessment" />
+        <NewActivity selectedStudent={student} page="student" />
       </div>
     </>
   );

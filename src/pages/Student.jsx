@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 
-import Levels from "../components/Assessment/Levels";
-import StudentActivities from "../components/Assessment/StudentActivities";
-import CancelledStudentActivities from "../components/Assessment/CancelledStudentActivities";
+import Levels from "../components/Student/Levels";
+import StudentActivities from "../components/Student/StudentActivities";
+import CancelledStudentActivities from "../components/Student/CancelledStudentActivities";
 
 import data from "../json/data.json";
 import { addStudentsToLocalStorage, getCurrentDate } from "../components/func";
@@ -36,7 +36,7 @@ function studentInLocalStorage(studentId) {
   }
 }
 
-export default function Assessment() {
+export default function Student() {
   const [selectedTool, setSelectedTool] = useState(0);
   const [selectedArea, setSelectedArea] = useState(0);
   const [selectedCriteria, setSelectedCriteria] = useState(0);
@@ -183,6 +183,13 @@ export default function Assessment() {
       {localStorage.getItem("studentId") !== null ? (
         <Container fluid>
           <Row className="pt-2">
+            <Col xs={12} md={12} className="text-center">
+              <h3 className="text-decoration-underline">
+                Elevsida
+              </h3>
+            </Col>
+          </Row>
+          <Row>
             <Col xs={12} md={2}></Col>
             <Col xs={12} md={8}>
               <Container className="text-center d-flex justify-content-center align-items-center py-2">
@@ -203,15 +210,13 @@ export default function Assessment() {
                 )}
               </Container>
             </Col>
-            <Col xs={12} md={2}>
-              <Container className="d-flex justify-content-end align-items-center w-100 h-100">
-                <button
-                  className="btn btn-primary px-5 py-3"
-                  onClick={() => (window.location.href = "/analyse")}
-                >
-                  Analys
-                </button>
-              </Container>
+            <Col xs={12} md={2} className="d-flex justify-content-end align-items-center">
+              <button
+                className="btn btn-primary px-5 py-3"
+                onClick={() => (window.location.href = "/analyse")}
+              >
+                Analys
+              </button>
             </Col>
           </Row>
           <Row className="mb-2">
@@ -220,7 +225,7 @@ export default function Assessment() {
                 <h4 className="mb-4" style={{ textAlign: "center" }}>
                   Pågående aktiviteter
                 </h4>
-                <StudentActivities student={student} page="assessment" />
+                <StudentActivities student={student} page="student" />
               </Card>
             </Col>
             <Col xs={12} md={4}>
@@ -418,7 +423,7 @@ export default function Assessment() {
                 </h4>
                 <CancelledStudentActivities
                   student={student}
-                  page="assessment"
+                  page="student"
                 />
               </Card>
             </Col>

@@ -67,6 +67,7 @@ export default function ActivityModal({
       );
       currentActivity.updates.push(data);
       localStorage.setItem("studentData", JSON.stringify(storedData));
+      setIsPresent(true);
       onClose();
     }
   };

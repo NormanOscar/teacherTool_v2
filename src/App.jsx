@@ -1,7 +1,7 @@
 // App.js
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home.jsx';
-import Assessment from './pages/Assessment.jsx';
+import Student from './pages/Student.jsx';
 import Analyse from './pages/Analyse.jsx';
 import NavBar from './components/NavBar.jsx';
 import Login from './pages/Login.jsx';
@@ -16,7 +16,7 @@ export default function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/assessment" element={<Assessment />} />
+        <Route path="/student" element={<Student />} />
         <Route path='/analyse' element={<Analyse />}/>
         <Route path='/login' element={<Login />}/>
         <Route path='/profile' element={<Profile />}/>

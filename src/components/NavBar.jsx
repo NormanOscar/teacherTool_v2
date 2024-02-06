@@ -47,8 +47,8 @@ export default function NavBar() {
                 </NavLink>
               </Nav.Item>
               <Nav.Item>
-                <NavLink href='/assessment' className='text-center'>
-                  Bedömning
+                <NavLink href='/student' className='text-center'>
+                  Elevsida
                 </NavLink>
               </Nav.Item>
             </Nav>

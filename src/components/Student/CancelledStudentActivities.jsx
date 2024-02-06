@@ -13,7 +13,7 @@ export default function CancelledStudentActivities({ student, page }) {
                   className="list-group-item"
                   key={activity.id}
                   value={activity.id}
-                  style={{ backgroundColor: page === 'assessment' ? "#ffffff" : "transparent", marginBottom: "0.5em", borderRadius: "5px" }}
+                  style={{ backgroundColor: page === 'student' ? "#ffffff" : "transparent", marginBottom: "0.5em", borderRadius: "5px" }}
                 >
                   <p className="mb-0 d-flex justify-content-between">
                     <span

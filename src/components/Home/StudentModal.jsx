@@ -1,6 +1,6 @@
 import { Modal } from "react-bootstrap";
 
-import StudentActivities from "../Assessment/StudentActivities";
+import StudentActivities from "../Student/StudentActivities";
 
 export default function StudentModal({ show, student, onClose }) {
   return (
