@@ -12,7 +12,7 @@ library.add(faFaceSmile, faFaceMeh, faFaceFrown);
 
 import { getTeacher } from "../func";
 
-export default function TimelineModal({ item, show, onClose }) {
+export default function TimeLineModal({ item, show, onClose }) {
   return (
     <>
       <Modal show={show} onHide={onClose} centered>
