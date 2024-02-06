@@ -3,7 +3,7 @@ import { Row, Col, Modal } from "react-bootstrap";
 import { getTimelineData } from "../func";
 
 import Loading from "../Loading";
-import TimeLineModal from "./TimeLineModal";
+import TimelineModal from "./TimeLineModal.jsx";
 
 export default function Timeline() {
   const [timeLineData, setTimeLineData] = useState(null);
@@ -34,7 +34,9 @@ export default function Timeline() {
   }, []);
 
   const showTimeLineItem = (e) => {
-    let item = timeLineData.find((item) => item.id === parseInt(e.currentTarget.id));
+    let item = timeLineData.find(
+      (item) => item.id === parseInt(e.currentTarget.id)
+    );
     console.log(item);
     setModalData(item);
     setShowModal(true);
@@ -55,7 +57,11 @@ export default function Timeline() {
       ) : (
         <>
           {showModal && (
-            <TimeLineModal item={modalData} show={showModal} onClose={closeModal} />
+            <TimelineModal
+              item={modalData}
+              show={showModal}
+              onClose={closeModal}
+            />
           )}
           <Row className="mb-3">
             <Col xs={12} md={3}></Col>
@@ -94,7 +100,9 @@ export default function Timeline() {
                   className="d-flex flex-column align-items-center"
                 >
                   <p
-                    className={`text-center mb-2 timeLine-text ${hoveredIndex === index ? 'underline' : ''}`}
+                    className={`text-center mb-2 timeLine-text ${
+                      hoveredIndex === index ? "underline" : ""
+                    }`}
                     id={item.id}
                     onClick={showTimeLineItem}
                     onMouseEnter={() => handleHover(index)}

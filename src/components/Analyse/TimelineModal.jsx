@@ -12,24 +12,18 @@ library.add(faFaceSmile, faFaceMeh, faFaceFrown);
 
 import { getTeacher } from "../func";
 
-export default function TimeLineModal({ item, show, onClose }) {
+export default function TimelineModal({ item, show, onClose }) {
   return (
     <>
       <Modal show={show} onHide={onClose} centered>
-        <Modal.Header closeButton></Modal.Header>
-        {item.type === "Bedömning" && (  
+        <Modal.Header closeButton />
+        {item.type === "Bedömning" && (
           <Modal.Body>
             <p className="mb-0 d-flex justify-content-between">
-              <span
-                className="align-middle"
-                style={{ fontWeight: "bold" }}
-              >
+              <span className="align-middle" style={{ fontWeight: "bold" }}>
                 {item.obj.gradingTool}
               </span>
-              <small
-                className="align-middle"
-                style={{ color: "grey" }}
-              >
+              <small className="align-middle" style={{ color: "grey" }}>
                 {item.obj.date}
               </small>
             </p>
@@ -44,8 +38,8 @@ export default function TimeLineModal({ item, show, onClose }) {
             <div>
               <Row className="d-flex justify-content-between">
                 <span style={{ width: "fit-content" }}>
-                  {item.obj.area} &rarr; {item.obj.criteria}{" "}
-                  &rarr; {item.obj.level}
+                  {item.obj.area} &rarr; {item.obj.criteria} &rarr;{" "}
+                  {item.obj.level}
                 </span>
               </Row>
               <Row className="d-flex justify-content-between">
@@ -69,9 +63,7 @@ export default function TimeLineModal({ item, show, onClose }) {
               </span>
               <small className="align-middle" style={{ color: "grey" }}>
                 {item.obj.date} -{" "}
-                {item.obj.cancelDate === ""
-                  ? "Pågående"
-                  : item.obj.cancelDate}
+                {item.obj.cancelDate === "" ? "Pågående" : item.obj.cancelDate}
               </small>
             </p>
           </Modal.Body>
