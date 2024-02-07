@@ -160,12 +160,15 @@ export default function Analyse() {
                 </Row>
                 <Row>
                   <Card className="p-4 my-2">
+                    <Row className="text-center mb-2">
+                      <h4>Slutbedömning</h4>
+                    </Row>
                     <Row className="d-flex justify-content-center align-items-center">
                       <Col
                         xs={12}
                         md={8}
                         className="d-flex justify-content-center align-items-center"
-                      >
+                      > 
                         <button
                           className="btn btn-primary py-3 px-4"
                           onClick={() =>
@@ -177,6 +180,29 @@ export default function Analyse() {
                       </Col>
                     </Row>
                   </Card>
+                  {student.finalAssessment && (
+                    <Card className="p-4 my-2">
+                      <Row className="text-center mb-2">
+                        <h4>Sammanställning</h4>
+                      </Row>
+                      <Row className="d-flex justify-content-center align-items-center">
+                        <Col
+                          xs={12}
+                          md={8}
+                          className="d-flex justify-content-center align-items-center"
+                        >
+                          <button
+                            className="btn btn-primary py-3 px-4"
+                            onClick={() =>
+                              (window.location.href = "/summary")
+                            }
+                          >
+                            Se sammanställning
+                          </button>
+                        </Col>
+                      </Row>
+                    </Card>
+                  )}
                 </Row>
               </Col>
             </Row>

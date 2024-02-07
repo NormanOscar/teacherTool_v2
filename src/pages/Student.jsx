@@ -183,7 +183,18 @@ export default function Student() {
       {localStorage.getItem("studentId") !== null ? (
         <Container fluid>
           <Row className="mt-2">
-            <Col xs={12} md={2}></Col>
+            <Col
+              xs={12}
+              md={2}
+              className="d-flex justify-content-start align-items-center"
+            >
+              <button
+                className="btn btn-primary py-3 px-4"
+                onClick={() => (window.location.href = "/")}
+              >
+                Tillbaka
+              </button>
+            </Col>
             <Col xs={12} md={8}>
               <Container className="text-center d-flex justify-content-center align-items-center py-2">
                 <h3 className="student-name d-inline-block">

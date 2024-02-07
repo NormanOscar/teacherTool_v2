@@ -9,6 +9,7 @@ import Profile from './pages/Profile.jsx';
 import Admin from './pages/Admin.jsx';
 import Logout from './pages/Logout.jsx';
 import FinalAssessment from './pages/FinalAssessment.jsx';
+import Summary from './pages/Summary.jsx';
 import "./style/styles.css";
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/student" element={<Student />} />
         <Route path='/analyse' element={<Analyse />}/>
         <Route path='/finalAssessment' element={<FinalAssessment />}/>
+        <Route path='/summary' element={<Summary />}/>
         <Route path='/login' element={<Login />}/>
         <Route path='/profile' element={<Profile />}/>
         <Route path='/admin' element={<Admin />}/>
