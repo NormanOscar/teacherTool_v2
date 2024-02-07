@@ -152,10 +152,32 @@ export default function Analyse() {
                 <AssessmentCard student={student} />
               </Col>
               <Col xs={12} md={4}>
-                <PresentCard
-                  student={student}
-                  setPerformances={setPerformances}
-                />
+                <Row>
+                  <PresentCard
+                    student={student}
+                    setPerformances={setPerformances}
+                  />
+                </Row>
+                <Row>
+                  <Card className="p-4 my-2">
+                    <Row className="d-flex justify-content-center align-items-center">
+                      <Col
+                        xs={12}
+                        md={8}
+                        className="d-flex justify-content-center align-items-center"
+                      >
+                        <button
+                          className="btn btn-primary py-3 px-4"
+                          onClick={() =>
+                            (window.location.href = "/finalAssessment")
+                          }
+                        >
+                          Gör en slutbedömning
+                        </button>
+                      </Col>
+                    </Row>
+                  </Card>
+                </Row>
               </Col>
             </Row>
             <Row>
