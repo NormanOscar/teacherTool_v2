@@ -3,7 +3,7 @@ import { Row, Col, Modal } from "react-bootstrap";
 import { getTimelineData } from "../func";
 
 import Loading from "../Loading";
-import TimeLineModal from "./TimeLineModal.jsx";
+import TimelineModal from "./TimelineModal";
 
 export default function Timeline() {
   const [timeLineData, setTimeLineData] = useState(null);
@@ -57,7 +57,7 @@ export default function Timeline() {
       ) : (
         <>
           {showModal && (
-            <TimeLineModal
+            <TimelineModal
               item={modalData}
               show={showModal}
               onClose={closeModal}
