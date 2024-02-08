@@ -5,11 +5,11 @@ export default function AddStudent() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [selectedGrade, setSelectedGrade] = useState("0");
+  const [selectedClass, setSelectedClass] = useState("0");
   const [inputResult, setInputResult] = useState({ msg: null, type: null });
 
   const handleSelectChange = (e) => {
-    setSelectedGrade(e.target.value);
+    setSelectedClass(e.target.value);
     setInputResult({ msg: null, type: null });
   };
 
@@ -44,8 +44,8 @@ export default function AddStudent() {
     } else if (email === "") {
       setInputResult({ msg: "Email saknas", type: "danger" });
       return;
-    } else if (selectedGrade === "0") {
-      setInputResult({ msg: "Årskurs saknas", type: "danger" });
+    } else if (selectedClass === "0") {
+      setInputResult({ msg: "Klass saknas", type: "danger" });
       return;
     } else {
 
@@ -62,7 +62,7 @@ export default function AddStudent() {
       let data = {
         id : id,
         name : firstName + " " + lastName,
-        grade : Number(selectedGrade),
+        class : selectedClass,
         email : email,
         assessments : [],
         activeActivities : 0,
@@ -73,7 +73,7 @@ export default function AddStudent() {
       students.push(data);
       localStorage.setItem('studentData', JSON.stringify(students));
       setInputResult({ msg: "Elev tillagd", type: "success" });
-      setSelectedGrade("0");
+      setSelectedClass("0");
       setFirstName("");
       setLastName("");
       setEmail("");
@@ -136,19 +136,25 @@ export default function AddStudent() {
             />
           </div>
           <div className="form-outline mb-2">
-            <label style={{ margin: 0 }} htmlFor="grade">
-              Årskurs <span className="required-symbol">*</span>
+            <label style={{ margin: 0 }} htmlFor="class">
+              Klass <span className="required-symbol">*</span>
             </label>
             <select
               className="form-select"
               type="text"
-              id="grade"
-              value={selectedGrade}
+              id="class"
+              value={selectedClass}
               onChange={handleSelectChange}>
-              <option value="0">Välj årskurs</option>
-              <option value="1">Årskurs 1</option>
-              <option value="2">Årskurs 2</option>
-              <option value="3">Årskurs 3</option>
+                <option value="0">Välj klass</option>
+                <option value="1a">Klass 1a</option>
+                <option value="1b">Klass 1b</option>
+                <option value="1c">Klass 1c</option>
+                <option value="2a">Klass 2a</option>
+                <option value="2b">Klass 2b</option>
+                <option value="2c">Klass 2c</option>
+                <option value="3a">Klass 3a</option>
+                <option value="3b">Klass 3b</option>
+                <option value="3c">Klass 3c</option>
               </select>
           </div>
           <div className="mb-2 d-flex justify-content-center">

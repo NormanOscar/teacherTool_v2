@@ -10,7 +10,7 @@ export default function AdminEdit({ editType, editObj, show, onClose }) {
     } else if (editType === 'user') {
       return editObj.firstName + ' ' + editObj.lastName;
     } else if (editType === 'student') {
-      return editObj.name + ' (åk. ' + editObj.grade + ')';
+      return editObj.name + ' (' + editObj.class + ')';
     }
   }
 
@@ -263,7 +263,7 @@ function EditStudent({ student, setError }) {
   const [firstName, setFirstName] = useState(student.name.split(' ')[0] || '');
   const [lastName, setLastName] = useState(student.name.split(' ')[1] || '');
   const [email, setEmail] = useState(student.email || '');
-  const [selectedGrade, setSelectedGrade] = useState(student.grade || 0);
+  const [selectedClass, setSelectedClass] = useState(student.class || "0");
 
   const handleTextChange = (e) => {
     switch(e.target.id) {
@@ -284,7 +284,7 @@ function EditStudent({ student, setError }) {
   }
 
   const handleSelectChange = (e) => {
-    setSelectedGrade(Number(e.target.value));
+    setSelectedClass(Number(e.target.value));
     setError({ msg: null, type: null });
   }
 
@@ -300,8 +300,8 @@ function EditStudent({ student, setError }) {
     } else if (email === '') {
       setError({ msg: "Fyll i email", type: "danger" });
       return;
-    } else if (selectedGrade === 0) {
-      setError({ msg: "Välj årskurs", type: "danger" });
+    } else if (selectedClass === "0") {
+      setError({ msg: "Välj klass", type: "danger" });
       return;
     }
 
@@ -309,7 +309,7 @@ function EditStudent({ student, setError }) {
     let studentIndex = students.findIndex((s) => s.id === student.id);
     students[studentIndex].name = firstName + ' ' + lastName;
     students[studentIndex].email = email;
-    students[studentIndex].grade = selectedGrade;
+    students[studentIndex].class = selectedClass;
 
     localStorage.setItem("studentData", JSON.stringify(students));
 
@@ -356,19 +356,25 @@ function EditStudent({ student, setError }) {
           />
         </div>
         <div className="form-outline mb-2">
-          <label style={{ margin: 0 }} htmlFor="grade">
-            Årskurs <span className="required-symbol">*</span>
+          <label style={{ margin: 0 }} htmlFor="class">
+            Klass <span className="required-symbol">*</span>
           </label>
           <select
             className="form-select"
             type="text"
-            id="grade"
-            value={selectedGrade}
+            id="class"
+            value={selectedClass}
             onChange={handleSelectChange}>
-            <option value="0">Välj årskurs</option>
-            <option value="1">Årskurs 1</option>
-            <option value="2">Årskurs 2</option>
-            <option value="3">Årskurs 3</option>
+            <option value="0">Välj klass</option>
+            <option value="1a">Klass 1a</option>
+            <option value="1b">Klass 1b</option>
+            <option value="1c">Klass 1c</option>
+            <option value="2a">Klass 2a</option>
+            <option value="2b">Klass 2b</option>
+            <option value="2c">Klass 2c</option>
+            <option value="3a">Klass 3a</option>
+            <option value="3b">Klass 3b</option>
+            <option value="3c">Klass 3c</option>
             </select>
         </div>
         <div className="mb-2 d-flex justify-content-center">

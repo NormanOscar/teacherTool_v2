@@ -12,7 +12,7 @@ export default function Home() {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    if (!localStorage.getItem("login") || !localStorage.getItem("userId")){
+    if (!localStorage.getItem("login") || !localStorage.getItem("userId") || !localStorage.getItem("studentData")){
       window.location.href = "/login";
     }
     addStudentsToLocalStorage();
@@ -30,7 +30,7 @@ export default function Home() {
     e.preventDefault();
     if (name !== "") {
       let student = students.filter(
-        (student) => student.name + " (åk. " + student.grade + ")" === name
+        (student) => student.name + " (" + student.class + ")" === name
       );
       if (student.length > 0) {
         localStorage.setItem("studentId", JSON.stringify(student[0].id));

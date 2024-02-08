@@ -5,7 +5,7 @@ import ActivityModal from "./ActivityModal";
 import ConfirmationModal from "./ConfirmationModal";
 import NewActivity from "../NewActivity";
 
-export default function StudentActivities({ student, onClose, page }) {
+export default function StudentActivities({ student, page }) {
   const [activityToShow, setActivityToShow] = useState(null);
   const [showActivity, setShowActivity] = useState(false);
   const showActivityModal = () => setShowActivity(true);

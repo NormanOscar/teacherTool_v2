@@ -27,7 +27,7 @@ export default function Analyse() {
   });
 
   useEffect(() => {
-    if (!localStorage.getItem("login") || !localStorage.getItem("userId")) {
+    if (!localStorage.getItem("login") || !localStorage.getItem("userId") || !localStorage.getItem("studentData")) {
       window.location.href = "/login";
     }
 
@@ -83,7 +83,7 @@ export default function Analyse() {
               >
                 <Container className="text-center d-flex justify-content-center">
                   <h3 className="student-name d-inline-block">
-                    {student.name + " (åk. " + student.grade + ") - Analys"}
+                    {student.name + " (" + student.class + ") - Analys"}
                   </h3>
                 </Container>
               </Col>

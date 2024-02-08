@@ -8,7 +8,7 @@ export default function StudentModal({ show, student, onClose }) {
       <Modal show={show} onHide={onClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>
-            {student.name + " (åk. " + student.grade + ")"}
+            {student.name + " ( " + student.class + ")"}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

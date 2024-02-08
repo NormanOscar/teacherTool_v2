@@ -3,9 +3,19 @@
     {
       "id": 1,
       "name": "Oscar Norman",
-      "grade" : 1,
+      "class" : "1c",
       "email" : "oscar.norman@example.com",
-      "assessments": [],
+      "assessments": [
+        {
+          "date":"2024-02-06",
+          "gradingTool":"Skolverket A",
+          "area":"Läsa",
+          "criteria":"Avkodning",
+          "level":"1 (Logografisk ljudning)",
+          "comment":"",
+          "teacher":1
+        }
+      ],
       "activeActivities": 2,
       "cancelledActivities": 0,
       "activities": [
@@ -16,9 +26,16 @@
           "cancelled": false,
           "cancelComment": "",
           "cancelDate": "",
-          "updates": []
-      },
-      {
+          "updates": [
+            {
+              "date":"2024-02-06",
+              "present":true,
+              "performance":"good",
+              "comment":""
+            }
+          ]
+        },
+        {
           "id": 2,
           "name":"Test",
           "date":"2023-10-24",
@@ -26,13 +43,13 @@
           "cancelComment": "",
           "cancelDate": "",
           "updates": []
-      }
+        }
       ]
     },
     {
       "id": 2,
       "name": "Oscar Norman",
-      "grade" : 2,
+      "class" : "2a",
       "email" : "oscar.norman@example.com",
       "assessments": [],
       "activeActivities": 0,
@@ -42,7 +59,7 @@
     {
       "id": 3,
       "name": "Mari Udderyd",
-      "grade" : 1,
+      "class" : "1a",
       "email" : "mari.udderyd@example.com",
       "assessments": [],
       "activeActivities": 1,
@@ -62,7 +79,7 @@
     {
       "id": 4,
       "name": "Niklas Andersson",
-      "grade" : 2,
+      "class" : "2b",
       "email" : "niklas.andersson@example.com",
       "assessments": [],
       "activeActivities": 0,
@@ -72,7 +89,7 @@
     {
       "id": 5,
       "name": "Mattias Davidsson",
-      "grade" : 3,
+      "class" : "3a",
       "email" : "mattias.davidsson@example.com",
       "assessments": [],
       "activeActivities": 0,

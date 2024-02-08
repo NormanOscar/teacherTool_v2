@@ -18,7 +18,7 @@ export default function Profile() {
   const [chosenField, setChosenField] = useState(null);
 
   useEffect(() => {
-    if (!localStorage.getItem("login") || !localStorage.getItem("userId")) {
+    if (!localStorage.getItem("login") || !localStorage.getItem("userId") || !localStorage.getItem("studentData")) {
       window.location.href = "/login";
     }
 

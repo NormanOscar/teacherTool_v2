@@ -34,7 +34,7 @@ export default function AutoComplete ({ change }) {
           id="name"
           onChange={handleSelectChange}
           onInputChange={handleTypeChange}
-          options={students.map((student) => student.name + " (åk. " + student.grade + ")")}
+          options={students.map((student) => student.name + " (" + student.class + ")")}
           selected={selected}
         />
       )}

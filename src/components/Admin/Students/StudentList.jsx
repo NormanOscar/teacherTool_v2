@@ -45,7 +45,7 @@ export default function StudentList({ showModal, setObject, setEditType }) {
                   <Row>
                     <Col>
                       <p className="mb-0 d-flex justify-content-between">
-                        {student.name + " (åk. " + student.grade + ")"}
+                        {student.name + " (" + student.class + ")"}
                       </p>
                       <p className="mb-0">{student.email}</p>
                     </Col>

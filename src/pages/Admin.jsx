@@ -19,7 +19,7 @@ export default function Admin() {
   let users = JSON.parse(localStorage.getItem("userData"));
 
   useEffect(() => {
-    if (!localStorage.getItem("login") || !localStorage.getItem("userId")) {
+    if (!localStorage.getItem("login") || !localStorage.getItem("userId") || !localStorage.getItem("studentData")) {
       window.location.href = "/login";
     } else {
       let userId = JSON.parse(localStorage.getItem("userId"));

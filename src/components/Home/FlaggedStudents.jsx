@@ -167,7 +167,7 @@ export default function FlaggedStudents() {
                   >
                     <div className="d-flex w-150 justify-content-between">
                       <h5 className="mb-0 py-1">
-                        {student.name + " (åk. " + student.grade + ")"}
+                        {student.name + " (" + student.class + ")"}
                       </h5>
                       <span
                         className="px-2 py-1"

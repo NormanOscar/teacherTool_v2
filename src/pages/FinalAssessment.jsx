@@ -9,7 +9,7 @@ export default function FinalAssessment() {
   const [inputResult, setInputResult] = useState({ msg: null, type: null });
 
   useEffect(() => {
-    if (!localStorage.getItem("login") || !localStorage.getItem("userId")) {
+    if (!localStorage.getItem("login") || !localStorage.getItem("userId") || !localStorage.getItem("studentData")) {
       window.location.href = "/login";
     }
   }, []);

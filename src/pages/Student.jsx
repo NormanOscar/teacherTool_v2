@@ -43,7 +43,7 @@ export default function Student() {
   const [inputResult, setInputResult] = useState({ msg: null, type: null });
 
   useEffect(() => {
-    if (!localStorage.getItem("login") || !localStorage.getItem("userId")) {
+    if (!localStorage.getItem("login") || !localStorage.getItem("userId") || !localStorage.getItem("studentData")) {
       window.location.href = "/login";
     }
 
@@ -61,7 +61,7 @@ export default function Student() {
     student = JSON.parse(localStorage.getItem("studentData")).find(
       (student) => student.id === JSON.parse(localStorage.getItem("studentId"))
     );
-    name = student.name + " (åk. " + student.grade + ")";
+    name = student.name + " (" + student.class + ")";
     if (student.flag) {
       if (student.flag === "ok") {
         flag.name = "Ok";
@@ -109,7 +109,7 @@ export default function Student() {
       levelVal = levelCheck.checked ? "Uppnår" : "Uppnår inte";
     }
     const nameVal = student.name;
-    const gradeVal = student.grade;
+    const classVal = student.class;
     let gradingToolVal = data.gradingTools.find(
       (tool) => tool.id === selectedTool
     ).name;
@@ -142,7 +142,7 @@ export default function Student() {
     const studentData = {
       name: nameVal,
       id: student.id,
-      grade: gradeVal,
+      class: classVal,
       gradingTools: gradingToolVal,
       areas: areaVal,
       criteria: criteriaVal,

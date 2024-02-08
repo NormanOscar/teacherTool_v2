@@ -7,13 +7,18 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 library.add(faFilePdf);
 
 export default function Summary() {
-
   useEffect(() => {
-    if (!localStorage.getItem("login") || !localStorage.getItem("userId")) {
+    if (
+      !localStorage.getItem("login") ||
+      !localStorage.getItem("userId") ||
+      !localStorage.getItem("studentData")
+    ) {
       window.location.href = "/login";
     }
 
-    const student = JSON.parse(localStorage.getItem("studentData")).find((student) => student.id === JSON.parse(localStorage.getItem("studentId")));
+    const student = JSON.parse(localStorage.getItem("studentData")).find(
+      (student) => student.id === JSON.parse(localStorage.getItem("studentId"))
+    );
     console.log(student);
   }, []);
 
@@ -42,22 +47,21 @@ export default function Summary() {
               <h3 className="student-name d-inline-block">Sammanställning</h3>
             </Container>
           </Col>
-          <Col 
+          <Col
             xs={12}
             md={2}
             className="d-flex justify-content-end align-items-center"
           >
             <button
               className="btn btn-primary py-3 px-4"
-              onClick={() => (console.log('Exportera'))}
+              onClick={() => console.log("Exportera")}
             >
-              <span className="mx-2">
-                Exportera till PDF
-              </span>
+              <span className="mx-2">Exportera till PDF</span>
               <FontAwesomeIcon size="xl" icon="fas fa-file-pdf" />
-            </button></Col>
+            </button>
+          </Col>
         </Row>
       </Container>
     </>
-  )
+  );
 }

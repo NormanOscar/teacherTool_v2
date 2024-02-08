@@ -20,7 +20,8 @@ export default function CurrentActivities() {
 
   const currentStudents = studentData.filter(
     (student) => student.activities.length > 0 && student.activities.every(activity => activity.cancelled === false)
-  );  
+  );
+  console.log(currentStudents);
 
   function handleClick(e) {
     setStudentToShow(
@@ -54,7 +55,7 @@ export default function CurrentActivities() {
                     >
                       <div className="d-flex w-150 justify-content-between">
                         <h5 className="mb-1">
-                          {student.name + " (åk. " + student.grade + ")"}
+                          {student.name + " (" + student.class + ")"}
                         </h5>
                         <small>{student.activities[0].date}</small>
                       </div>

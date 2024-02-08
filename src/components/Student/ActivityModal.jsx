@@ -90,7 +90,7 @@ export default function ActivityModal({
             </Row>
             <Row>
               <p>
-                {selectedStudent.name + " (åk. " + selectedStudent.grade + ")"}
+                {selectedStudent.name + " (" + selectedStudent.class + ")"}
               </p>
             </Row>
           </Col>
