@@ -18,24 +18,40 @@ export default function Levels({ id }) {
             />
           </div>
         ) : (
-          <div className="form-outline mb-2" id="level-select-div">
-            <label htmlFor="level">
-              {" "}
-              Uppnår: <span className="required-symbol">*</span>
-            </label>
-            <select
-              className="form-select border border-2"
-              id="level"
-              name="level"
-            >
-              <option value="0">Välj nivå</option>
-              {selectedCriteria.levels.map((level, index) => (
-                <option key={index} value={level}>
-                  {level}
-                </option>
-              ))}
-            </select>
-          </div>
+          selectedCriteria.wordCount ? (
+            <>
+              <label htmlFor="level">
+                {" "}
+                Antal ord per minut: <span className="required-symbol">*</span>
+              </label>
+              <input
+                type="number"
+                id="wordCount"
+                className="form-control"
+              />
+            </>
+          ) : (
+            <>
+              <div className="form-outline mb-2" id="level-select-div">
+                <label htmlFor="level">
+                  {" "}
+                  Uppnår: <span className="required-symbol">*</span>
+                </label>
+                <select
+                  className="form-select border border-2"
+                  id="level"
+                  name="level"
+                >
+                  <option value="0">Välj nivå</option>
+                  {selectedCriteria.levels.map((level, index) => (
+                    <option key={index} value={level}>
+                      {level}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </>
+          )
         )}
       </div>
     </>

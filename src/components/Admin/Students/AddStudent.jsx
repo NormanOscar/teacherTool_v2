@@ -6,11 +6,20 @@ export default function AddStudent() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [selectedClass, setSelectedClass] = useState("0");
+  const [selectedSubject, setSelectedSubject] = useState("0");
+  const [year, setYear] = useState("2000");
   const [inputResult, setInputResult] = useState({ msg: null, type: null });
 
   const handleSelectChange = (e) => {
-    setSelectedClass(e.target.value);
     setInputResult({ msg: null, type: null });
+    switch (e.target.id) {
+      case "class":
+        setSelectedClass(e.target.value);
+        break;
+      case "subject":
+        setSelectedSubject(e.target.value);
+        break;
+    }
   };
 
   const handleTextChange = (e) => {
@@ -48,30 +57,32 @@ export default function AddStudent() {
       setInputResult({ msg: "Klass saknas", type: "danger" });
       return;
     } else {
+      let students = JSON.parse(localStorage.getItem("studentData"));
 
-      let students = JSON.parse(localStorage.getItem('studentData'));
-  
-      if (students.find(student => student.email === email)) {
+      if (students.find((student) => student.email === email)) {
         setInputResult({ msg: "Email finns redan", type: "danger" });
         return;
       }
-  
+
       let sortedStudents = students.sort((a, b) => a.id - b.id);
-      let id = sortedStudents[sortedStudents.length - 1].id + 1;
-  
-      let data = {
-        id : id,
-        name : firstName + " " + lastName,
-        class : selectedClass,
-        email : email,
-        assessments : [],
-        activeActivities : 0,
-        cancelledActivities : 0,
-        activities : [],
+      let id = 0;
+      if (sortedStudents.length > 0) {
+        id = sortedStudents[sortedStudents.length - 1].id + 1;
       }
-  
+
+      let data = {
+        id: id,
+        name: firstName + " " + lastName,
+        class: selectedClass,
+        email: email,
+        assessments: [],
+        activeActivities: 0,
+        cancelledActivities: 0,
+        activities: [],
+      };
+
       students.push(data);
-      localStorage.setItem('studentData', JSON.stringify(students));
+      localStorage.setItem("studentData", JSON.stringify(students));
       setInputResult({ msg: "Elev tillagd", type: "success" });
       setSelectedClass("0");
       setFirstName("");
@@ -80,9 +91,9 @@ export default function AddStudent() {
     }
 
     window.location.reload(false);
-  }
+  };
 
-  return(
+  return (
     <Card className="p-4 my-2">
       <Col>
         <h4 className="mb-4" style={{ textAlign: "center" }}>
@@ -90,12 +101,14 @@ export default function AddStudent() {
         </h4>
         <form>
           {inputResult.msg !== null && (
-            <div 
-            className={
-              inputResult.type === "danger"
-                ? "alert alert-danger"
-                : "alert alert-success"
-            } role="alert">
+            <div
+              className={
+                inputResult.type === "danger"
+                  ? "alert alert-danger"
+                  : "alert alert-success"
+              }
+              role="alert"
+            >
               {inputResult.msg}
             </div>
           )}
@@ -144,18 +157,45 @@ export default function AddStudent() {
               type="text"
               id="class"
               value={selectedClass}
-              onChange={handleSelectChange}>
-                <option value="0">Välj klass</option>
-                <option value="1a">Klass 1a</option>
-                <option value="1b">Klass 1b</option>
-                <option value="1c">Klass 1c</option>
-                <option value="2a">Klass 2a</option>
-                <option value="2b">Klass 2b</option>
-                <option value="2c">Klass 2c</option>
-                <option value="3a">Klass 3a</option>
-                <option value="3b">Klass 3b</option>
-                <option value="3c">Klass 3c</option>
-              </select>
+              onChange={handleSelectChange}
+            >
+              <option value="0">Välj klass</option>
+              <option value="1a">Klass 1a</option>
+              <option value="1b">Klass 1b</option>
+              <option value="2a">Klass 2a</option>
+              <option value="2b">Klass 2b</option>
+              <option value="3a">Klass 3a</option>
+              <option value="3b">Klass 3b</option>
+            </select>
+          </div>
+          <div className="form-outline mb-2">
+            <label style={{ margin: 0 }} htmlFor="subject">
+              Ämne <span className="required-symbol">*</span>
+            </label>
+            <select
+              className="form-select"
+              type="text"
+              id="subject"
+              value={selectedSubject}
+              onChange={handleSelectChange}
+            >
+              <option value="0">Välj ämne</option>
+              <option value="1">Svenska</option>
+              <option value="2">Svenska som andraspråk</option>
+            </select>
+          </div>
+          <div className="form-outline mb-2">
+            <label style={{ margin: 0 }} htmlFor="year">
+              Ankomstår <span className="required-symbol">*</span>
+            </label>
+            <input
+              type="number"
+              step="1"
+              id="year"
+              className="form-control"
+              onChange={(e) => setYear(e.target.value)}
+              value={year}
+            />
           </div>
           <div className="mb-2 d-flex justify-content-center">
             <button className="btn btn-primary" onClick={handleSubmit}>

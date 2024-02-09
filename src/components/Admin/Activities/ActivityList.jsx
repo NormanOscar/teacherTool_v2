@@ -11,7 +11,9 @@ export default function ActivityList({ showModal, setObject, setEditType }) {
 
   const removeActivity = (e) => {
     let activityId = e.currentTarget.id;
-    let activityIndex = activities.findIndex((activity) => activity.id === activityId);
+    let activityIndex = activities.findIndex(
+      (activity) => activity.id == activityId
+    );
     activities.splice(activityIndex, 1);
 
     localStorage.setItem("activityData", JSON.stringify(activities));
@@ -21,11 +23,13 @@ export default function ActivityList({ showModal, setObject, setEditType }) {
 
   const handleEditClick = (e) => {
     let activityId = Number(e.currentTarget.id);
-    let selectedActivity = activities.find((activity) => activity.id === activityId);
+    let selectedActivity = activities.find(
+      (activity) => activity.id === activityId
+    );
     setObject(selectedActivity);
     setEditType("activity");
     showModal();
-  }
+  };
 
   return (
     <>

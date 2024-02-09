@@ -43,7 +43,11 @@ export default function Student() {
   const [inputResult, setInputResult] = useState({ msg: null, type: null });
 
   useEffect(() => {
-    if (!localStorage.getItem("login") || !localStorage.getItem("userId") || !localStorage.getItem("studentData")) {
+    if (
+      !localStorage.getItem("login") ||
+      !localStorage.getItem("userId") ||
+      !localStorage.getItem("studentData")
+    ) {
       window.location.href = "/login";
     }
 
@@ -97,6 +101,7 @@ export default function Student() {
 
     const levelCheck = document.querySelector("#flexCheckDefault");
     const levelSelect = document.querySelector("#level");
+    const wordCount = document.querySelector("#wordCount");
 
     var levelVal;
     if (levelSelect != null) {
@@ -105,8 +110,14 @@ export default function Student() {
         return;
       }
       levelVal = levelSelect.value;
-    } else {
+    } else if (levelCheck != null) {
       levelVal = levelCheck.checked ? "Uppnår" : "Uppnår inte";
+    } else {
+      if (wordCount.value == 0) {
+        setInputResult({ msg: "Du måste välja fylla i antal ord", type: "danger" });
+        return;
+      }
+      levelVal = wordCount.value;
     }
     const nameVal = student.name;
     const classVal = student.class;
@@ -149,6 +160,7 @@ export default function Student() {
       level: levelVal,
       comment: commentVal,
     };
+
     saveLocalStorage(studentData);
     handleFormSubmit();
   }
@@ -165,9 +177,12 @@ export default function Student() {
     switch (e.target.id) {
       case "gradingTool":
         setSelectedTool(parseInt(e.target.value));
+        setSelectedArea(0);
+        setSelectedCriteria(0);
         break;
       case "area":
         setSelectedArea(parseInt(e.target.value));
+        setSelectedCriteria(0);
         break;
       case "criteria":
         setSelectedCriteria(parseInt(e.target.value));

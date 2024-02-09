@@ -67,7 +67,10 @@ export default function AddUser() {
     } else {
       let users = JSON.parse(localStorage.getItem("userData"));
       let sortedUsers = users.sort((a, b) => a.id - b.id);
-      let id = sortedUsers[sortedUsers.length - 1].id + 1;
+      let id = 0;
+      if (sortedUsers.length > 0) {
+        id = sortedUsers[sortedUsers.length - 1].id + 1;
+      }
       let data = {
         id: id,
         firstName: firstName,

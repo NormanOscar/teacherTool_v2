@@ -34,7 +34,10 @@ export default function AddActivity() {
       let activities = JSON.parse(localStorage.getItem('activityData'));
   
       let sortedActivities = activities.sort((a, b) => a.id - b.id);
-      let id = sortedActivities[sortedActivities.length - 1].id + 1;
+      let id = 0;
+      if (sortedActivities.length > 0) {
+        id = sortedActivities[sortedActivities.length - 1].id + 1;
+      }
   
       let data = {
         id : id,

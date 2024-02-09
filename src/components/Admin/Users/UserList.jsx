@@ -11,7 +11,7 @@ export default function AddUser({ showModal, setObject, setEditType }) {
 
   const removeUser = (e) => {
     let userId = e.currentTarget.id;
-    let userIndex = users.findIndex((user) => user.id === userId);
+    let userIndex = users.findIndex((user) => user.id == userId);
     users.splice(userIndex, 1);
 
     localStorage.setItem("userData", JSON.stringify(users));

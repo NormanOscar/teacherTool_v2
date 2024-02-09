@@ -10,8 +10,11 @@ export default function StudentList({ showModal, setObject, setEditType }) {
   let students = JSON.parse(localStorage.getItem("studentData"));
 
   const removeStudent = (e) => {
+    e.preventDefault();
     let studentId = e.currentTarget.id;
-    let studentIndex = students.findIndex((student) => student.id === studentId);
+    console.log(studentId);
+    let studentIndex = students.findIndex((student) => student.id == studentId);
+    console.log(studentIndex);
     students.splice(studentIndex, 1);
 
     localStorage.setItem("studentData", JSON.stringify(students));
@@ -25,9 +28,9 @@ export default function StudentList({ showModal, setObject, setEditType }) {
     setObject(selectedStudent);
     setEditType("student");
     showModal();
-  }
+  };
 
-  return(
+  return (
     <>
       <Card className="p-4 my-2">
         <h4 className="mb-4" style={{ textAlign: "center" }}>
@@ -77,5 +80,5 @@ export default function StudentList({ showModal, setObject, setEditType }) {
         </ul>
       </Card>
     </>
-  )
+  );
 }

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Col, Row, Modal } from "react-bootstrap";
 
-import { getCurrentDate } from "./func";
-import { activities } from "../json/activities.json";
+import { getCurrentDate, addActivitiesToLocalStorage } from "./func";
 
 export default function NewActivity({ selectedStudent }) {
   const [show, setShow] = useState(false);
@@ -11,9 +10,12 @@ export default function NewActivity({ selectedStudent }) {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedActivity, setSelectedActivity] = useState("0");
   const [inputResult, setInputResult] = useState({ msg: null, type: null });
+  const [activities, setActivities] = useState([]);
 
   useEffect(() => {
     setSelectedDate(getCurrentDate()); // Set the default value to today's date
+    addActivitiesToLocalStorage();
+    setActivities(JSON.parse(localStorage.getItem("activityData")));
   }, []);
 
   function handleDateChange(e) {

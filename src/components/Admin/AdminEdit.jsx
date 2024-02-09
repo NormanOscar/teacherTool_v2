@@ -264,6 +264,8 @@ function EditStudent({ student, setError }) {
   const [lastName, setLastName] = useState(student.name.split(' ')[1] || '');
   const [email, setEmail] = useState(student.email || '');
   const [selectedClass, setSelectedClass] = useState(student.class || "0");
+  const [selectedSubject, setSelectedSubject] = useState(Number(student.subject) || "0");
+  const [year, setYear] = useState(student.year || '');
 
   const handleTextChange = (e) => {
     switch(e.target.id) {
@@ -284,8 +286,18 @@ function EditStudent({ student, setError }) {
   }
 
   const handleSelectChange = (e) => {
-    setSelectedClass(Number(e.target.value));
     setError({ msg: null, type: null });
+
+    switch(e.target.id) {
+      case 'class':
+        setSelectedClass(Number(e.target.value));
+        break;
+      case 'subject':
+        setSelectedSubject(e.target.value);
+        break;
+      default:
+        break;
+    }
   }
 
   const handleSubmit = (e) => {
@@ -368,15 +380,41 @@ function EditStudent({ student, setError }) {
             <option value="0">Välj klass</option>
             <option value="1a">Klass 1a</option>
             <option value="1b">Klass 1b</option>
-            <option value="1c">Klass 1c</option>
             <option value="2a">Klass 2a</option>
             <option value="2b">Klass 2b</option>
-            <option value="2c">Klass 2c</option>
             <option value="3a">Klass 3a</option>
             <option value="3b">Klass 3b</option>
-            <option value="3c">Klass 3c</option>
             </select>
         </div>
+        <div className="form-outline mb-2">
+            <label style={{ margin: 0 }} htmlFor="subject">
+              Ämne <span className="required-symbol">*</span>
+            </label>
+            <select
+              className="form-select"
+              type="text"
+              id="subject"
+              value={selectedSubject}
+              onChange={handleSelectChange}>
+                <option value="0">Välj ämne</option>
+                <option value="1">Svenska</option>
+                <option value="2">Svenska som andraspråk</option>
+              </select>
+          </div>
+          <div className="form-outline mb-2">
+            <label style={{ margin: 0 }} htmlFor="year">
+              Ankomstår <span className="required-symbol">*</span>
+            </label>
+            <input 
+              type="number"
+              min="1900"
+              max="2099"
+              step="1"
+              id="year"
+              className="form-control"
+              onChange={(e) => setYear(e.target.value)}
+              value={year} />
+          </div>
         <div className="mb-2 d-flex justify-content-center">
           <button className="btn btn-primary" onClick={handleSubmit}>
             Spara ändringar
