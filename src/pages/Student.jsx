@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  OverlayTrigger,
+  Tooltip,
+  Popover,
+} from "react-bootstrap";
 
 import Levels from "../components/Student/Levels";
 import StudentActivities from "../components/Student/StudentActivities";
@@ -7,6 +15,12 @@ import CancelledStudentActivities from "../components/Student/CancelledStudentAc
 
 import data from "../json/data.json";
 import { addStudentsToLocalStorage, getCurrentDate } from "../components/func";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleQuestion } from "@fortawesome/free-regular-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+library.add(faCircleQuestion);
 
 function saveLocalStorage(data) {
   if (studentInLocalStorage(data.id)) {
@@ -114,7 +128,10 @@ export default function Student() {
       levelVal = levelCheck.checked ? "Uppnår" : "Uppnår inte";
     } else {
       if (wordCount.value == 0) {
-        setInputResult({ msg: "Du måste välja fylla i antal ord", type: "danger" });
+        setInputResult({
+          msg: "Du måste välja fylla i antal ord",
+          type: "danger",
+        });
         return;
       }
       levelVal = wordCount.value;
@@ -213,7 +230,37 @@ export default function Student() {
             <Col xs={12} md={8}>
               <Container className="text-center d-flex justify-content-center align-items-center py-2">
                 <h3 className="student-name d-inline-block">
-                  {name} - Elevsida
+                  {name}
+                  <span>
+                    <OverlayTrigger
+                      placement="right-start"
+                      overlay={
+                        <Popover>
+                          <Popover.Header as="h3">
+                            {student.name}
+                          </Popover.Header>
+                          <Popover.Body>
+                            <p>
+                              <strong>Klass:</strong> {student.class}
+                            </p>
+                            <p>
+                              <strong>Ämne:</strong> {student.subject == "1" ? "Svenska" : "Svenska som andraspråk"}
+                            </p>
+                            <p>
+                              <strong>Ankomst:</strong> {student.year}
+                            </p>
+                          </Popover.Body>
+                        </Popover>
+                      }
+                    >
+                      <FontAwesomeIcon
+                        icon={faCircleQuestion}
+                        size="sm"
+                        className="mx-2"
+                        style={{ cursor: "pointer" }}
+                      />
+                    </OverlayTrigger>
+                  </span>
                 </h3>
                 {flag.name !== "" && (
                   <>

@@ -186,7 +186,8 @@ button {
   text-decoration: underline;
 }
 
-.timeLine-text, .timeLine-dot {
+.timeLine-text,
+.timeLine-dot {
   cursor: pointer;
 }
 
