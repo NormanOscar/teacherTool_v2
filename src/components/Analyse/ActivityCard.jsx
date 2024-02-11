@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Card, Row, Col } from "react-bootstrap";
 
 import { library } from "@fortawesome/fontawesome-svg-core";

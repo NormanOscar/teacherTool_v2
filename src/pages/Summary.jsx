@@ -28,15 +28,14 @@ export default function Summary() {
       (student) => student.id === JSON.parse(localStorage.getItem("studentId"))
     ));
   }, []);
-  console.log(student);
 
-  const handlePrint = (mode) => {
+  const handlePrint = () => {
     const documentToPrint = document.querySelector("#document-to-print");
     console.log(documentToPrint);
     setLoader(true);
     html2canvas(documentToPrint).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF(mode, "mm", "a4");
+      const pdf = new jsPDF("l", "mm", "a4");
       const pageWidth = pdf.internal.pageSize.getWidth();
       const imgWidth = pageWidth;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
@@ -88,23 +87,15 @@ export default function Summary() {
                   Förhandsgranska
                 </Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item onClick={() => handlePrint("p")}>
-                  Porträtt
-                </Dropdown.Item>
-                <Dropdown.Divider />
                 <Dropdown.Item onClick={() => handlePrint("l")}>
                   Landskap
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-            {/* <button className="btn btn-primary py-3 px-4" onClick={handlePrint}>
-              <span className="mx-2">Exportera till PDF</span>
-              <FontAwesomeIcon size="xl" icon="fas fa-file-pdf" />
-            </button> */}
           </Col>
         </Row>
         <Row className="d-flex justify-content-center align-items-center">
-          <Col xs={12} md={8} className="text-center">
+          <Col xs={12} md={10} className="text-center">
             <MyDocument id="document-to-print" student={student} />
           </Col>
         </Row>

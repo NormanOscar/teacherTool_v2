@@ -147,16 +147,6 @@ export function getTimelineData(student) {
   });
 
   student.activities.map((activity) => {
-    let activityDate = new Date(activity.date);
-    items.push({
-      id: id,
-      date: activityDate,
-      type: "Aktivitet",
-      name: activity.name,
-      color: "#00A8CC",
-      obj: activity,
-    });
-    id++;
     activity.updates.map((update) => {
       let updateDate = new Date(update.date);
       items.push({
