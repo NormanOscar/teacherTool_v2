@@ -11,7 +11,14 @@ import AssessmentForm from "../AssessmentForm";
 
 library.add(faFaceSmile, faFaceMeh, faFaceFrown);
 
-export default function EditModal({ show, onClose, obj, activityId, type, student }) {
+export default function EditModal({
+  show,
+  onClose,
+  obj,
+  activityId,
+  type,
+  student,
+}) {
   const getType = () => {
     switch (type) {
       case "assessment":
@@ -29,8 +36,16 @@ export default function EditModal({ show, onClose, obj, activityId, type, studen
         <Modal.Title>Redigera {getType()}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {type === "assessment" && <EditAssessment assessment={obj} activityId={activityId} student={student} />}
-        {type === "activityUpdate" && <EditActivityUpdate update={obj} activityId={activityId} />}
+        {type === "assessment" && (
+          <EditAssessment
+            assessment={obj}
+            activityId={activityId}
+            student={student}
+          />
+        )}
+        {type === "activityUpdate" && (
+          <EditActivityUpdate update={obj} activityId={activityId} />
+        )}
       </Modal.Body>
     </Modal>
   );
@@ -47,10 +62,8 @@ function EditAssessment({ assessment, student }) {
 function EditActivityUpdate({ update, activityId }) {
   const [performance, setPerformance] = useState(update.performance || "good");
   const [selectedDate, setSelectedDate] = useState(update.date || "");
-  const [comment, setComment] = useState(update.comment || "");
-  const [absentComment, setAbsentComment] = useState(
-    update.absentComment || ""
-  );
+  const [comment, setComment] = useState(update.comment);
+  const [absentComment, setAbsentComment] = useState(update.absentComment);
   const [isPresent, setIsPresent] = useState(update.present);
   const [inputResult, setInputResult] = useState({ msg: null, type: null });
 
@@ -58,12 +71,12 @@ function EditActivityUpdate({ update, activityId }) {
     setPerformance(e.target.id);
     setInputResult({ msg: null, type: null });
   };
-  
+
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
     setInputResult({ msg: null, type: null });
   };
-  
+
   const handlePresent = () => {
     setIsPresent(!isPresent);
     setInputResult({ msg: null, type: null });
@@ -81,13 +94,17 @@ function EditActivityUpdate({ update, activityId }) {
     let currentStudent = storedData.find(
       (student) => student.id == JSON.parse(localStorage.getItem("studentId"))
     );
-    let currentActivity = currentStudent.activities.find((oneActivity) => oneActivity.id == activityId);
-    let updateIndex = currentActivity.updates.findIndex((oneUpdate) => oneUpdate.id == update.id);
+    let currentActivity = currentStudent.activities.find(
+      (oneActivity) => oneActivity.id == activityId
+    );
+    let updateIndex = currentActivity.updates.findIndex(
+      (oneUpdate) => oneUpdate.id == update.id
+    );
     console.log(update);
 
     currentActivity.updates[updateIndex].date = selectedDate;
     currentActivity.updates[updateIndex].present = isPresent;
-    
+
     if (isPresent) {
       currentActivity.updates[updateIndex].performance = performance;
       currentActivity.updates[updateIndex].comment = comment;
@@ -96,7 +113,7 @@ function EditActivityUpdate({ update, activityId }) {
     }
 
     localStorage.setItem("studentData", JSON.stringify(storedData));
-    
+
     window.location.reload(false);
   };
 
@@ -248,6 +265,7 @@ function EditActivityUpdate({ update, activityId }) {
                   rows="4"
                   id="comment"
                   style={{ resize: "none" }}
+                  value={isPresent ? comment : absentComment}
                   onChange={(e) => setComment(e.target.value)}
                 />
               </div>
@@ -269,6 +287,7 @@ function EditActivityUpdate({ update, activityId }) {
                   rows="4"
                   id="absentComment"
                   style={{ resize: "none" }}
+                  value={absentComment}
                   onChange={(e) => setAbsentComment(e.target.value)}
                 />
               </div>

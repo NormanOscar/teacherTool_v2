@@ -42,7 +42,7 @@ export default function ActivityCard({ student, performances }) {
     currentStudent.activities[activityIndex].updates.splice(updateIndex, 1);
     localStorage.setItem("studentData", JSON.stringify(storedData));
     window.location.reload(false);
-  }
+  };
 
   return (
     <>
@@ -218,8 +218,30 @@ export default function ActivityCard({ student, performances }) {
                                       )}
                                     </Row>
                                     <Row className="my-1">
-                                      {update.comment !== "" ? (
-                                        <p className="m-0">{update.comment}</p>
+                                      {update.present ? (
+                                        update.comment !== "" ? (
+                                          <span
+                                            className="m-0"
+                                            style={{
+                                              width: "fit-content",
+                                              color: "grey",
+                                            }}
+                                          >
+                                            Kommentar: {update.comment}
+                                          </span>
+                                        ) : (
+                                          <p className="m-0">Ingen kommentar</p>
+                                        )
+                                      ) : update.absentComment !== "" ? (
+                                        <span
+                                          className="m-0"
+                                          style={{
+                                            width: "fit-content",
+                                            color: "grey",
+                                          }}
+                                        >
+                                          Kommentar: {update.absentComment}
+                                        </span>
                                       ) : (
                                         <p className="m-0">Ingen kommentar</p>
                                       )}
@@ -230,7 +252,9 @@ export default function ActivityCard({ student, performances }) {
                                       icon={faPen}
                                       size="lg"
                                       className="icons mx-1"
-                                      onClick={() => handleEditClick(activity.id, update.id)}
+                                      onClick={() =>
+                                        handleEditClick(activity.id, update.id)
+                                      }
                                       style={{ width: "fit-content" }}
                                     />
                                     <FontAwesomeIcon
@@ -238,7 +262,9 @@ export default function ActivityCard({ student, performances }) {
                                       size="lg"
                                       color="red"
                                       className="icons mx-1"
-                                      onClick={() => removeUpdate(activity.id, update.id)}
+                                      onClick={() =>
+                                        removeUpdate(activity.id, update.id)
+                                      }
                                       style={{ width: "fit-content" }}
                                     />
                                   </div>

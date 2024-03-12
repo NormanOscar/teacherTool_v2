@@ -45,6 +45,8 @@ export default function AssessmentForm({ student, currentAssessment }) {
   const [selectedArea, setSelectedArea] = useState(0);
   const [selectedCriteria, setSelectedCriteria] = useState(0);
   const [skolverketLevel, setSkolverketLevel] = useState("A");
+  const [date, setDate] = useState(getCurrentDate());
+  const [comment, setComment] = useState("");
   const [inputResult, setInputResult] = useState({ msg: null, type: null });
 
   useEffect(() => {
@@ -65,6 +67,8 @@ export default function AssessmentForm({ student, currentAssessment }) {
           (criteria) => criteria.name === currentAssessment.criteria
         ).id
       );
+      setDate(currentAssessment.date);
+      setComment(currentAssessment.comment);
     }
   }, []);
   console.table({ selectedTool, selectedArea, selectedCriteria });
@@ -118,25 +122,29 @@ export default function AssessmentForm({ student, currentAssessment }) {
     if (selectedTool === 1) {
       let mergedStr = gradingToolVal.concat(" ", skolverketLevel);
       gradingToolVal = mergedStr;
-      
     }
     const areaVal = data.areas.find((area) => area.id === selectedArea).name;
     const criteriaVal = data.criteria.find(
       (criteria) => criteria.id === selectedCriteria
     ).name;
-    const commentVal = document.querySelector("#comment").value;
 
     if (currentAssessment) {
       let storedData = JSON.parse(localStorage.getItem("studentData"));
-      let student = storedData.find((student) => student.id === JSON.parse(localStorage.getItem("studentId")));
-      let assessmentToUpdate = student.assessments.find((assessment) => assessment.id === currentAssessment.id);
+      let student = storedData.find(
+        (student) =>
+          student.id === JSON.parse(localStorage.getItem("studentId"))
+      );
+      let assessmentToUpdate = student.assessments.find(
+        (assessment) => assessment.id === currentAssessment.id
+      );
       assessmentToUpdate.gradingTool = gradingToolVal;
       assessmentToUpdate.area = areaVal;
       assessmentToUpdate.criteria = criteriaVal;
       assessmentToUpdate.level = levelVal;
-      assessmentToUpdate.comment = commentVal;
+      assessmentToUpdate.comment = comment;
+      assessmentToUpdate.date = date;
       localStorage.setItem("studentData", JSON.stringify(storedData));
-      handleFormSubmit('update');
+      handleFormSubmit("update");
       window.location.reload(false);
       return;
     }
@@ -149,18 +157,18 @@ export default function AssessmentForm({ student, currentAssessment }) {
       areas: areaVal,
       criteria: criteriaVal,
       level: levelVal,
-      comment: commentVal,
+      comment: comment,
     };
 
     saveLocalStorage(studentData);
-    handleFormSubmit('save');
+    handleFormSubmit("save");
   }
 
   function handleFormSubmit(type) {
     setSelectedTool(0);
     setSelectedArea(0);
     setSelectedCriteria(0);
-    if (type === 'update') {
+    if (type === "update") {
       setInputResult({ msg: "Bedömning uppdaterad!", type: "success" });
     } else {
       setInputResult({ msg: "Bedömning sparad!", type: "success" });
@@ -208,6 +216,20 @@ export default function AssessmentForm({ student, currentAssessment }) {
               role="alert"
             >
               {inputResult.msg}
+            </div>
+          )}
+          {currentAssessment && (
+            <div className="form-outline mb-2">
+              <label htmlFor="defaultForm-date">
+                Datum: <span className="required-symbol">*</span>
+              </label>
+              <input
+                type="date"
+                id="defaultForm-date"
+                className="form-control validate"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
             </div>
           )}
 
@@ -362,6 +384,8 @@ export default function AssessmentForm({ student, currentAssessment }) {
               className="form-control border border-2 form-text"
               rows="4"
               id="comment"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
             ></textarea>
           </div>
 

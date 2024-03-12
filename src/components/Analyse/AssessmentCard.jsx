@@ -107,14 +107,14 @@ export default function AssessmentCard({ student }) {
                       icon={faPen}
                       size="lg"
                       className="icons mx-1"
-                      id={student.id}
+                      id={assessment.id}
                       onClick={handleEditClick}
                     />
                     <FontAwesomeIcon
                       icon={faTrash}
                       size="lg"
                       color="red"
-                      id={student.id}
+                      id={assessment.id}
                       className="icons mx-1"
                       onClick={removeAssessment}
                     />
