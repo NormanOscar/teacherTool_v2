@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { Col, Card } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 
 export default function AddStudent() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [gender, setGender] = useState("b");
   const [email, setEmail] = useState("");
   const [selectedClass, setSelectedClass] = useState("0");
   const [selectedSubject, setSelectedSubject] = useState("0");
   const [year, setYear] = useState("2000");
+  const [bornInSweden, setBornInSweden] = useState(true);
   const [inputResult, setInputResult] = useState({ msg: null, type: null });
 
   const handleSelectChange = (e) => {
@@ -56,6 +58,12 @@ export default function AddStudent() {
     } else if (selectedClass === "0") {
       setInputResult({ msg: "Klass saknas", type: "danger" });
       return;
+    } else if (selectedSubject === "0") {
+      setInputResult({ msg: "Ämne saknas", type: "danger" });
+      return;
+    } else if (year === "") {
+      setInputResult({ msg: "År saknas", type: "danger" });
+      return;
     } else {
       let students = JSON.parse(localStorage.getItem("studentData"));
 
@@ -72,9 +80,13 @@ export default function AddStudent() {
 
       let data = {
         id: id,
-        name: firstName + " " + lastName,
+        name: firstName.trim() + " " + lastName.trim(),
+        gender: gender,
+        email: email.trim(),
         class: selectedClass,
-        email: email,
+        subject: selectedSubject,
+        year: year,
+        bornInSweden: bornInSweden,
         assessments: [],
         activeActivities: 0,
         cancelledActivities: 0,
@@ -137,6 +149,55 @@ export default function AddStudent() {
             />
           </div>
           <div className="form-outline mb-2">
+            <label style={{ margin: 0 }} htmlFor="gender">
+              Kön <span className="required-symbol">*</span>
+            </label>
+            <div className="d-flex">
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="gender"
+                  id="boyBtn"
+                  value="b"
+                  onChange={(e) => setGender(e.target.value)}
+                  checked={gender === "b"}
+                />
+                <label className="form-check-label" htmlFor="boyBtn">
+                  Kille
+                </label>
+              </div>
+              <div className="form-check mx-2">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="gender"
+                  id="girlBtn"
+                  value="g"
+                  onChange={(e) => setGender(e.target.value)}
+                  checked={gender === "g"}
+                />
+                <label className="form-check-label" htmlFor="girlBtn">
+                  Tjej
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="gender"
+                  id="other"
+                  value="o"
+                  onChange={(e) => setGender(e.target.value)}
+                  checked={gender === "o"}
+                />
+                <label className="form-check-label" htmlFor="other">
+                  Annat
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="form-outline mb-2">
             <label style={{ margin: 0 }} htmlFor="email">
               Email <span className="required-symbol">*</span>
             </label>
@@ -196,6 +257,12 @@ export default function AddStudent() {
               onChange={(e) => setYear(e.target.value)}
               value={year}
             />
+          </div>
+          <div className="form-outline mb-2">
+            <div className="form-switch d-flex p-0">
+              <input className="form-check-input mx-2" type="checkbox" id="bornInSweden" onChange={(e) => setBornInSweden(e.target.checked)} checked={bornInSweden} />
+              <label className="form-check-label" htmlFor="bornInSweden">Född i Sverige</label>
+            </div>
           </div>
           <div className="mb-2 d-flex justify-content-center">
             <button className="btn btn-primary" onClick={handleSubmit}>

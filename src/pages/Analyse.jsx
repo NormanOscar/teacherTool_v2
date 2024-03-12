@@ -27,7 +27,11 @@ export default function Analyse() {
   });
 
   useEffect(() => {
-    if (!localStorage.getItem("login") || !localStorage.getItem("userId") || !localStorage.getItem("studentData")) {
+    if (
+      !localStorage.getItem("login") ||
+      !localStorage.getItem("userId") ||
+      !localStorage.getItem("studentData")
+    ) {
       window.location.href = "/login";
     }
 
@@ -152,58 +156,52 @@ export default function Analyse() {
                 <AssessmentCard student={student} />
               </Col>
               <Col xs={12} md={4}>
-                <Row>
-                  <PresentCard
-                    student={student}
-                    setPerformances={setPerformances}
-                  />
-                </Row>
-                <Row>
+                <PresentCard
+                  student={student}
+                  setPerformances={setPerformances}
+                />
+                <Card className="p-4 my-2">
+                  <Row className="text-center mb-2">
+                    <h4>Slutbedömning</h4>
+                  </Row>
+                  <Row className="d-flex justify-content-center align-items-center">
+                    <Col
+                      xs={12}
+                      md={8}
+                      className="d-flex justify-content-center align-items-center"
+                    >
+                      <button
+                        className="btn btn-primary py-3 px-4"
+                        onClick={() =>
+                          (window.location.href = "/finalAssessment")
+                        }
+                      >
+                        Gör en slutbedömning
+                      </button>
+                    </Col>
+                  </Row>
+                </Card>
+                {student.finalAssessment && (
                   <Card className="p-4 my-2">
                     <Row className="text-center mb-2">
-                      <h4>Slutbedömning</h4>
+                      <h4>Sammanställning</h4>
                     </Row>
                     <Row className="d-flex justify-content-center align-items-center">
                       <Col
                         xs={12}
                         md={8}
                         className="d-flex justify-content-center align-items-center"
-                      > 
+                      >
                         <button
                           className="btn btn-primary py-3 px-4"
-                          onClick={() =>
-                            (window.location.href = "/finalAssessment")
-                          }
+                          onClick={() => (window.location.href = "/summary")}
                         >
-                          Gör en slutbedömning
+                          Se sammanställning
                         </button>
                       </Col>
                     </Row>
                   </Card>
-                  {student.finalAssessment && (
-                    <Card className="p-4 my-2">
-                      <Row className="text-center mb-2">
-                        <h4>Sammanställning</h4>
-                      </Row>
-                      <Row className="d-flex justify-content-center align-items-center">
-                        <Col
-                          xs={12}
-                          md={8}
-                          className="d-flex justify-content-center align-items-center"
-                        >
-                          <button
-                            className="btn btn-primary py-3 px-4"
-                            onClick={() =>
-                              (window.location.href = "/summary")
-                            }
-                          >
-                            Se sammanställning
-                          </button>
-                        </Col>
-                      </Row>
-                    </Card>
-                  )}
-                </Row>
+                )}
               </Col>
             </Row>
             <Row>

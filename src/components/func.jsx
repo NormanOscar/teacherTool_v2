@@ -140,7 +140,7 @@ export function getTimelineData(student) {
       date: assessmentDate,
       type: "Bedömning",
       name: assessment.gradingTool,
-      color: "#F28800",
+      color: "#00A8CC",
       obj: assessment,
     });
     id++;
@@ -154,12 +154,63 @@ export function getTimelineData(student) {
         date: updateDate,
         type: "Avstämning",
         name: "",
-        color: "#DC6390",
+        color: "#D0BFFF",
         obj: update,
+        activity: activity,
       });
       id++;
     });
   });
 
   return items;
+}
+
+export function getWeekNumber(d) {
+  // Copy date so don't modify original
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  // Set to nearest Thursday: current date + 4 - current day number
+  // Make Sunday's day number 7
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+  // Get first day of year
+  var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  // Calculate full weeks to nearest Thursday
+  var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+  // Return array of year and week number
+  return weekNo;
+}
+
+export function createWeekDay(id, items, startWeek, index) {
+  let days = [
+    "Måndag",
+    "Tisdag",
+    "Onsdag",
+    "Torsdag",
+    "Fredag",
+    "Lördag",
+    "Söndag",
+  ];
+  let dayItems = items.filter(
+    (item) =>
+      getWeekNumber(item.date) === startWeek + index &&
+      new Date(item.date).getDay() === id
+  );
+
+  let dots = []
+  for (let i = 0; i < dayItems.length; i++) {
+    dots.push(
+      { 
+        color: dayItems[i].color,
+        present: dayItems[i].type === "Bedömning" ? true : dayItems[i].obj.present,
+        obj: dayItems[i].obj,
+        type: dayItems[i].type,
+        activity: dayItems[i].type === "Avstämning" ? dayItems[i].activity : null
+      }
+    );
+  } // Extract dot color information from the items, if any
+
+  let day = {
+    day: days[id],
+    dots: dots, // Include dot information in the day object
+  };
+  return day;
 }

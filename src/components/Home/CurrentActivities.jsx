@@ -21,7 +21,6 @@ export default function CurrentActivities() {
   const currentStudents = studentData.filter(
     (student) => student.activities.length > 0 && student.activities.every(activity => activity.cancelled === false)
   );
-  console.log(currentStudents);
 
   function handleClick(e) {
     setStudentToShow(

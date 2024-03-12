@@ -24,9 +24,12 @@ export default function Summary() {
       window.location.href = "/login";
     }
 
-    setStudent(JSON.parse(localStorage.getItem("studentData")).find(
-      (student) => student.id === JSON.parse(localStorage.getItem("studentId"))
-    ));
+    setStudent(
+      JSON.parse(localStorage.getItem("studentData")).find(
+        (student) =>
+          student.id === JSON.parse(localStorage.getItem("studentId"))
+      )
+    );
   }, []);
 
   const handlePrint = () => {
@@ -41,7 +44,9 @@ export default function Summary() {
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
       pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
       setLoader(false);
-      const documentName = `Sammanställning_${student.name}_${new Date().toLocaleDateString()}`;
+      const documentName = `Sammanställning_${
+        student.name
+      }_${new Date().toLocaleDateString()}`;
       pdf.save(`${documentName}.pdf`);
     });
   };
@@ -82,13 +87,18 @@ export default function Summary() {
                 <FontAwesomeIcon size="xl" icon="fas fa-file-pdf" />
               </Dropdown.Toggle>
 
-              <Dropdown.Menu className="text-center" style={{width: '100%'}}>
-                <Dropdown.Item onClick={() => {console.log('Förhandsgranska');}}>
+              <Dropdown.Menu className="text-center" style={{ width: "100%" }}>
+                <Dropdown.Item
+                  onClick={() => {
+                    console.log("Förhandsgranska");
+                  }}
+                >
                   Förhandsgranska
                 </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={() => handlePrint("l")}>
-                  Landskap
+                  <span className="mx-2">Exportera</span>
+                  <FontAwesomeIcon size="xl" icon="fas fa-file-pdf" />
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

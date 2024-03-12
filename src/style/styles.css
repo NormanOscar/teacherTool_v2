@@ -182,11 +182,14 @@ button {
   z-index: 2;
 }
 
+.dot-on-timeLine {
+  transform: translate(-50%);
+}
+
 .underline {
   text-decoration: underline;
 }
 
-.timeLine-text,
 .timeLine-dot {
   cursor: pointer;
 }
@@ -196,6 +199,16 @@ button {
   width: 100%;
   background-color: lightgray;
   z-index: 1;
+}
+
+.week-name {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-45deg);
+  white-space: nowrap;
+  margin-bottom: 5px;
 }
 
 @media screen and (max-width: 1100px) {

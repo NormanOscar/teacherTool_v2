@@ -1,18 +1,13 @@
-import { useState, useEffect } from "react";
-import { Row, Col, Modal } from "react-bootstrap";
-import { getTimelineData } from "../func";
+import React, { useState, useEffect } from "react";
+import { Row, Col } from "react-bootstrap";
 
+import { getTimelineData, getWeekNumber, createWeekDay } from "../func";
 import Loading from "../Loading";
-import TimelineModal from "./TimelineModal";
+import TimelineDot from "./TimelineDot";
 
 export default function Timeline() {
-  const [timeLineData, setTimeLineData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [modalData, setModalData] = useState(null);
-
-  const closeModal = () => setShowModal(false);
+  const [timeLines, setTimeLines] = useState([]);
 
   useEffect(() => {
     const getData = () => {
@@ -24,7 +19,33 @@ export default function Timeline() {
 
       items.sort((a, b) => a.date - b.date);
 
-      setTimeLineData(items);
+      if (items.length > 0) {
+        let startWeek = getWeekNumber(items[0].date);
+        let currentWeek = getWeekNumber(new Date());
+        let nrOfWeeks = currentWeek - startWeek + 1;
+
+        while (nrOfWeeks % 8 !== 0) {
+          nrOfWeeks++;
+        }
+
+        let tempTimeLine = []; // Temporary array to hold batches of 8 weeks
+        for (let i = 0; i < nrOfWeeks; i++) {
+          let days = [];
+          for (let j = 0; j < 7; j++) {
+            days.push(createWeekDay(j, items, startWeek, i));
+          }
+          let week = {
+            week: startWeek + i,
+            days: days,
+          };
+          tempTimeLine.push(week);
+
+          if (tempTimeLine.length === 8) {
+            timeLines.push(tempTimeLine);
+            tempTimeLine = []; // Reset tempTimeLine
+          }
+        }
+      }
     };
 
     if (loading) {
@@ -33,96 +54,129 @@ export default function Timeline() {
     }
   }, []);
 
-  const showTimeLineItem = (e) => {
-    let item = timeLineData.find(
-      (item) => item.id === parseInt(e.currentTarget.id)
-    );
-    console.log(item);
-    setModalData(item);
-    setShowModal(true);
-  };
-
-  const handleHover = (index) => {
-    setHoveredIndex(index);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredIndex(null);
-  };
-
   return (
     <>
       {loading ? (
         <Loading />
       ) : (
         <>
-          {showModal && (
-            <TimelineModal
-              item={modalData}
-              show={showModal}
-              onClose={closeModal}
-            />
-          )}
           <Row className="mb-3">
             <Col xs={12} md={3}></Col>
             <Col xs={12} md={6}>
               <h3 className="text-center m-0">Tidslinje</h3>
             </Col>
-            <Col xs={12} md={3} className="d-flex justify-content-between">
-              <div className="d-flex align-items-center">
-                <span
-                  className="timeLine-dot"
-                  style={{ backgroundColor: "#F28800" }}
-                />
-                <span>&nbsp;Bedömning</span>
-              </div>
-              <div className="d-flex align-items-center">
+            <Col xs={12} md={3} className="d-flex justify-content-end">
+              <div className="d-flex align-items-center me-2">
                 <span
                   className="timeLine-dot"
                   style={{ backgroundColor: "#00A8CC" }}
                 />
-                <span>&nbsp;Aktivitet</span>
+                <span>&nbsp;Bedömning</span>
+              </div>
+              <div className="d-flex align-items-center me-2">
+                <span
+                  className="timeLine-dot"
+                  style={{ backgroundColor: "#D0BFFF" }}
+                />
+                <span>&nbsp;Avstämning</span>
               </div>
               <div className="d-flex align-items-center">
                 <span
                   className="timeLine-dot"
-                  style={{ backgroundColor: "#DC6390" }}
+                  style={{ backgroundColor: "#FF3126" }}
                 />
-                <span>&nbsp;Avstämning</span>
+                <span>&nbsp;Frånvarande</span>
               </div>
             </Col>
           </Row>
-          <Col xs={12} md={12}>
-            <Row>
-              {timeLineData.map((item, index) => (
-                <Col
-                  key={index}
-                  className="d-flex flex-column align-items-center"
-                >
-                  <p
-                    className={`text-center mb-2 timeLine-text ${
-                      hoveredIndex === index ? "underline" : ""
-                    }`}
-                    id={item.id}
-                    onClick={showTimeLineItem}
-                    onMouseEnter={() => handleHover(index)}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    {item.date.toISOString().substring(0, 10)}
-                  </p>
-                  <span
-                    className="timeLine-dot"
-                    style={{ backgroundColor: item.color }}
-                    onClick={showTimeLineItem}
-                    id={item.id}
-                    onMouseEnter={() => handleHover(index)}
-                    onMouseLeave={handleMouseLeave}
-                  />
-                </Col>
-              ))}
-              <div className="timeLine-line"></div>
-            </Row>
-          </Col>
+          <Row
+            className="overflow-auto custom-scrollbar"
+            style={{ maxHeight: "300px", width: "100%" }}
+          >
+            {timeLines.map(
+              (weeks, outerIndex) =>
+                weeks.length > 0 && (
+                  <Row className="my-3" key={"timeLine" + (outerIndex + 1)}>
+                    {weeks.map((week, innerIndex) => (
+                      <Col
+                        key={"week" + (outerIndex + 1) + "-" + (innerIndex + 1)}
+                        className="p-0"
+                      >
+                        <Col className="d-flex p-0">
+                          {week.days.map((day, index) =>
+                            day.day === "Måndag" ? (
+                              <Col
+                                key={
+                                  "day" + (outerIndex + 1) + "-" + (index + 1)
+                                }
+                              >
+                                <div className="week-name">
+                                  {"v. " + week.week}
+                                </div>
+                                <div
+                                  style={{
+                                    height: "60px",
+                                    borderLeft: "1px solid black",
+                                  }}
+                                  className="d-flex flex-column justify-content-end"
+                                >
+                                  {day.dots.length > 0 &&
+                                    day.dots.map((dot, dotIndex) => (
+                                      <TimelineDot
+                                        dot={dot}
+                                        index={dotIndex}
+                                        key={
+                                          "dot" +
+                                          (outerIndex + 1) +
+                                          "-" +
+                                          (dotIndex + 1)
+                                        }
+                                      />
+                                    ))}
+                                </div>
+                              </Col>
+                            ) : (
+                              <Col
+                                key={
+                                  "day" + (outerIndex + 1) + "-" + (index + 1)
+                                }
+                                className="d-flex align-items-end"
+                              >
+                                <div
+                                  style={{
+                                    height: "50px",
+                                    borderLeft: "1px solid black",
+                                  }}
+                                  className="d-flex flex-column justify-content-end"
+                                >
+                                  {day.dots.length > 0 &&
+                                    day.dots.map((dot, dotIndex) => (
+                                      <TimelineDot
+                                        dot={dot}
+                                        index={dotIndex}
+                                        key={
+                                          "dot" +
+                                          (outerIndex + 1) +
+                                          "-" +
+                                          (dotIndex + 1)
+                                        }
+                                      />
+                                    ))}
+                                </div>
+                              </Col>
+                            )
+                          )}
+                        </Col>
+                      </Col>
+                    ))}
+                    <div
+                      className="timeLine-line"
+                      key={"line" + (outerIndex + 1)}
+                    />
+                  </Row>
+                )
+            )}
+          </Row>
         </>
       )}
     </>

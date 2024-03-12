@@ -23,6 +23,8 @@ export default function ActivityModal({
   const [isPresent, setIsPresent] = useState(true);
   const [performance, setPerformance] = useState("good");
   const [inputResult, setInputResult] = useState(false);
+  const [comment, setComment] = useState("");
+  const [absentComment, setAbsentComment] = useState("");
 
   useEffect(() => {
     setSelectedDate(getCurrentDate()); // Set the default value to today's date
@@ -50,9 +52,9 @@ export default function ActivityModal({
     };
     if (isPresent) {
       data.performance = performance;
-      data.comment = document.querySelector("#comment").value;
+      data.comment = comment;
     } else {
-      data.comment = document.querySelector("#absentComment").value;
+      data.comment = absentComment;
     }
     if (selectedDate === "") {
       setInputResult(true);
@@ -65,6 +67,14 @@ export default function ActivityModal({
       const currentActivity = currentStudent.activities.find(
         (oneActivity) => oneActivity.id == activity.id
       );
+
+      let sortedUpdates = currentActivity.updates.sort((a, b) => a.id - b.id);
+      let id = 0;
+      if (sortedUpdates.length > 0) {
+        id = sortedUpdates[sortedUpdates.length - 1].id + 1;
+      }
+      data.id = id;
+      
       currentActivity.updates.push(data);
       localStorage.setItem("studentData", JSON.stringify(storedData));
       setIsPresent(true);
@@ -133,7 +143,6 @@ export default function ActivityModal({
                 <label className="btn" htmlFor="present">
                   Närvarande
                 </label>
-
                 <input
                   type="radio"
                   className="btn-check"
@@ -236,6 +245,7 @@ export default function ActivityModal({
                       rows="4"
                       id="comment"
                       style={{ resize: "none" }}
+                      onChange={(e) => setComment(e.target.value)}
                     />
                   </div>
                 </Row>
@@ -256,6 +266,7 @@ export default function ActivityModal({
                       rows="4"
                       id="absentComment"
                       style={{ resize: "none" }}
+                      onChange={(e) => setAbsentComment(e.target.value)}
                     />
                   </div>
                 </Row>

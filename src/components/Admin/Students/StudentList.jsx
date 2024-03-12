@@ -12,9 +12,7 @@ export default function StudentList({ showModal, setObject, setEditType }) {
   const removeStudent = (e) => {
     e.preventDefault();
     let studentId = e.currentTarget.id;
-    console.log(studentId);
     let studentIndex = students.findIndex((student) => student.id == studentId);
-    console.log(studentIndex);
     students.splice(studentIndex, 1);
 
     localStorage.setItem("studentData", JSON.stringify(students));

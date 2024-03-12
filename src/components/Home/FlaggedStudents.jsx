@@ -90,7 +90,7 @@ export default function FlaggedStudents() {
         </h3>
         <Col>
           <Row className="mb-3 d-flex justify-content-center">
-            <div className="btn-group w-50">
+            <div className="btn-group w-50 flex-wrap">
               <input
                 type="radio"
                 className="btn-check"

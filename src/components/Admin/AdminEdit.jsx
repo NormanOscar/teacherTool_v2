@@ -260,12 +260,15 @@ function EditUser({ user, error }) {
 }
 
 function EditStudent({ student, setError }) {
+  console.log(student);
   const [firstName, setFirstName] = useState(student.name.split(' ')[0] || '');
   const [lastName, setLastName] = useState(student.name.split(' ')[1] || '');
   const [email, setEmail] = useState(student.email || '');
+  const [gender, setGender] = useState(student.gender || "b");
   const [selectedClass, setSelectedClass] = useState(student.class || "0");
   const [selectedSubject, setSelectedSubject] = useState(Number(student.subject) || "0");
   const [year, setYear] = useState(student.year || '');
+  const [bornInSweden, setBornInSweden] = useState(student.bornInSweden);
 
   const handleTextChange = (e) => {
     switch(e.target.id) {
@@ -315,6 +318,12 @@ function EditStudent({ student, setError }) {
     } else if (selectedClass === "0") {
       setError({ msg: "Välj klass", type: "danger" });
       return;
+    } else if (selectedSubject === "0") {
+      setError({ msg: "Välj ämne", type: "danger" });
+      return;
+    } else if (year === '') {
+      setError({ msg: "Fyll i ankomstår", type: "danger" });
+      return;
     }
 
     let students = JSON.parse(localStorage.getItem("studentData"));
@@ -356,6 +365,55 @@ function EditStudent({ student, setError }) {
           />
         </div>
         <div className="form-outline mb-2">
+          <label style={{ margin: 0 }} htmlFor="gender">
+            Kön <span className="required-symbol">*</span>
+          </label>
+          <div className="d-flex">
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="gender"
+                id="boyBtn"
+                value="b"
+                onChange={(e) => setGender(e.target.value)}
+                checked={gender === "b"}
+              />
+              <label className="form-check-label" htmlFor="boyBtn">
+                Kille
+              </label>
+            </div>
+            <div className="form-check mx-2">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="gender"
+                id="girlBtn"
+                value="g"
+                onChange={(e) => setGender(e.target.value)}
+                checked={gender === "g"}
+              />
+              <label className="form-check-label" htmlFor="girlBtn">
+                Tjej
+              </label>
+            </div>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="gender"
+                id="other"
+                value="o"
+                onChange={(e) => setGender(e.target.value)}
+                checked={gender === "o"}
+              />
+              <label className="form-check-label" htmlFor="other">
+                Annat
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="form-outline mb-2">
           <label style={{ margin: 0 }} htmlFor="email">
             Email <span className="required-symbol">*</span>
           </label>
@@ -387,35 +445,41 @@ function EditStudent({ student, setError }) {
             </select>
         </div>
         <div className="form-outline mb-2">
-            <label style={{ margin: 0 }} htmlFor="subject">
-              Ämne <span className="required-symbol">*</span>
-            </label>
-            <select
-              className="form-select"
-              type="text"
-              id="subject"
-              value={selectedSubject}
-              onChange={handleSelectChange}>
-                <option value="0">Välj ämne</option>
-                <option value="1">Svenska</option>
-                <option value="2">Svenska som andraspråk</option>
-              </select>
+          <label style={{ margin: 0 }} htmlFor="subject">
+            Ämne <span className="required-symbol">*</span>
+          </label>
+          <select
+            className="form-select"
+            type="text"
+            id="subject"
+            value={selectedSubject}
+            onChange={handleSelectChange}>
+              <option value="0">Välj ämne</option>
+              <option value="1">Svenska</option>
+              <option value="2">Svenska som andraspråk</option>
+            </select>
+        </div>
+        <div className="form-outline mb-2">
+          <label style={{ margin: 0 }} htmlFor="year">
+            Ankomstår <span className="required-symbol">*</span>
+          </label>
+          <input 
+            type="number"
+            min="1900"
+            max="2099"
+            step="1"
+            id="year"
+            className="form-control"
+            onChange={(e) => setYear(e.target.value)}
+            value={year} />
+        </div>
+        <div className="form-outline mb-2">
+          <div className="form-switch d-flex p-0">
+            <input className="form-check-input mx-2" type="checkbox" id="bornInSweden" onChange={(e) => setBornInSweden(e.target.checked)} checked={bornInSweden} />
+            <label className="form-check-label" htmlFor="bornInSweden">Född i Sverige</label>
           </div>
-          <div className="form-outline mb-2">
-            <label style={{ margin: 0 }} htmlFor="year">
-              Ankomstår <span className="required-symbol">*</span>
-            </label>
-            <input 
-              type="number"
-              min="1900"
-              max="2099"
-              step="1"
-              id="year"
-              className="form-control"
-              onChange={(e) => setYear(e.target.value)}
-              value={year} />
-          </div>
-        <div className="mb-2 d-flex justify-content-center">
+        </div>
+      <div className="mb-2 d-flex justify-content-center">
           <button className="btn btn-primary" onClick={handleSubmit}>
             Spara ändringar
           </button>
