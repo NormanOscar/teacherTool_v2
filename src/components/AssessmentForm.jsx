@@ -40,7 +40,6 @@ function saveLocalStorage(data) {
 }
 
 export default function AssessmentForm({ student, currentAssessment }) {
-  console.log(currentAssessment);
   const [selectedTool, setSelectedTool] = useState(0);
   const [selectedArea, setSelectedArea] = useState(0);
   const [selectedCriteria, setSelectedCriteria] = useState(0);
@@ -71,7 +70,6 @@ export default function AssessmentForm({ student, currentAssessment }) {
       setComment(currentAssessment.comment);
     }
   }, []);
-  console.table({ selectedTool, selectedArea, selectedCriteria });
 
   function handleForm(e) {
     e.preventDefault();

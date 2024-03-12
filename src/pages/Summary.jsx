@@ -34,7 +34,6 @@ export default function Summary() {
 
   const handlePrint = () => {
     const documentToPrint = document.querySelector("#document-to-print");
-    console.log(documentToPrint);
     setLoader(true);
     html2canvas(documentToPrint).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
@@ -81,27 +80,17 @@ export default function Summary() {
             md={2}
             className="d-flex justify-content-end align-items-center"
           >
-            <Dropdown>
-              <Dropdown.Toggle className="btn btn-primary py-3 px-4">
-                <span className="mx-2">Exportera till PDF</span>
-                <FontAwesomeIcon size="xl" icon="fas fa-file-pdf" />
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu className="text-center" style={{ width: "100%" }}>
-                <Dropdown.Item
-                  onClick={() => {
-                    console.log("Förhandsgranska");
-                  }}
-                >
-                  Förhandsgranska
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item onClick={() => handlePrint("l")}>
-                  <span className="mx-2">Exportera</span>
-                  <FontAwesomeIcon size="xl" icon="fas fa-file-pdf" />
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+            <button
+              className="btn btn-primary py-3 px-4"
+              onClick={() => handlePrint("l")}
+            >
+              <span className="mx-1">Exportera till PDF</span>
+              <FontAwesomeIcon
+                size="xl"
+                icon="fas fa-file-pdf"
+                className="mx-1"
+              />
+            </button>
           </Col>
         </Row>
         <Row className="d-flex justify-content-center align-items-center">

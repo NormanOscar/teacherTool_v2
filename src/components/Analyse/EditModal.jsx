@@ -100,7 +100,6 @@ function EditActivityUpdate({ update, activityId }) {
     let updateIndex = currentActivity.updates.findIndex(
       (oneUpdate) => oneUpdate.id == update.id
     );
-    console.log(update);
 
     currentActivity.updates[updateIndex].date = selectedDate;
     currentActivity.updates[updateIndex].present = isPresent;

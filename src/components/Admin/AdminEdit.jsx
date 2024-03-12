@@ -260,7 +260,6 @@ function EditUser({ user, error }) {
 }
 
 function EditStudent({ student, setError }) {
-  console.log(student);
   const [firstName, setFirstName] = useState(student.name.split(' ')[0] || '');
   const [lastName, setLastName] = useState(student.name.split(' ')[1] || '');
   const [email, setEmail] = useState(student.email || '');

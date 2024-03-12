@@ -18,7 +18,6 @@ export default function AssessmentCard({ student }) {
     let currentAssessment = student.assessments.find(
       (assessment) => assessment.id == e.currentTarget.id
     );
-    console.log(currentAssessment);
     setEditObj(currentAssessment);
     showModal();
   };

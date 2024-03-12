@@ -18,7 +18,6 @@ export default function FlaggedStudents() {
   }, []);
 
   const handleClick = (e) => {
-    console.log(e.currentTarget.value);
     localStorage.setItem("studentId", JSON.stringify(e.currentTarget.value));
     window.location.href = "/student";
   };
