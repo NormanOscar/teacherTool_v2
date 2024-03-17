@@ -46,9 +46,20 @@ export default function MyDocument({ id, student }) {
             <Card className="p-2 my-2">
               <Card.Body>
                 <h4 className="m-0">{student.name}</h4>
-                <p>Klass: {student.class}</p>
-                <p>Ankomst: {student.year}</p>
-                <p className="m-0">{student.email}</p>
+                <div className="mt-2">
+                  <p className="my-1">
+                    {student.bornInSweden ? (
+                      <strong>Född i Sverige</strong>
+                    ) : (
+                      <>
+                        <strong>Ankomst:</strong> {student.arrivalYear}
+                      </>
+                    )}
+                  </p>
+                  <p className="my-1">Födelseår: {student.birthYear}</p>
+                  <p className="my-1">Klass: {student.class}</p>
+                  <p className="m-0">{student.email}</p>
+                </div>
               </Card.Body>
             </Card>
           </Col>

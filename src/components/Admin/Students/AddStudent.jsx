@@ -8,7 +8,8 @@ export default function AddStudent() {
   const [email, setEmail] = useState("");
   const [selectedClass, setSelectedClass] = useState("0");
   const [selectedSubject, setSelectedSubject] = useState("0");
-  const [year, setYear] = useState("2000");
+  const [arrivalYear, setArrivalYear] = useState("");
+  const [birthYear, setBirthYear] = useState("");
   const [bornInSweden, setBornInSweden] = useState(true);
   const [inputResult, setInputResult] = useState({ msg: null, type: null });
 
@@ -61,9 +62,6 @@ export default function AddStudent() {
     } else if (selectedSubject === "0") {
       setInputResult({ msg: "Ämne saknas", type: "danger" });
       return;
-    } else if (year === "") {
-      setInputResult({ msg: "År saknas", type: "danger" });
-      return;
     } else {
       let students = JSON.parse(localStorage.getItem("studentData"));
 
@@ -85,7 +83,8 @@ export default function AddStudent() {
         email: email.trim(),
         class: selectedClass,
         subject: selectedSubject,
-        year: year,
+        arrivalYear: !bornInSweden ? arrivalYear : "",
+        birthYear: birthYear,
         bornInSweden: bornInSweden,
         assessments: [],
         activeActivities: 0,
@@ -198,6 +197,19 @@ export default function AddStudent() {
             </div>
           </div>
           <div className="form-outline mb-2">
+            <label style={{ margin: 0 }} htmlFor="birthYear">
+              Födelseår <span className="required-symbol">*</span>
+            </label>
+            <input
+              type="number"
+              step="1"
+              id="birthYear"
+              className="form-control"
+              onChange={(e) => setBirthYear(e.target.value)}
+              value={birthYear}
+            />
+          </div>
+          <div className="form-outline mb-2">
             <label style={{ margin: 0 }} htmlFor="email">
               Email <span className="required-symbol">*</span>
             </label>
@@ -246,24 +258,34 @@ export default function AddStudent() {
             </select>
           </div>
           <div className="form-outline mb-2">
-            <label style={{ margin: 0 }} htmlFor="year">
-              Ankomstår <span className="required-symbol">*</span>
-            </label>
-            <input
-              type="number"
-              step="1"
-              id="year"
-              className="form-control"
-              onChange={(e) => setYear(e.target.value)}
-              value={year}
-            />
-          </div>
-          <div className="form-outline mb-2">
             <div className="form-switch d-flex p-0">
-              <input className="form-check-input mx-2" type="checkbox" id="bornInSweden" onChange={(e) => setBornInSweden(e.target.checked)} checked={bornInSweden} />
-              <label className="form-check-label" htmlFor="bornInSweden">Född i Sverige</label>
+              <input
+                className="form-check-input mx-2"
+                type="checkbox"
+                id="bornInSweden"
+                onChange={(e) => setBornInSweden(e.target.checked)}
+                checked={bornInSweden}
+              />
+              <label className="form-check-label" htmlFor="bornInSweden">
+                Född i Sverige
+              </label>
             </div>
           </div>
+          {!bornInSweden && (
+            <div className="form-outline mb-2">
+              <label style={{ margin: 0 }} htmlFor="arrivalYear">
+                Ankomstår <span className="required-symbol">*</span>
+              </label>
+              <input
+                type="number"
+                step="1"
+                id="arrivalYear"
+                className="form-control"
+                onChange={(e) => setArrivalYear(e.target.value)}
+                value={arrivalYear}
+              />
+            </div>
+          )}
           <div className="mb-2 d-flex justify-content-center">
             <button className="btn btn-primary" onClick={handleSubmit}>
               Lägg till

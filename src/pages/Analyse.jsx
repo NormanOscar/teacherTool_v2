@@ -6,6 +6,7 @@ import Timeline from "../components/Analyse/Timeline";
 import AssessmentCard from "../components/Analyse/AssessmentCard";
 import ActivityCard from "../components/Analyse/ActivityCard";
 import PresentCard from "../components/Analyse/PresentCard";
+import StudentInfoPopover from "../components/StudentInfoPopover";
 
 export default function Analyse() {
   const [student, setStudent] = useState({});
@@ -87,7 +88,10 @@ export default function Analyse() {
               >
                 <Container className="text-center d-flex justify-content-center">
                   <h3 className="student-name d-inline-block">
-                    {student.name + " (" + student.class + ") - Analys"}
+                    <span>
+                      <StudentInfoPopover student={student} />
+                    </span>
+                    {student.name + " (" + student.class + ")"} - Slutbedömning
                   </h3>
                 </Container>
               </Col>

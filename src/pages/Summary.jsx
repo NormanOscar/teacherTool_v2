@@ -12,7 +12,6 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 export default function Summary() {
-  const [loader, setLoader] = useState(false);
   const [student, setStudent] = useState({});
 
   useEffect(() => {
@@ -34,7 +33,6 @@ export default function Summary() {
 
   const handlePrint = () => {
     const documentToPrint = document.querySelector("#document-to-print");
-    setLoader(true);
     html2canvas(documentToPrint).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("l", "mm", "a4");
@@ -42,7 +40,6 @@ export default function Summary() {
       const imgWidth = pageWidth;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
       pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-      setLoader(false);
       const documentName = `Sammanställning_${
         student.name
       }_${new Date().toLocaleDateString()}`;
@@ -72,7 +69,9 @@ export default function Summary() {
             className="d-flex justify-content-center align-items-center"
           >
             <Container className="text-center d-flex justify-content-center">
-              <h3 className="student-name d-inline-block">Sammanställning</h3>
+              <h3 className="student-name d-inline-block">
+                {student.name + " (" + student.class + ")"} - Sammanställning
+              </h3>
             </Container>
           </Col>
           <Col

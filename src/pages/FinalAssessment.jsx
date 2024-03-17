@@ -1,17 +1,27 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 
+import StudentInfoPopover from "../components/StudentInfoPopover";
+
 export default function FinalAssessment() {
   const [good, setGood] = useState("");
   const [bad, setBad] = useState("");
   const [nextStep, setNextStep] = useState("");
   const [tickChecked, setTickChecked] = useState(false);
   const [inputResult, setInputResult] = useState({ msg: null, type: null });
+  const [student, setStudent] = useState({});
 
   useEffect(() => {
     if (!localStorage.getItem("login") || !localStorage.getItem("userId") || !localStorage.getItem("studentData")) {
       window.location.href = "/login";
     }
+
+    setStudent(
+      JSON.parse(localStorage.getItem("studentData")).find(
+        (student) =>
+          student.id === JSON.parse(localStorage.getItem("studentId"))
+      )
+    );
   }, []);
 
   const handleSubmit = (e) => {
@@ -78,7 +88,12 @@ export default function FinalAssessment() {
                 className="d-flex justify-content-center align-items-center"
               >
                 <Container className="text-center d-flex justify-content-center">
-                  <h3 className="student-name d-inline-block">Slutbedömning</h3>
+                  <h3 className="student-name d-inline-block">
+                    <span>
+                      <StudentInfoPopover student={student} />
+                    </span>
+                    {student.name + " (" + student.class + ")"} - Slutbedömning
+                  </h3>
                 </Container>
               </Col>
           <Col xs={12} md={2}></Col>

@@ -1,25 +1,12 @@
-import { useState, useEffect } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  OverlayTrigger,
-  Tooltip,
-  Popover,
-} from "react-bootstrap";
+import { useEffect } from "react";
+import { Container, Row, Col, Card } from "react-bootstrap";
 
 import StudentActivities from "../components/Student/StudentActivities";
 import CancelledStudentActivities from "../components/Student/CancelledStudentActivities";
 
 import { addStudentsToLocalStorage } from "../components/func";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import AssessmentForm from "../components/AssessmentForm";
-
-library.add(faInfoCircle);
+import StudentInfoPopover from "../components/StudentInfoPopover";
 
 export default function Student() {
   useEffect(() => {
@@ -83,38 +70,7 @@ export default function Student() {
               <Container className="text-center d-flex justify-content-center align-items-center py-2">
                 <h3 className="student-name d-inline-block">
                   <span>
-                    <OverlayTrigger
-                      placement="left-start"
-                      trigger="click"
-                      overlay={
-                        <Popover>
-                          <Popover.Header as="h3">
-                            {student.name}
-                          </Popover.Header>
-                          <Popover.Body>
-                            <p>
-                              <strong>Klass:</strong> {student.class}
-                            </p>
-                            <p>
-                              <strong>Ämne:</strong>{" "}
-                              {student.subject == "1"
-                                ? "Svenska"
-                                : "Svenska som andraspråk"}
-                            </p>
-                            <p>
-                              <strong>Ankomst:</strong> {student.year}
-                            </p>
-                          </Popover.Body>
-                        </Popover>
-                      }
-                    >
-                      <FontAwesomeIcon
-                        icon={faInfoCircle}
-                        size="sm"
-                        className="mx-2"
-                        style={{ cursor: "pointer" }}
-                      />
-                    </OverlayTrigger>
+                    <StudentInfoPopover student={student} />
                   </span>
                   {name}
                 </h3>
@@ -158,7 +114,7 @@ export default function Student() {
             </Col>
             <Col xs={12} md={4}>
               <Card className="p-4 my-2">
-                <AssessmentForm student={student}/>
+                <AssessmentForm student={student} />
               </Card>
             </Col>
             <Col xs={12} md={4}>

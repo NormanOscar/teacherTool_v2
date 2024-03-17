@@ -1,241 +1,331 @@
 {
   "students": [
     {
-        "id": 1,
-        "name": "Oscar Norman",
-        "class": "1a",
-        "email": "oscar.norman@example.com",
-        "subject": "1",
-        "year": "2018",
-        "bornInSweden": true,
-        "assessments": [
+      "id": 0,
+      "name": "Oscar Norman",
+      "class": "1a",
+      "email": "oscar.norman@example.com",
+      "subject": "1",
+      "arrivalYear": "2018",
+      "birthYear": "",
+      "bornInSweden": true,
+      "assessments": [
+        {
+          "date": "2024-01-08",
+          "gradingTool": "Skolverket A",
+          "area": "Läsa",
+          "criteria": "Avkodning",
+          "level": "1 (Logografisk ljudning)",
+          "comment": "",
+          "teacher": 1,
+          "id": 0
+        }
+      ],
+      "activeActivities": 2,
+      "cancelledActivities": 0,
+      "activities": [
+        {
+          "id": 0,
+          "name": "Wendick",
+          "date": "2024-01-08",
+          "cancelled": false,
+          "cancelComment": "",
+          "cancelDate": "",
+          "updates": [
             {
-                "date": "2024-01-08",
-                "gradingTool": "Skolverket A",
-                "area": "Läsa",
-                "criteria": "Avkodning",
-                "level": "1 (Logografisk ljudning)",
-                "comment": "",
-                "teacher": 1,
-                "id": 1
+              "id": 0,
+              "date": "2024-01-15",
+              "present": true,
+              "performance": "good",
+              "comment": ""
             }
-        ],
-        "activeActivities": 2,
-        "cancelledActivities": 0,
-        "activities": [
+          ]
+        },
+        {
+          "id": 1,
+          "name": "Test",
+          "date": "2024-01-08",
+          "cancelled": false,
+          "cancelComment": "",
+          "cancelDate": "",
+          "updates": []
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Oscar Norman",
+      "class": "2a",
+      "email": "oscar.norman@example.com",
+      "subject": "2",
+      "arrivalYear": "2019",
+      "birthYear": "",
+      "bornInSweden": true,
+      "assessments": [],
+      "activeActivities": 0,
+      "cancelledActivities": 0,
+      "activities": []
+    },
+    {
+      "id": 2,
+      "name": "Mari Udderyd",
+      "class": "1a",
+      "email": "mari.udderyd@example.com",
+      "subject": "1",
+      "arrivalYear": "2019",
+      "birthYear": "",
+      "bornInSweden": true,
+      "assessments": [],
+      "activeActivities": 1,
+      "cancelledActivities": 0,
+      "activities": [
+        {
+          "id": 0,
+          "name": "Wendick",
+          "date": "2023-10-18",
+          "cancelled": false,
+          "cancelComment": "",
+          "cancelDate": "",
+          "updates": []
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Niklas Andersson",
+      "class": "2b",
+      "email": "niklas.andersson@example.com",
+      "subject": "2",
+      "arrivalYear": "2020",
+      "birthYear": "",
+      "bornInSweden": true,
+      "assessments": [],
+      "activeActivities": 0,
+      "cancelledActivities": 0,
+      "activities": []
+    },
+    {
+      "id": 4,
+      "name": "Mattias Davidsson",
+      "class": "3a",
+      "email": "mattias.davidsson@example.com",
+      "subject": "1",
+      "arrivalYear": "2020",
+      "birthYear": "",
+      "bornInSweden": true,
+      "assessments": [],
+      "activeActivities": 0,
+      "cancelledActivities": 0,
+      "activities": []
+    },
+    {
+      "id": 5,
+      "name": "Micraj Abdulahi",
+      "class": "1b",
+      "email": "miab16001@utb.vaxjo.se",
+      "subject": "",
+      "arrivalYear": "",
+      "birthYear": "",
+      "bornInSweden": false,
+      "assessments": [
+        {
+          "date": "2024-03-01",
+          "gradingTool": "H4",
+          "area": "Läsa",
+          "criteria": "Läshastighet",
+          "level": "17",
+          "comment": "Eleven går på vårterminen i åk 1. På höstterminen i åk 2 finns ett riktmärke för pojkar på ca 50 lästa ord per min.",
+          "teacher": 1,
+          "id": 0
+        }
+      ],
+      "activeActivities": 1,
+      "cancelledActivities": 0,
+      "activities": [
+        {
+          "cancelComment": "",
+          "cancelDate": "",
+          "cancelled": false,
+          "date": "2024-03-11",
+          "id": 0,
+          "name": "Wendick",
+          "updates": [
             {
-                "id": 1,
-                "name": "Wendick",
-                "date": "2024-01-08",
-                "cancelled": false,
-                "cancelComment": "",
-                "cancelDate": "",
-                "updates": [
-                    {
-                        "id": 1,
-                        "date": "2024-01-15",
-                        "present": true,
-                        "performance": "good",
-                        "comment": ""
-                    }
-                ]
+              "date": "2024-03-11",
+              "present": true,
+              "performance": "good",
+              "comment": "Läste listan 3 ggr och skrev orden 1 gång.",
+              "id": 0
             },
             {
-                "id": 2,
-                "name": "Test",
-                "date": "2024-01-08",
-                "cancelled": false,
-                "cancelComment": "",
-                "cancelDate": "",
-                "updates": []
-            }
-        ]
-    },
-    {
-        "id": 2,
-        "name": "Oscar Norman",
-        "class": "2a",
-        "email": "oscar.norman@example.com",
-        "subject": "2",
-        "year": "2019",
-        "bornInSweden": true,
-        "assessments": [],
-        "activeActivities": 0,
-        "cancelledActivities": 0,
-        "activities": []
-    },
-    {
-        "id": 3,
-        "name": "Mari Udderyd",
-        "class": "1a",
-        "email": "mari.udderyd@example.com",
-        "subject": "1",
-        "year": "2019",
-        "bornInSweden": true,
-        "assessments": [],
-        "activeActivities": 1,
-        "cancelledActivities": 0,
-        "activities": [
+              "date": "2024-03-12",
+              "present": true,
+              "performance": "good",
+              "comment": "Läste listan 3 ggr och skrev orden 1 gång.",
+              "id": 1
+            },
             {
-                "id": 1,
-                "name": "Wendick",
-                "date": "2023-10-18",
-                "cancelled": false,
-                "cancelComment": "",
-                "cancelDate": "",
-                "updates": []
-            }
-        ]
-    },
-    {
-        "id": 4,
-        "name": "Niklas Andersson",
-        "class": "2b",
-        "email": "niklas.andersson@example.com",
-        "subject": "2",
-        "year": "2020",
-        "bornInSweden": true,
-        "assessments": [],
-        "activeActivities": 0,
-        "cancelledActivities": 0,
-        "activities": []
-    },
-    {
-        "id": 5,
-        "name": "Mattias Davidsson",
-        "class": "3a",
-        "email": "mattias.davidsson@example.com",
-        "subject": "1",
-        "year": "2020",
-        "bornInSweden": true,
-        "assessments": [],
-        "activeActivities": 0,
-        "cancelledActivities": 0,
-        "activities": []
-    },
-    {
-        "id": 6,
-        "name": "Micraj Abdulahi",
-        "class": "1b",
-        "email": "miab16001@utb.vaxjo.se",
-        "assessments": [
+              "date": "2024-03-13",
+              "present": true,
+              "performance": "good",
+              "comment": "Läste listan 3 ggr och skrev orden 1 gång.",
+              "id": 2
+            },
             {
-                "date": "2024-03-01",
-                "gradingTool": "H4",
-                "area": "Läsa",
-                "criteria": "Läshastighet",
-                "level": 17,
-                "comment": "Eleven går på vårterminen i åk 1. På höstterminen i åk 2 finns ett riktmärke för pojkar på ca 50 lästa ord per min.",
-                "teacher": 1,
-                "id": 1
+              "date": "2024-03-04",
+              "present": false,
+              "comment": "Sjuk",
+              "id": 3
+            },
+            {
+              "date": "2024-03-08",
+              "present": false,
+              "comment": "Sjuk",
+              "id": 4
+            },
+            {
+              "date": "2024-03-06",
+              "present": false,
+              "comment": "Sjuk",
+              "id": 5
             }
-        ],
-        "activeActivities": 0,
-        "cancelledActivities": 0,
-        "activities": []
+          ]
+        }
+      ],
+      "flag": "indicate"
     },
     {
-        "id": 7,
-        "name": "Rahim Arcuev",
-        "class": "1b",
-        "email": "raar16001@utb.vaxjo.se",
-        "assessments": [
+      "id": 6,
+      "name": "Rahim Arcuev",
+      "class": "1b",
+      "email": "raar16001@utb.vaxjo.se",
+      "subject": "",
+      "arrivalYear": "",
+      "birthYear": "",
+      "bornInSweden": false,
+      "assessments": [
+        {
+          "date": "2024-03-01",
+          "gradingTool": "H4",
+          "area": "Läsa",
+          "criteria": "Läshastighet",
+          "level": "4",
+          "comment": "Eleven går på vårterminen i åk 1. På höstterminen i åk 2 finns ett riktmärke för pojkar på ca 50 lästa ord per min.",
+          "teacher": 1,
+          "id": 0
+        }
+      ],
+      "activeActivities": 1,
+      "cancelledActivities": 0,
+      "activities": [
+        {
+          "cancelComment": "",
+          "cancelDate": "",
+          "cancelled": false,
+          "date": "2024-03-06",
+          "id": 0,
+          "name": "Aktivitet 2",
+          "updates": [
             {
-                "date": "2024-03-01",
-                "gradingTool": "H4",
-                "area": "Läsa",
-                "criteria": "Läshastighet",
-                "level": 4,
-                "comment": "Eleven går på vårterminen i åk 1. På höstterminen i åk 2 finns ett riktmärke för pojkar på ca 50 lästa ord per min.",
-                "teacher": 1,
-                "id": 1
-            }
-        ],
-        "activeActivities": 1,
-        "cancelledActivities": 0,
-        "activities": [
+              "date": "2024-03-06",
+              "present": true,
+              "performance": "good",
+              "comment": "",
+              "id": 0
+            },
             {
-                "cancelComment": "",
-                "cancelDate": "",
-                "cancelled": false,
-                "date": "2024-03-06",
-                "id": 1,
-                "name": "Aktivitet 2",
-                "updates": [
-                    {
-                        "id": 1,
-                        "date": "2024-03-06",
-                        "present": true,
-                        "performance": "good",
-                        "comment": ""
-                    }
-                ]
+              "date": "2024-03-11",
+              "present": true,
+              "performance": "good",
+              "comment": "Vi fortsatte med ark 2 montessorimaterial. Ord- läsa + skriva.",
+              "id": 1
+            },
+            {
+              "date": "2024-03-13",
+              "present": true,
+              "performance": "good",
+              "comment": "Vi arbetade med alfabetet och fortsatte med ark 3. Repeterade ark 1 och 2.",
+              "id": 2
             }
-        ],
-        "flag": "danger"
+          ]
+        }
+      ],
+      "flag": "danger"
     },
     {
-        "id": 8,
-        "name": "Walid Kelou",
-        "class": "1b",
-        "email": "wake16002@utb.vaxjo.se",
-        "assessments": [
-            {
-                "date": "2024-03-01",
-                "gradingTool": "H4",
-                "area": "Läsa",
-                "criteria": "Läshastighet",
-                "level": 16,
-                "comment": "Eleven går på vårterminen i åk 1. På höstterminen i åk 2 finns ett riktmärke för pojkar på ca 50 lästa ord per min.",
-                "teacher": 1,
-                "id": 1
-            }
-        ],
-        "activeActivities": 0,
-        "cancelledActivities": 0,
-        "activities": []
+      "id": 7,
+      "name": "Walid Kelou",
+      "class": "1b",
+      "email": "wake16002@utb.vaxjo.se",
+      "subject": "",
+      "arrivalYear": "",
+      "birthYear": "",
+      "bornInSweden": false,
+      "assessments": [
+        {
+          "date": "2024-03-01",
+          "gradingTool": "H4",
+          "area": "Läsa",
+          "criteria": "Läshastighet",
+          "level": 16,
+          "comment": "Eleven går på vårterminen i åk 1. På höstterminen i åk 2 finns ett riktmärke för pojkar på ca 50 lästa ord per min.",
+          "teacher": 1,
+          "id": 0
+        }
+      ],
+      "activeActivities": 0,
+      "cancelledActivities": 0,
+      "activities": []
     },
     {
-        "id": 9,
-        "name": "Ridan Moubark",
-        "class": "1b",
-        "email": "rimo16001@utb.vaxjo.se",
-        "assessments": [
-            {
-                "date": "2024-03-01",
-                "gradingTool": "H4",
-                "area": "Läsa",
-                "criteria": "Läshastighet",
-                "level": 8,
-                "comment": "Eleven går på vårterminen i åk 1. På höstterminen i åk 2 finns ett riktmärke för pojkar på ca 50 lästa ord per min.",
-                "teacher": 1,
-                "id": 1
-            }
-        ],
-        "activeActivities": 0,
-        "cancelledActivities": 0,
-        "activities": []
+      "id": 8,
+      "name": "Ridan Moubark",
+      "class": "1b",
+      "email": "rimo16001@utb.vaxjo.se",
+      "subject": "",
+      "arrivalYear": "",
+      "birthYear": "",
+      "bornInSweden": false,
+      "assessments": [
+        {
+          "date": "2024-03-01",
+          "gradingTool": "H4",
+          "area": "Läsa",
+          "criteria": "Läshastighet",
+          "level": 8,
+          "comment": "Eleven går på vårterminen i åk 1. På höstterminen i åk 2 finns ett riktmärke för pojkar på ca 50 lästa ord per min.",
+          "teacher": 1,
+          "id": 0
+        }
+      ],
+      "activeActivities": 0,
+      "cancelledActivities": 0,
+      "activities": []
     },
     {
-        "id": 10,
-        "name": "Sidra Almadi",
-        "class": "1b",
-        "email": "sial16002@utb.vaxjo.se",
-        "assessments": [
-            {
-                "date": "2024-03-01",
-                "gradingTool": "H4",
-                "area": "Läsa",
-                "criteria": "Läshastighet",
-                "level": 6,
-                "comment": "Eleven går på vårterminen i åk 1. På höstterminen i åk 2 finns ett riktmärke för flickor på ca 50 lästa ord per min.",
-                "teacher": 1,
-                "id": 1
-            }
-        ],
-        "activeActivities": 0,
-        "cancelledActivities": 0,
-        "activities": []
+      "id": 9,
+      "name": "Sidra Almadi",
+      "class": "1b",
+      "email": "sial16002@utb.vaxjo.se",
+      "subject": "",
+      "arrivalYear": "",
+      "birthYear": "",
+      "bornInSweden": false,
+      "assessments": [
+        {
+          "date": "2024-03-01",
+          "gradingTool": "H4",
+          "area": "Läsa",
+          "criteria": "Läshastighet",
+          "level": 6,
+          "comment": "Eleven går på vårterminen i åk 1. På höstterminen i åk 2 finns ett riktmärke för flickor på ca 50 lästa ord per min.",
+          "teacher": 1,
+          "id": 0
+        }
+      ],
+      "activeActivities": 0,
+      "cancelledActivities": 0,
+      "activities": []
     }
   ]
 }
