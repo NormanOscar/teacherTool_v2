@@ -11,7 +11,7 @@
       "bornInSweden": true,
       "assessments": [
         {
-          "date": "2024-01-08",
+          "date": "2024-02-06",
           "gradingTool": "Skolverket A",
           "area": "Läsa",
           "criteria": "Avkodning",
@@ -54,79 +54,14 @@
     },
     {
       "id": 1,
-      "name": "Oscar Norman",
-      "class": "2a",
-      "email": "oscar.norman@example.com",
-      "subject": "2",
-      "arrivalYear": "2019",
-      "birthYear": "",
-      "bornInSweden": true,
-      "assessments": [],
-      "activeActivities": 0,
-      "cancelledActivities": 0,
-      "activities": []
-    },
-    {
-      "id": 2,
-      "name": "Mari Udderyd",
-      "class": "1a",
-      "email": "mari.udderyd@example.com",
-      "subject": "1",
-      "arrivalYear": "2019",
-      "birthYear": "",
-      "bornInSweden": true,
-      "assessments": [],
-      "activeActivities": 1,
-      "cancelledActivities": 0,
-      "activities": [
-        {
-          "id": 0,
-          "name": "Wendick",
-          "date": "2023-10-18",
-          "cancelled": false,
-          "cancelComment": "",
-          "cancelDate": "",
-          "updates": []
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "name": "Niklas Andersson",
-      "class": "2b",
-      "email": "niklas.andersson@example.com",
-      "subject": "2",
-      "arrivalYear": "2020",
-      "birthYear": "",
-      "bornInSweden": true,
-      "assessments": [],
-      "activeActivities": 0,
-      "cancelledActivities": 0,
-      "activities": []
-    },
-    {
-      "id": 4,
-      "name": "Mattias Davidsson",
-      "class": "3a",
-      "email": "mattias.davidsson@example.com",
-      "subject": "1",
-      "arrivalYear": "2020",
-      "birthYear": "",
-      "bornInSweden": true,
-      "assessments": [],
-      "activeActivities": 0,
-      "cancelledActivities": 0,
-      "activities": []
-    },
-    {
-      "id": 5,
       "name": "Micraj Abdulahi",
+      "gender": "b",
       "class": "1b",
-      "email": "miab16001@utb.vaxjo.se",
-      "subject": "",
+      "email": "miab16001@utb.vaxjo.se",  
+      "subject": "2",   
       "arrivalYear": "",
-      "birthYear": "",
-      "bornInSweden": false,
+      "birthYear": "2013",
+      "bornInSweden": true,
       "assessments": [
         {
           "date": "2024-03-01",
@@ -139,13 +74,13 @@
           "id": 0
         }
       ],
-      "activeActivities": 1,
-      "cancelledActivities": 0,
+      "activeActivities": 0,
+      "cancelledActivities": 1,
       "activities": [
         {
-          "cancelComment": "",
-          "cancelDate": "",
-          "cancelled": false,
+          "cancelComment": "Interventionstiden är slut och vi har arbetat tillsammans i X antal veckor. \nEfter aktivitetens slut läser nu Micraj X antal ord per minut.",
+          "cancelDate": "2024-03-30",
+          "cancelled": true,
           "date": "2024-03-11",
           "id": 0,
           "name": "Wendick",
@@ -181,21 +116,122 @@
               "date": "2024-03-08",
               "present": false,
               "comment": "Sjuk",
-              "id": 4
+              "id": 5
             },
             {
               "date": "2024-03-06",
               "present": false,
               "comment": "Sjuk",
-              "id": 5
+              "id": 6
+            },
+            {
+              "date": "2024-03-14",
+              "present": true,
+              "performance": "good",
+              "comment": "Läst Wendick-listor 3ggr och skrivit 1 gång.",
+              "id": 7
+            },
+            {
+              "date": "2024-03-18",
+              "present": false,
+              "comment": "Sjuk",
+              "id": 9
+            },
+            {
+              "date": "2024-03-19",
+              "present": true,
+              "performance": "good",
+              "comment": "Läst Wendick + enkel bok (myran). Skrivit lista 1 gång. ",
+              "id": 10
+            },
+            {
+              "date": "2024-03-20",
+              "present": true,
+              "performance": "neutral",
+              "comment": "Läst men trött idag.",
+              "id": 11
+            },
+            {
+              "date": "2024-03-21",
+              "present": true,
+              "performance": "neutral",
+              "comment": "Läst men trött idag.",
+              "id": 12
+            },
+            {
+              "date": "2024-03-22",
+              "present": true,
+              "performance": "good",
+              "comment": "Wendick 3 ggr + skrivit.",
+              "id": 13
+            },
+            {
+              "date": "2024-03-25",
+              "present": true,
+              "performance": "good",
+              "comment": "Bytt listor från tre bokstäver till fyra. Läst tre gånger och skrivit en gång. ",
+              "id": 14
+            },
+            {
+              "date": "2024-03-26",
+              "present": false,
+              "comment": "Sjuk",
+              "id": 15
+            },
+            {
+              "date": "2024-03-27",
+              "present": true,
+              "performance": "good",
+              "comment": "Läst med bra flyt och hastighet idag.",
+              "id": 16
+            },
+            {
+              "date": "2024-03-28",
+              "present": true,
+              "performance": "good",
+              "comment": "Läst med bra flyt och hastighet idag.",
+              "id": 17
+            },
+            {
+              "date": "2024-03-29",
+              "present": true,
+              "performance": "good",
+              "comment": "Läst och skrivit Wendick.",
+              "id": 18
+            },
+            {
+              "date": "2024-04-02",
+              "present": true,
+              "performance": "good",
+              "comment": "Läst Wendick på tid. Skrivit orden.",
+              "id": 19
+            },
+            {
+              "date": "2024-03-07",
+              "present": false,
+              "comment": "Sjuk",
+              "id": 20
+            },
+            {
+              "date": "2024-03-15",
+              "present": true,
+              "performance": "good",
+              "comment": "Läst listor.",
+              "id": 21
             }
           ]
         }
       ],
-      "flag": "indicate"
+      "flag": "indicate",
+      "finalAssessment": {
+        "good": "Micraj har varit motiverad att öka sin läshastighet.\nHan tar emot hjälp och vill fortsätta att jobba för att bli ännu säkrare på sin läsning.",
+        "bad": "Micraj har varit sjuk vid 6 tillfällen och varit trött vid ett antal tillfällen då vi arbetat.",
+        "nextStep": "Micraj kommer att få en intervention till på 8 veckor för att se om vi kan öka läshastigheten ännu mer.",
+        "tickChecked": false
+      }
     },
     {
-      "id": 6,
+      "id": 2,
       "name": "Rahim Arcuev",
       "class": "1b",
       "email": "raar16001@utb.vaxjo.se",
@@ -253,8 +289,8 @@
       "flag": "danger"
     },
     {
-      "id": 7,
-      "name": "Walid Kelou",
+      "id": 3,
+      "name": "Walid  Kelou",
       "class": "1b",
       "email": "wake16002@utb.vaxjo.se",
       "subject": "",
@@ -278,7 +314,7 @@
       "activities": []
     },
     {
-      "id": 8,
+      "id": 4,
       "name": "Ridan Moubark",
       "class": "1b",
       "email": "rimo16001@utb.vaxjo.se",
@@ -300,10 +336,11 @@
       ],
       "activeActivities": 0,
       "cancelledActivities": 0,
-      "activities": []
+      "activities": [],
+      "flag": "indicate"
     },
     {
-      "id": 9,
+      "id": 5,
       "name": "Sidra Almadi",
       "class": "1b",
       "email": "sial16002@utb.vaxjo.se",

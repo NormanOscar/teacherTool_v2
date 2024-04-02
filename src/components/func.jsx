@@ -192,20 +192,20 @@ export function createWeekDay(id, items, startWeek, index) {
   let dayItems = items.filter(
     (item) =>
       getWeekNumber(item.date) === startWeek + index &&
-      new Date(item.date).getDay() === id
+      new Date(item.date).getDay() === id + 1
   );
 
-  let dots = []
+  let dots = [];
   for (let i = 0; i < dayItems.length; i++) {
-    dots.push(
-      { 
-        color: dayItems[i].color,
-        present: dayItems[i].type === "Bedömning" ? true : dayItems[i].obj.present,
-        obj: dayItems[i].obj,
-        type: dayItems[i].type,
-        activity: dayItems[i].type === "Avstämning" ? dayItems[i].activity : null
-      }
-    );
+    console.log(dayItems[i]);
+    dots.push({
+      color: dayItems[i].color,
+      present:
+        dayItems[i].type === "Bedömning" ? true : dayItems[i].obj.present,
+      obj: dayItems[i].obj,
+      type: dayItems[i].type,
+      activity: dayItems[i].type === "Avstämning" ? dayItems[i].activity : null,
+    });
   } // Extract dot color information from the items, if any
 
   let day = {
@@ -213,4 +213,25 @@ export function createWeekDay(id, items, startWeek, index) {
     dots: dots, // Include dot information in the day object
   };
   return day;
+}
+
+export function checkIfToday(week, day) {
+  let weekdays = [
+    "Måndag",
+    "Tisdag",
+    "Onsdag",
+    "Torsdag",
+    "Fredag",
+    "Lördag",
+    "Söndag",
+  ];
+  let today = new Date();
+  let currentWeek = getWeekNumber(today);
+  let currentDay = weekdays[today.getDay() - 1];
+
+  if (currentWeek === week && currentDay === day) {
+    return true;
+  } else {
+    return false;
+  }
 }

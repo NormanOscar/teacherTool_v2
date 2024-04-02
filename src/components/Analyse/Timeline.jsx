@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 
-import { getTimelineData, getWeekNumber, createWeekDay } from "../func";
+import {
+  getTimelineData,
+  getWeekNumber,
+  createWeekDay,
+  checkIfToday,
+} from "../func";
 import Loading from "../Loading";
 import TimelineDot from "./TimelineDot";
 
@@ -53,6 +58,7 @@ export default function Timeline() {
       setLoading(false);
     }
   }, []);
+  console.log(timeLines);
 
   return (
     <>
@@ -66,6 +72,13 @@ export default function Timeline() {
               <h3 className="text-center m-0">Tidslinje</h3>
             </Col>
             <Col xs={12} md={3} className="d-flex justify-content-end">
+              <div className="d-flex align-items-center me-2">
+                <span
+                  className="timeLine-dot"
+                  style={{ backgroundColor: "orange" }}
+                />
+                <span>&nbsp;Idag</span>
+              </div>
               <div className="d-flex align-items-center me-2">
                 <span
                   className="timeLine-dot"
@@ -145,7 +158,8 @@ export default function Timeline() {
                                 <div
                                   style={{
                                     height: "50px",
-                                    borderLeft: "1px solid black",
+                                    borderLeft: checkIfToday(week.week, day.day) ?
+                                    "2px solid orange": "1px solid black",
                                   }}
                                   className="d-flex flex-column justify-content-end"
                                 >
@@ -173,6 +187,25 @@ export default function Timeline() {
                       className="timeLine-line"
                       key={"line" + (outerIndex + 1)}
                     />
+                    <div className="d-flex justify-content-between p-0">
+                      {timeLines.length > 0 &&
+                        weeks.map((week, outerIndex) =>
+                          week.days.map((day, innerIndex) => (
+                            <span
+                              key={
+                                "week " + outerIndex + " - day " + innerIndex
+                              }
+                              style={{
+                                width: "30px",
+                                color:
+                                  checkIfToday(week.week, day.day) && "orange",
+                              }}
+                            >
+                              {day.day[0].toLowerCase()}
+                            </span>
+                          ))
+                        )}
+                    </div>
                   </Row>
                 )
             )}
