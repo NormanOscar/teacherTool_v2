@@ -135,7 +135,7 @@ export default function Timeline() {
                                   style={{
                                     height: "60px",
                                     borderLeft: checkIfToday(week.week, day.day)
-                                    ? "2px solid green"
+                                    ? "2px solid orange"
                                     : "1px solid black",
                                   }}
                                   className="d-flex flex-column justify-content-end"

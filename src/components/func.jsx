@@ -3,7 +3,8 @@ import { users } from "../json/userList.json";
 import { activities } from "../json/activities.json";
 
 export function checkLoginAndData() {
-  if (!localStorage.getItem("login") || !localStorage.getItem("userId")) {
+  const path = window.location.href.split("/");
+  if ((!localStorage.getItem("login") || !localStorage.getItem("userId")) && path[path.length -1] !== "login") {
     window.location.href = "/login";
   }
   if (!localStorage.getItem("studentData")) {
