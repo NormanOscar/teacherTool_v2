@@ -19,8 +19,12 @@ export default function CurrentActivities() {
   }, []); // Empty dependency array ensures this effect runs only once
 
   const currentStudents = studentData.filter(
-    (student) => student.activities.length > 0 && student.activities.every(activity => activity.cancelled === false)
+    (student) =>
+      student.activities.length > 0 &&
+      student.activities.find((activity) => activity.cancelled === false)
   );
+  console.log(studentData);
+  console.log(currentStudents);
 
   function handleClick(e) {
     setStudentToShow(

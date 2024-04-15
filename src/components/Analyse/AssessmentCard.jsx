@@ -23,15 +23,23 @@ export default function AssessmentCard({ student }) {
   };
 
   const removeAssessment = (e) => {
+    let confirmDelete = window.confirm(
+      "Är du säker på att du vill ta bort denna bedömning?"
+    );
+    if (!confirmDelete) {
+      return;
+    }
     let storedData = JSON.parse(localStorage.getItem("studentData"));
     let studentId = JSON.parse(localStorage.getItem("studentId"));
     let currentStudent = storedData.find((student) => student.id === studentId);
-    let assessmentIndex = currentStudent.assessments.findIndex((assessment) => assessment.id == e.currentTarget.id);
+    let assessmentIndex = currentStudent.assessments.findIndex(
+      (assessment) => assessment.id == e.currentTarget.id
+    );
 
     currentStudent.assessments.splice(assessmentIndex, 1);
     localStorage.setItem("studentData", JSON.stringify(storedData));
     window.location.reload(false);
-  }
+  };
 
   return (
     <>
@@ -54,72 +62,77 @@ export default function AssessmentCard({ student }) {
               className="list-group list-group-flush overflow-auto custom-scrollbar"
               style={{ maxHeight: "410px", width: "100%" }}
             >
-              {student.assessments.map((assessment, index) => (
-                <li
-                  className="list-group-item d-flex justify-content-between align-items-center"
-                  key={index}
-                  style={{ marginBottom: "0.5em" }}
-                >
-                  <div>
-                    <p className="mb-0 d-flex justify-content-between">
-                      <span
-                        className="align-middle"
-                        style={{ fontWeight: "bold" }}
-                      >
-                        {assessment.gradingTool}
-                      </span>
-                    </p>
-                    <p className="m-0">
-                      <small className="align-middle" style={{ color: "grey" }}>
-                        {assessment.date}
-                      </small>
-                    </p>
-                    {assessment.teacher && (
-                      <span>
-                        Lärare:{" "}
-                        {getTeacher(assessment.teacher).firstName +
-                          " " +
-                          getTeacher(assessment.teacher).lastName}
-                      </span>
-                    )}
+              {student.assessments
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .map((assessment, index) => (
+                  <li
+                    className="list-group-item d-flex justify-content-between align-items-center"
+                    key={index}
+                    style={{ marginBottom: "0.5em" }}
+                  >
                     <div>
-                      <Row className="d-flex justify-content-between">
-                        <span style={{ width: "fit-content" }}>
-                          {assessment.area} &rarr; {assessment.criteria} &rarr;{" "}
-                          {assessment.level}
-                        </span>
-                      </Row>
-                      <Row className="d-flex justify-content-between">
+                      <p className="mb-0 d-flex justify-content-between">
                         <span
-                          style={{
-                            width: "fit-content",
-                            color: "grey",
-                          }}
+                          className="align-middle"
+                          style={{ fontWeight: "bold" }}
                         >
-                          Kommentar: {assessment.comment}
+                          {assessment.gradingTool}
                         </span>
-                      </Row>
+                      </p>
+                      <p className="m-0">
+                        <small
+                          className="align-middle"
+                          style={{ color: "grey" }}
+                        >
+                          {assessment.date}
+                        </small>
+                      </p>
+                      {assessment.teacher && (
+                        <span>
+                          Lärare:{" "}
+                          {getTeacher(assessment.teacher).firstName +
+                            " " +
+                            getTeacher(assessment.teacher).lastName}
+                        </span>
+                      )}
+                      <div>
+                        <Row className="d-flex justify-content-between">
+                          <span style={{ width: "fit-content" }}>
+                            {assessment.area} &rarr; {assessment.criteria}{" "}
+                            &rarr; {assessment.level}
+                          </span>
+                        </Row>
+                        <Row className="d-flex justify-content-between">
+                          <span
+                            style={{
+                              width: "fit-content",
+                              color: "grey",
+                            }}
+                          >
+                            Kommentar: {assessment.comment}
+                          </span>
+                        </Row>
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <FontAwesomeIcon
-                      icon={faPen}
-                      size="lg"
-                      className="icons mx-1"
-                      id={assessment.id}
-                      onClick={handleEditClick}
-                    />
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      size="lg"
-                      color="red"
-                      id={assessment.id}
-                      className="icons mx-1"
-                      onClick={removeAssessment}
-                    />
-                  </div>
-                </li>
-              ))}
+                    <div>
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        size="lg"
+                        className="icons mx-1"
+                        id={assessment.id}
+                        onClick={handleEditClick}
+                      />
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        size="lg"
+                        color="red"
+                        id={assessment.id}
+                        className="icons mx-1"
+                        onClick={removeAssessment}
+                      />
+                    </div>
+                  </li>
+                ))}
             </ul>
           </div>
         ) : (

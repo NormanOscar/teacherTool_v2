@@ -12,6 +12,7 @@ import {
 library.add(faFaceSmile, faFaceMeh, faFaceFrown);
 
 export default function TimelineDot({ dot, index }) {
+  console.log(dot);
   const assessmentPopover = (
     <Popover>
       <Popover.Header as="h3">{"Bedömning"}</Popover.Header>
@@ -229,13 +230,29 @@ export default function TimelineDot({ dot, index }) {
             : null
         }
       >
-        <div
-          key={"dot" + (index + 1)}
-          className="timeLine-dot dot-on-timeLine"
-          style={{
-            backgroundColor: dot.present ? dot.color : "#FF3126",
-          }}
-        />
+        {dot.type === "Bedömning" ? (
+          <div
+            key={"dot" + (index + 1)}
+            className="timeLine-dot dot-on-timeLine"
+            style={{
+              backgroundColor: dot.present ? dot.color : "#FF3126"
+            }}
+          />
+        ) : (
+          <div
+            key={"dot" + (index + 1)}
+            className="timeLine-dot dot-on-timeLine"
+            style={{
+              backgroundColor: !dot.activity.cancelled
+                ? dot.present
+                ? dot.color
+                : "#FF3126"
+                : undefined,
+              backgroundImage: dot.activity.cancelled
+                ? 'linear-gradient(135deg, #D0BFFF 50%, #FF3126 50%)' : 'none',
+            }}
+          />
+        )}
       </OverlayTrigger>
     </>
   );

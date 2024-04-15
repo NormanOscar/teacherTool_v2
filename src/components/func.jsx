@@ -2,6 +2,21 @@ import { students } from "../json/studentList.json";
 import { users } from "../json/userList.json";
 import { activities } from "../json/activities.json";
 
+export function checkLoginAndData() {
+  if (!localStorage.getItem("login") || !localStorage.getItem("userId")) {
+    window.location.href = "/login";
+  }
+  if (!localStorage.getItem("studentData")) {
+    addStudentsToLocalStorage();
+  }
+  if (!localStorage.getItem("activityData")) {
+    addActivitiesToLocalStorage();
+  }
+  if (!localStorage.getItem("userData")) {
+    addUsersToLocalStorage();
+  }
+}
+
 export function addStudentsToLocalStorage() {
   let savedData = JSON.parse(localStorage.getItem("studentData"));
   if (savedData === null) {
@@ -197,7 +212,6 @@ export function createWeekDay(id, items, startWeek, index) {
 
   let dots = [];
   for (let i = 0; i < dayItems.length; i++) {
-    console.log(dayItems[i]);
     dots.push({
       color: dayItems[i].color,
       present:

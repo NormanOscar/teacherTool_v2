@@ -5,6 +5,7 @@ import StudentCards from "../components/Admin/Students/StudentCards";
 import UsersCards from "../components/Admin/Users/UserCards";
 import ActivityCards from "../components/Admin/Activities/ActivityCards";
 import AdminEdit from "../components/Admin/AdminEdit";
+import { checkLoginAndData } from "../components/func";
 
 export default function Admin() {
   const storedChosenCard = localStorage.getItem("chosenCard");
@@ -20,21 +21,11 @@ export default function Admin() {
 
   let users = JSON.parse(localStorage.getItem("userData"));
 
-  useEffect(() => {
-    if (
-      !localStorage.getItem("login") ||
-      !localStorage.getItem("userId") ||
-      !localStorage.getItem("studentData") ||
-      !localStorage.getItem("userData") ||
-      !localStorage.getItem("activityData")
-    ) {
-      window.location.href = "/login";
-    } else {
-      let userId = JSON.parse(localStorage.getItem("userId"));
-      let user = users.find((user) => user.id === userId);
-      if (user.role !== "admin") {
-        window.location.href = "/";
-      }
+  useEffect(() => {    
+    let userId = JSON.parse(localStorage.getItem("userId"));
+    let user = users.find((user) => user.id === userId);
+    if (user.role !== "admin") {
+      window.location.href = "/";
     }
   }, []);
 

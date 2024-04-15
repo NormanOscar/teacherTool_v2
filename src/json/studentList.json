@@ -6,8 +6,8 @@
       "class": "1a",
       "email": "oscar.norman@example.com",
       "subject": "1",
-      "arrivalYear": "2018",
-      "birthYear": "",
+      "arrivalYear": "",
+      "birthYear": "1999",
       "bornInSweden": true,
       "assessments": [
         {
@@ -50,15 +50,16 @@
           "cancelDate": "",
           "updates": []
         }
-      ]
+      ],
+      "flag": "ok"
     },
     {
       "id": 1,
       "name": "Micraj Abdulahi",
       "gender": "b",
       "class": "1b",
-      "email": "miab16001@utb.vaxjo.se",  
-      "subject": "2",   
+      "email": "miab16001@utb.vaxjo.se",
+      "subject": "2",
       "arrivalYear": "",
       "birthYear": "2013",
       "bornInSweden": true,
@@ -223,12 +224,17 @@
         }
       ],
       "flag": "indicate",
-      "finalAssessment": {
-        "good": "Micraj har varit motiverad att öka sin läshastighet.\nHan tar emot hjälp och vill fortsätta att jobba för att bli ännu säkrare på sin läsning.",
-        "bad": "Micraj har varit sjuk vid 6 tillfällen och varit trött vid ett antal tillfällen då vi arbetat.",
-        "nextStep": "Micraj kommer att få en intervention till på 8 veckor för att se om vi kan öka läshastigheten ännu mer.",
-        "tickChecked": false
-      }
+      "finalAssessments": [
+        {
+          "good": "Micraj har varit motiverad att öka sin läshastighet.\nHan tar emot hjälp och vill fortsätta att jobba för att bli ännu säkrare på sin läsning.",
+          "bad": "Micraj har varit sjuk vid 6 tillfällen och varit trött vid ett antal tillfällen då vi arbetat.",
+          "nextStep": "Micraj kommer att få en intervention till på 8 veckor för att se om vi kan öka läshastigheten ännu mer.",
+          "tickChecked": false,
+          "date": "2024-01-08",
+          "teacher": 1,
+          "id": 0
+        }
+      ]
     },
     {
       "id": 2,

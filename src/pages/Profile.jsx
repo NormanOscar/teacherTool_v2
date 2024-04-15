@@ -11,17 +11,15 @@ import EditEmail from "../components/Profile/EditEmail";
 import EditUsername from "../components/Profile/EditUsername";
 import EditPassword from "../components/Profile/EditPassword";
 
+import { checkLoginAndData } from "../components/func";
+
 library.add(faEdit);
 
 export default function Profile() {
   const [user, setUser] = useState({});
   const [chosenField, setChosenField] = useState(null);
 
-  useEffect(() => {
-    if (!localStorage.getItem("login") || !localStorage.getItem("userId") || !localStorage.getItem("studentData")) {
-      window.location.href = "/login";
-    }
-
+  useEffect(() => {    
     let userId = JSON.parse(localStorage.getItem("userId"));
     let users = JSON.parse(localStorage.getItem("userData"));
     setUser(users.find((user) => user.id === userId));

@@ -58,7 +58,6 @@ export default function Timeline() {
       setLoading(false);
     }
   }, []);
-  console.log(timeLines);
 
   return (
     <>
@@ -67,11 +66,10 @@ export default function Timeline() {
       ) : (
         <>
           <Row className="mb-3">
-            <Col xs={12} md={3}></Col>
-            <Col xs={12} md={6}>
-              <h3 className="text-center m-0">Tidslinje</h3>
+            <Col xs={12} md={2}>
+              <h3 className="m-0" style={{width: 'fit-content'}}>Tidslinje</h3>
             </Col>
-            <Col xs={12} md={3} className="d-flex justify-content-end">
+            <Col xs={12} md={10} className="d-flex justify-content-end">
               <div className="d-flex align-items-center me-2">
                 <span
                   className="timeLine-dot"
@@ -92,6 +90,13 @@ export default function Timeline() {
                   style={{ backgroundColor: "#D0BFFF" }}
                 />
                 <span>&nbsp;Avstämning</span>
+              </div>
+              <div className="d-flex align-items-center me-2">
+                <span
+                  className="timeLine-dot"
+                  style={{ backgroundImage: 'linear-gradient(135deg, #D0BFFF 50%, #FF3126 50%)' }}
+                />
+                <span>&nbsp;Avslutad aktivitet</span>
               </div>
               <div className="d-flex align-items-center">
                 <span
@@ -129,7 +134,9 @@ export default function Timeline() {
                                 <div
                                   style={{
                                     height: "60px",
-                                    borderLeft: "1px solid black",
+                                    borderLeft: checkIfToday(week.week, day.day)
+                                    ? "2px solid green"
+                                    : "1px solid black",
                                   }}
                                   className="d-flex flex-column justify-content-end"
                                 >
@@ -158,8 +165,9 @@ export default function Timeline() {
                                 <div
                                   style={{
                                     height: "50px",
-                                    borderLeft: checkIfToday(week.week, day.day) ?
-                                    "2px solid orange": "1px solid black",
+                                    borderLeft: checkIfToday(week.week, day.day)
+                                      ? "2px solid orange"
+                                      : "1px solid black",
                                   }}
                                   className="d-flex flex-column justify-content-end"
                                 >

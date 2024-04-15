@@ -5,6 +5,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
+import { checkLoginAndData } from './func';
+
 library.add(faUser);
 
 // Define the NavBar component
@@ -13,6 +15,7 @@ export default function NavBar() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    checkLoginAndData();
     if (localStorage.getItem('login')) {
       setLogin(true);
     }

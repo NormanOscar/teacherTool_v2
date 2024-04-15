@@ -184,14 +184,11 @@ button {
 
 .dot-on-timeLine {
   transform: translate(-50%);
+  cursor: pointer;
 }
 
 .underline {
   text-decoration: underline;
-}
-
-.timeLine-dot {
-  cursor: pointer;
 }
 
 .timeLine-line {

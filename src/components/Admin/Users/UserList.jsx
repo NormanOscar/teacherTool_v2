@@ -10,6 +10,13 @@ export default function AddUser({ showModal, setObject, setEditType }) {
   let users = JSON.parse(localStorage.getItem("userData"));
 
   const removeUser = (e) => {
+    e.preventDefault();
+    let confirmDelete = window.confirm(
+      "Är du säker på att du vill ta bort denna användare?"
+    );
+    if (!confirmDelete) {
+      return;
+    }
     let userId = e.currentTarget.id;
     let userIndex = users.findIndex((user) => user.id == userId);
     users.splice(userIndex, 1);
@@ -25,9 +32,9 @@ export default function AddUser({ showModal, setObject, setEditType }) {
     setObject(selectedUser);
     setEditType("user");
     showModal();
-  }
+  };
 
-  return(
+  return (
     <Card className="p-4 my-2">
       <h4 className="mb-4" style={{ textAlign: "center" }}>
         Användare
@@ -75,5 +82,5 @@ export default function AddUser({ showModal, setObject, setEditType }) {
           })}
       </ul>
     </Card>
-  )
+  );
 }

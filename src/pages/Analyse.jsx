@@ -8,6 +8,12 @@ import ActivityCard from "../components/Analyse/ActivityCard";
 import PresentCard from "../components/Analyse/PresentCard";
 import StudentInfoPopover from "../components/StudentInfoPopover";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+library.add(faPen, faTrash);
+
 export default function Analyse() {
   const [student, setStudent] = useState({});
   const [loading, setLoading] = useState(true);
@@ -28,14 +34,6 @@ export default function Analyse() {
   });
 
   useEffect(() => {
-    if (
-      !localStorage.getItem("login") ||
-      !localStorage.getItem("userId") ||
-      !localStorage.getItem("studentData")
-    ) {
-      window.location.href = "/login";
-    }
-
     function getData() {
       let studentId = JSON.parse(localStorage.getItem("studentId"));
       let students = JSON.parse(localStorage.getItem("studentData"));
@@ -59,6 +57,28 @@ export default function Analyse() {
     let selectedStudent = students.find((student) => student.id === studentId);
     selectedStudent.flag = e.target.id;
     localStorage.setItem("studentData", JSON.stringify(students));
+  };
+
+  const handleEditClick = (id) => {
+    localStorage.setItem("finalAssessmentId", JSON.stringify(id));
+    window.location.href = "/finalAssessment";
+  };
+
+  const handleDeleteClick = (id) => {
+    let confirmDelete = window.confirm(
+      "Är du säker på att du vill ta bort denna slutbedömning?"
+    );
+    if (!confirmDelete) {
+      return;
+    }
+    let studentId = JSON.parse(localStorage.getItem("studentId"));
+    let students = JSON.parse(localStorage.getItem("studentData"));
+    let selectedStudent = students.find((student) => student.id === studentId);
+    selectedStudent.finalAssessments = selectedStudent.finalAssessments.filter(
+      (assessment) => assessment.id !== id
+    );
+    localStorage.setItem("studentData", JSON.stringify(students));
+    window.location.reload();
   };
 
   return (
@@ -91,7 +111,7 @@ export default function Analyse() {
                     <span>
                       <StudentInfoPopover student={student} />
                     </span>
-                    {student.name + " (" + student.class + ")"} - Slutbedömning
+                    {student.name + " (" + student.class + ")"} - Analys
                   </h3>
                 </Container>
               </Col>
@@ -166,7 +186,62 @@ export default function Analyse() {
                 />
                 <Card className="p-4 my-2">
                   <Row className="text-center mb-2">
-                    <h4>Slutbedömning</h4>
+                    <h4>Slutbedömningar</h4>
+                  </Row>
+                  <Row>
+                    <ul
+                      className="list-group overflow-auto custom-scrollbar px-3 mb-4"
+                      style={{ maxHeight: "360px" }}
+                    >
+                      {student.finalAssessments &&
+                      student.finalAssessments.length > 0 ? (
+                        student.finalAssessments
+                          .sort((a, b) => new Date(b.date) - new Date(a.date))
+                          .map((finalAssessment, index) => (
+                            <li
+                              key={finalAssessment.id}
+                              className="list-group-item list-group-item-action d-flex justify-content-between align-items-center ps-0"
+                              style={{ cursor: "pointer" }}
+                              onClick={() => (
+                                localStorage.setItem(
+                                  "finalAssessmentId",
+                                  JSON.stringify(finalAssessment.id)
+                                ),
+                                (window.location.href = "/summary")
+                              )}
+                            >
+                              <p className="mb-0 ms-3">
+                                {finalAssessment.date}
+                              </p>
+                              <div>
+                                <FontAwesomeIcon
+                                  icon={faPen}
+                                  size="lg"
+                                  className="icons mx-1"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleEditClick(finalAssessment.id);
+                                  }}
+                                  style={{ width: "fit-content" }}
+                                />
+                                <FontAwesomeIcon
+                                  icon={faTrash}
+                                  size="lg"
+                                  color="red"
+                                  className="icons mx-1"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDeleteClick(finalAssessment.id);
+                                  }}
+                                  style={{ width: "fit-content" }}
+                                />
+                              </div>
+                            </li>
+                          ))
+                      ) : (
+                        <p className="text-center m-0">Inga slutbedömningar</p>
+                      )}
+                    </ul>
                   </Row>
                   <Row className="d-flex justify-content-center align-items-center">
                     <Col
@@ -176,36 +251,16 @@ export default function Analyse() {
                     >
                       <button
                         className="btn btn-primary py-3 px-4"
-                        onClick={() =>
+                        onClick={() => (
+                          localStorage.removeItem("finalAssessmentId"),
                           (window.location.href = "/finalAssessment")
-                        }
+                        )}
                       >
                         Gör en slutbedömning
                       </button>
                     </Col>
                   </Row>
                 </Card>
-                {student.finalAssessment && (
-                  <Card className="p-4 my-2">
-                    <Row className="text-center mb-2">
-                      <h4>Sammanställning</h4>
-                    </Row>
-                    <Row className="d-flex justify-content-center align-items-center">
-                      <Col
-                        xs={12}
-                        md={8}
-                        className="d-flex justify-content-center align-items-center"
-                      >
-                        <button
-                          className="btn btn-primary py-3 px-4"
-                          onClick={() => (window.location.href = "/summary")}
-                        >
-                          Se sammanställning
-                        </button>
-                      </Col>
-                    </Row>
-                  </Card>
-                )}
               </Col>
             </Row>
             <Row>

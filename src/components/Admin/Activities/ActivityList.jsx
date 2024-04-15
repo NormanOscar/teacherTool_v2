@@ -10,6 +10,13 @@ export default function ActivityList({ showModal, setObject, setEditType }) {
   let activities = JSON.parse(localStorage.getItem("activityData"));
 
   const removeActivity = (e) => {
+    e.preventDefault();
+    let confirmDelete = window.confirm(
+      "Är du säker på att du vill ta bort denna aktivitet?"
+    );
+    if (!confirmDelete) {
+      return;
+    }
     let activityId = e.currentTarget.id;
     let activityIndex = activities.findIndex(
       (activity) => activity.id == activityId

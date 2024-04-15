@@ -13,7 +13,7 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (username === "") {
       setInputResult({ msg: "Användarnamn saknas", type: "danger" });
     } else if (password === "") {
@@ -25,7 +25,9 @@ export default function Login() {
 
   const checkUser = () => {
     let users = JSON.parse(localStorage.getItem("userData"));
-    let user = users.find((user) => user.username === username || user.email === username);
+    let user = users.find(
+      (user) => user.username === username || user.email === username
+    );
     if (user) {
       if (user.password === password) {
         localStorage.setItem("login", true);
@@ -37,14 +39,14 @@ export default function Login() {
     } else {
       setInputResult({ msg: "Användaren finns inte", type: "danger" });
     }
-  }
+  };
 
   return (
     <>
       <Container fluid>
-      <Row className="my-4">
-          <Col xs={12} md={4} style={{paddingTop: '2em'}}></Col>
-          <Col xs={12} md={4} style={{paddingTop: '2em'}}>
+        <Row className="my-4">
+          <Col xs={12} md={4} style={{ paddingTop: "2em" }}></Col>
+          <Col xs={12} md={4} style={{ paddingTop: "2em" }}>
             <Card className="p-3 my-2">
               <div className="d-flex justify-content-center main-div">
                 <form id="form-block">
@@ -89,7 +91,7 @@ export default function Login() {
               </div>
             </Card>
           </Col>
-          <Col xs={12} md={4} style={{paddingTop: '2em'}}></Col>
+          <Col xs={12} md={4} style={{ paddingTop: "2em" }}></Col>
         </Row>
       </Container>
     </>

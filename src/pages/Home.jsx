@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import AutoComplete from "../components/Home/AutoComplete";
 import CurrentActivities from "../components/Home/CurrentActivities";
 import FlaggedStudents from "../components/Home/FlaggedStudents";
-import { addStudentsToLocalStorage, addActivitiesToLocalStorage, addUsersToLocalStorage } from "../components/func";
+import { checkLoginAndData } from "../components/func";
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -12,13 +12,6 @@ export default function Home() {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    if (!localStorage.getItem("login") || !localStorage.getItem("userId") || !localStorage.getItem("studentData")){
-      window.location.href = "/login";
-    }
-    addStudentsToLocalStorage();
-    addActivitiesToLocalStorage();
-    addUsersToLocalStorage();
-
     setStudents(JSON.parse(localStorage.getItem("studentData")));
   }, []);
 

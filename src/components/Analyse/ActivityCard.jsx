@@ -29,6 +29,12 @@ export default function ActivityCard({ student, performances }) {
   };
 
   const removeUpdate = (activityId, updateId) => {
+    let confirmDelete = window.confirm(
+      "Är du säker på att du vill ta bort denna avstämning?"
+    );
+    if (!confirmDelete) {
+      return;
+    }
     let storedData = JSON.parse(localStorage.getItem("studentData"));
     let studentId = JSON.parse(localStorage.getItem("studentId"));
     let currentStudent = storedData.find((student) => student.id === studentId);

@@ -10,26 +10,30 @@ library.add(faFilePdf);
 import MyDocument from "../components/Summary/MyDocument";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import Loading from "../components/Loading";
+import { checkLoginAndData } from "../components/func";
 
 export default function Summary() {
   const [student, setStudent] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (
-      !localStorage.getItem("login") ||
-      !localStorage.getItem("userId") ||
-      !localStorage.getItem("studentData")
-    ) {
-      window.location.href = "/login";
+    checkLoginAndData();
+
+    function getData() {
+      setStudent(
+        JSON.parse(localStorage.getItem("studentData")).find(
+          (student) =>
+            student.id === JSON.parse(localStorage.getItem("studentId"))
+        )
+      );
     }
 
-    setStudent(
-      JSON.parse(localStorage.getItem("studentData")).find(
-        (student) =>
-          student.id === JSON.parse(localStorage.getItem("studentId"))
-      )
-    );
-  }, []);
+    if (loading) {
+      getData();
+      setLoading(false);
+    }
+  }, [loading]);
 
   const handlePrint = () => {
     const documentToPrint = document.querySelector("#document-to-print");
@@ -50,53 +54,61 @@ export default function Summary() {
   return (
     <>
       <Container fluid>
-        <Row className="mt-2">
-          <Col
-            xs={12}
-            md={2}
-            className="d-flex justify-content-start align-items-center"
-          >
-            <button
-              className="btn btn-primary py-3 px-4"
-              onClick={() => (window.location.href = "/analyse")}
-            >
-              Tillbaka till analys
-            </button>
-          </Col>
-          <Col
-            xs={12}
-            md={8}
-            className="d-flex justify-content-center align-items-center"
-          >
-            <Container className="text-center d-flex justify-content-center">
-              <h3 className="student-name d-inline-block">
-                {student.name + " (" + student.class + ")"} - Sammanställning
-              </h3>
-            </Container>
-          </Col>
-          <Col
-            xs={12}
-            md={2}
-            className="d-flex justify-content-end align-items-center"
-          >
-            <button
-              className="btn btn-primary py-3 px-4"
-              onClick={() => handlePrint("l")}
-            >
-              <span className="mx-1">Exportera till PDF</span>
-              <FontAwesomeIcon
-                size="xl"
-                icon="fas fa-file-pdf"
-                className="mx-1"
-              />
-            </button>
-          </Col>
-        </Row>
-        <Row className="d-flex justify-content-center align-items-center">
-          <Col xs={12} md={10} className="text-center">
-            <MyDocument id="document-to-print" student={student} />
-          </Col>
-        </Row>
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <Row className="mt-2">
+              <Col
+                xs={12}
+                md={2}
+                className="d-flex justify-content-start align-items-center"
+              >
+                <button
+                  className="btn btn-primary py-3 px-4"
+                  onClick={() => (window.location.href = "/analyse")}
+                >
+                  Tillbaka till analys
+                </button>
+              </Col>
+              <Col
+                xs={12}
+                md={8}
+                className="d-flex justify-content-center align-items-center"
+              >
+                <Container className="text-center d-flex justify-content-center">
+                  <h3 className="student-name d-inline-block">
+                    {student.name + " (" + student.class + ")"} - Sammanställning
+                  </h3>
+                </Container>
+              </Col>
+              <Col
+                xs={12}
+                md={2}
+                className="d-flex justify-content-end align-items-center"
+              >
+                <button
+                  className="btn btn-primary py-3 px-4"
+                  onClick={() => handlePrint("l")}
+                >
+                  <span className="mx-1">Exportera till PDF</span>
+                  <FontAwesomeIcon
+                    size="xl"
+                    icon="fas fa-file-pdf"
+                    className="mx-1"
+                  />
+                </button>
+              </Col>
+            </Row>
+            <Row className="d-flex justify-content-center align-items-center">
+              <Col xs={12} md={10} className="text-center">
+                {Object.keys(student).length !== 0 && (
+                  <MyDocument id="document-to-print" student={student} />
+                )}
+              </Col>
+            </Row>
+          </>
+        )}
       </Container>
     </>
   );

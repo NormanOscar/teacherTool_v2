@@ -11,6 +11,12 @@ export default function StudentList({ showModal, setObject, setEditType }) {
 
   const removeStudent = (e) => {
     e.preventDefault();
+    let confirmDelete = window.confirm(
+      "Är du säker på att du vill ta bort denna elev?"
+    );
+    if (!confirmDelete) {
+      return;
+    }
     let studentId = e.currentTarget.id;
     let studentIndex = students.findIndex((student) => student.id == studentId);
     students.splice(studentIndex, 1);
